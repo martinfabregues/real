@@ -53,7 +53,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -62,7 +61,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(655, 524);
+            this.btnAceptar.Location = new System.Drawing.Point(828, 524);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 0;
@@ -72,7 +71,7 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(747, 524);
+            this.btnCancelar.Location = new System.Drawing.Point(920, 524);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 1;
@@ -84,15 +83,15 @@
             // 
             this.dgvEntregas.AllowUserToAddRows = false;
             this.dgvEntregas.AllowUserToDeleteRows = false;
-            this.dgvEntregas.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvEntregas.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvEntregas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvEntregas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEntregas.Location = new System.Drawing.Point(12, 184);
+            this.dgvEntregas.Location = new System.Drawing.Point(12, 163);
             this.dgvEntregas.Name = "dgvEntregas";
             this.dgvEntregas.ReadOnly = true;
             this.dgvEntregas.RowHeadersVisible = false;
             this.dgvEntregas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEntregas.Size = new System.Drawing.Size(819, 334);
+            this.dgvEntregas.Size = new System.Drawing.Size(980, 355);
             this.dgvEntregas.TabIndex = 2;
             // 
             // groupBox1
@@ -112,9 +111,9 @@
             this.groupBox1.Controls.Add(this.txtFactura);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 30);
+            this.groupBox1.Location = new System.Drawing.Point(12, 9);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(819, 148);
+            this.groupBox1.Size = new System.Drawing.Size(868, 148);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
@@ -124,9 +123,8 @@
             this.ckbSucursal.AutoSize = true;
             this.ckbSucursal.Location = new System.Drawing.Point(282, 124);
             this.ckbSucursal.Name = "ckbSucursal";
-            this.ckbSucursal.Size = new System.Drawing.Size(58, 17);
+            this.ckbSucursal.Size = new System.Drawing.Size(15, 14);
             this.ckbSucursal.TabIndex = 14;
-            this.ckbSucursal.Text = "activar";
             this.ckbSucursal.UseVisualStyleBackColor = true;
             this.ckbSucursal.CheckedChanged += new System.EventHandler(this.ckbSucursal_CheckedChanged);
             // 
@@ -135,9 +133,8 @@
             this.ckbProveedor.AutoSize = true;
             this.ckbProveedor.Location = new System.Drawing.Point(282, 96);
             this.ckbProveedor.Name = "ckbProveedor";
-            this.ckbProveedor.Size = new System.Drawing.Size(58, 17);
+            this.ckbProveedor.Size = new System.Drawing.Size(15, 14);
             this.ckbProveedor.TabIndex = 13;
-            this.ckbProveedor.Text = "activar";
             this.ckbProveedor.UseVisualStyleBackColor = true;
             this.ckbProveedor.CheckedChanged += new System.EventHandler(this.ckbProveedor_CheckedChanged);
             // 
@@ -153,7 +150,6 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(95, 121);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -172,7 +168,6 @@
             // cmbProveedor
             // 
             this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbProveedor.FormattingEnabled = true;
             this.cmbProveedor.Location = new System.Drawing.Point(95, 94);
             this.cmbProveedor.Name = "cmbProveedor";
@@ -184,9 +179,8 @@
             this.ckbFecha.AutoSize = true;
             this.ckbFecha.Location = new System.Drawing.Point(651, 23);
             this.ckbFecha.Name = "ckbFecha";
-            this.ckbFecha.Size = new System.Drawing.Size(58, 17);
+            this.ckbFecha.Size = new System.Drawing.Size(15, 14);
             this.ckbFecha.TabIndex = 8;
-            this.ckbFecha.Text = "activar";
             this.ckbFecha.UseVisualStyleBackColor = true;
             this.ckbFecha.CheckedChanged += new System.EventHandler(this.ckbFecha_CheckedChanged);
             // 
@@ -309,32 +303,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(843, 23);
-            this.lblTitulo.TabIndex = 40;
-            this.lblTitulo.Text = "Consultas de Ingresos de Proveedores";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmConsultaIngresoProveedor
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(843, 559);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(1004, 559);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvEntregas);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmConsultaIngresoProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmConsultaIngresoProveedor";
             this.Load += new System.EventHandler(this.frmConsultaIngresoProveedor_Load);
             this.Resize += new System.EventHandler(this.frmConsultaIngresoProveedor_Resize);
@@ -374,6 +357,5 @@
         private System.Windows.Forms.CheckBox ckbSucursal;
         private System.Windows.Forms.CheckBox ckbProveedor;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

@@ -58,27 +58,28 @@ namespace REAL
         private void PersonalizarGrilla()
         {
             dgvEntregas.Columns[0].Visible = false;
-            dgvEntregas.Columns[1].HeaderText = "N° FAC";
-            dgvEntregas.Columns[2].HeaderText = "N° REM";
-            dgvEntregas.Columns[3].HeaderText = "FECHA FAC";
-            dgvEntregas.Columns[4].HeaderText = "FECHA REC";
-            dgvEntregas.Columns[5].HeaderText = "SUCURSAL";
-            dgvEntregas.Columns[6].HeaderText = "PRODUCTO";
-            dgvEntregas.Columns[7].HeaderText = "CANT";
-            dgvEntregas.Columns[8].HeaderText = "IMP UNIT";
-            dgvEntregas.Columns[9].HeaderText = "TOTAL";
-            dgvEntregas.Columns[10].HeaderText = "O.COMPRA";
+            dgvEntregas.Columns[1].HeaderText = "Nro. Fac.";
+            dgvEntregas.Columns[2].HeaderText = "Nro. Rem.";
+            dgvEntregas.Columns[3].HeaderText = "Fec. Fac.";
+            dgvEntregas.Columns[4].HeaderText = "Fec. Rec.";
+            dgvEntregas.Columns[5].HeaderText = "Sucursal";
+            dgvEntregas.Columns[6].HeaderText = "Producto";
+            dgvEntregas.Columns[7].HeaderText = "Cant.";
+            dgvEntregas.Columns[8].HeaderText = "Imp. Unit.";
+            dgvEntregas.Columns[9].HeaderText = "Total";
+            dgvEntregas.Columns[10].HeaderText = "Nro. Orden";
 
             dgvEntregas.Columns[8].DefaultCellStyle.Format = "c";
             dgvEntregas.Columns[9].DefaultCellStyle.Format = "c";
 
-            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvEntregas.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvEntregas.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
 
         private void frmConsultaIngresoProveedor_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             IniciarControles();
             CargarGrilla();
             CargarComboBoxProveedor();
