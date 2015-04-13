@@ -785,7 +785,7 @@
             this.Controls.Add(this.txtIdIngreso);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.txtid);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "frmIngresoProveedor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -81,21 +81,23 @@ namespace DAL.Repositories
         }
 
 
-        public IList<OrdenCompra> BusquedaCondicional(string? numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
+        public IList<OrdenCompra> BusquedaCondicional(string numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
         {
             string query = "SELECT * FROM ORDENCOMPRA " + 
-                "WHERE ((ODCNUMERO LIKE CONCAT('%', @numero, '%')) OR (@numero IS NULL)) " + 
-                "AND ((PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " +
-                "AND ((ODCFECHA BETWEEN @desde AND @hasta) OR (@desde IS NULL OR @hasta IS NULL)) " + 
-                "ORDER BY ODCFECHA DESC";
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = ORDENCOMPRA.PROID " + 
+                "WHERE ((ORDENCOMPRA.ODCNUMERO LIKE CONCAT('%', @numero, '%')) OR (@numero IS NULL)) " + 
+                "AND ((ORDENCOMPRA.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " +
+                "AND ((ORDENCOMPRA.ODCFECHA BETWEEN @desde AND @hasta) OR (@desde IS NULL OR @hasta IS NULL)) " +
+                "ORDER BY ORDENCOMPRA.ODCFECHA DESC";
 
             using (_cnn)
             {
-                return _cnn.Query<OrdenCompra>(query, new { 
+                return _cnn.Query<OrdenCompra, Proveedor, OrdenCompra>(query, (orden, proveedor) => {orden.proveedor = proveedor; return orden;}, new { 
                     numero = numero, 
                     proveedor_id = proveedor_id, 
-                    desde = desde, 
-                    hasta = hasta }).ToList();
+                    desde = desde,
+                    hasta = hasta
+                }, splitOn: "proid").ToList();
             }
         }
     }

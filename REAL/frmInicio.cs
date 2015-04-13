@@ -24,7 +24,7 @@ namespace REAL
         {
             frmEntrega frm = new frmEntrega();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - NUEVA ENTREGA";
+            frm.Text = "Logística - Nueva Entrega";
             frm.Show();
         }
 
@@ -32,7 +32,7 @@ namespace REAL
         {
             frmAnularEntrega frm = new frmAnularEntrega();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - ANULAR ENTREGA";
+            frm.Text = "Logística - Anular Entrega";
             frm.Show();
         }
 
@@ -40,7 +40,7 @@ namespace REAL
         {
             frmNuevaRecepcion frm = new frmNuevaRecepcion();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - REGISTRAR RECEPCIÓN";
+            frm.Text = "Logística - Registrar Recepción";
             frm.Show();
         }
 
@@ -48,7 +48,7 @@ namespace REAL
         {
             frmAdministrarEntregas frm = new frmAdministrarEntregas();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - ADMINISTRAR ENTREGAS";
+            frm.Text = "Logística - Administrar Entregas";
             frm.Show();
         }
 
@@ -56,7 +56,7 @@ namespace REAL
         {
             frmConsultarEntregas frm = new frmConsultarEntregas();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - CONSULTAR ENTREGAS";
+            frm.Text = "Logística - Consultar Entregas";
             frm.Show();
         }
 
@@ -64,7 +64,7 @@ namespace REAL
         {
             frmEntregasConCosto frm = new frmEntregasConCosto();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - ENTREGAS CON COSTO";
+            frm.Text = "Logística - Entregas con Costo";
             frm.Show();
         }
 
@@ -72,7 +72,7 @@ namespace REAL
         {
             frmConsultaBarrio frm = new frmConsultaBarrio();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - CONSULTA DE BARRIOS";
+            frm.Text = "Logística - Barrios Registrados";
             frm.Show();
         }
 
@@ -80,7 +80,7 @@ namespace REAL
         {
             frmFiltro frm = new frmFiltro();
             frm.MdiParent = this;
-            frm.Text = "REPORTE - REPORTE DE ENTREGAS FILTROS";
+            frm.Text = "Reportes - Filtros de Entrega";
             frm.Show();
         }
 
@@ -88,12 +88,12 @@ namespace REAL
         {
             frmReporteDiario frm = new frmReporteDiario();
             frm.MdiParent = this;
-            frm.Text = "REPORTE - REPORTE DE ENTREGAS DIARIO";
+            frm.Text = "Logística - Reporte de Entregas Diario";
             frm.Show();
 
             frmRecepcionEntrega frmRecepcion = new frmRecepcionEntrega();
             frmRecepcion.MdiParent = this;
-            frmRecepcion.Text = "REPORTE - PLANILLA DE RECEPCIÓN DE ENTREGAS";
+            frmRecepcion.Text = "Logística - Reporte de Recepción de Entregas";
             frmRecepcion.Show();
         }
 
@@ -101,7 +101,7 @@ namespace REAL
         {
             frmMapa frm = new frmMapa();
             frm.MdiParent = this;
-            frm.Text = "ENTREGAS - CONSULTAR MAPA";
+            frm.Text = "Logística - Mapa";
             frm.Show();
         }
 
@@ -109,7 +109,7 @@ namespace REAL
         {
             frmNuevaCiudad frm = new frmNuevaCiudad();
             frm.MdiParent = this;
-            frm.Text = "ADMINISTRAR - NUEVA CIUDAD";
+            frm.Text = "Logística - Nueva Ciudad";
             frm.Show();
         }
 
@@ -117,7 +117,7 @@ namespace REAL
         {
             frmNuevaProvincia frm = new frmNuevaProvincia();
             frm.MdiParent = this;
-            frm.Text = "ADMINISTRAR - NUEVA PROVINCIA";
+            frm.Text = "Logística - Nueva Provincia";
             frm.Show();
         }
 
@@ -125,7 +125,7 @@ namespace REAL
         {
             frmNuevoBarrio frm = new frmNuevoBarrio();
             frm.MdiParent = this;
-            frm.Text = "ADMINISTRAR - NUEVO BARRIO";
+            frm.Text = "Logística - Nuevo Barrio";
             frm.Show();
         }
 
@@ -133,7 +133,7 @@ namespace REAL
         {
             frmEstadisticaGeneral frm = new frmEstadisticaGeneral();
             frm.MdiParent = this;
-            frm.Text = "ESTADÍSTICA - ESTADÍSTICA GENERAL MENSUAL";
+            frm.Text = "Logística - Estadística General Mensual";
             frm.Show();
         }
 
@@ -141,7 +141,7 @@ namespace REAL
         {
             frmEstadisticaAnual frm = new frmEstadisticaAnual();
             frm.MdiParent = this;
-            frm.Text = "ESTADÍSTICA - ESTADÍSTICA GENERAL ANUAL";
+            frm.Text = "Logística - Estadística General Anual";
             frm.Show();
         }
 
@@ -200,7 +200,7 @@ namespace REAL
         {
             frmNuevaMarca frm = new frmNuevaMarca();
             frm.MdiParent = this;
-            frm.Text = "MARCA - NUEVO MARCA";
+            frm.Text = "Marca - Nueva Marca";
             frm.Show();
         }
 
@@ -208,7 +208,7 @@ namespace REAL
         {
             frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("NUEVO");
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - NUEVA ORDEN DE COMPRA";
+            frm.Text = "Compras - Nueva Orden de Compra";
             frm.Show();
         }
 
@@ -229,7 +229,7 @@ namespace REAL
         {
             frmConsultaPendientes frm = new frmConsultaPendientes();
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - CONSULTA PENDIENTES DE ENTREGA";
+            frm.Text = "Compras - Pendientes de Entrega ";
             frm.Show();
         }
 
@@ -237,7 +237,7 @@ namespace REAL
         {
             frmFiltroReportePendientesEntrega frm = new frmFiltroReportePendientesEntrega();
             frm.MdiParent = this;
-            frm.Text = "REPORTE PENDIENTES DE ENTREGA - FILTRO";
+            frm.Text = "Reporte - Filtro Pendientes de Entrega";
             frm.Show();
         }
 
@@ -245,7 +245,7 @@ namespace REAL
         {
             frmConsultaProductos frm = new frmConsultaProductos();
             frm.MdiParent = this;
-            frm.Text = "PRODUCTOS - LISTADO DE PRODUCTOS";
+            frm.Text = "Productos - Productos Registrados";
             frm.Show();
         }
 
@@ -253,7 +253,7 @@ namespace REAL
         {
             frmConsultaOrdendeCompra frm = new frmConsultaOrdendeCompra();
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - LISTADO ORDENES DE COMPRA";
+            frm.Text = "Compras - Listado de Ordenes de Compra";
             frm.Show();
         }
 
@@ -288,7 +288,7 @@ namespace REAL
         {
             frmNuevoProducto frm = new frmNuevoProducto("MODIFICAR");
             frm.MdiParent = this;
-            frm.Text = "PRODUCTO - MODIFICAR PRODUCTO";
+            frm.Text = "Producto - Modificar Producto";
             frm.Show();
         }
 
@@ -296,23 +296,23 @@ namespace REAL
         {
             frmFiltroReporteProducto frm = new frmFiltroReporteProducto();
             frm.MdiParent = this;
-            frm.Text = "PRODUCTOS - Filtro Reporte Producto";
+            frm.Text = "Producto - Filtro Reporte Producto";
             frm.Show();
         }
 
         private void btnModificarOrdenCompra_Click(object sender, EventArgs e)
         {
-            frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("MODIFICAR");
-            frm.MdiParent = this;
-            frm.Text = "COMPRAS - MODIFICAR ORDEN DE COMPRA";
-            frm.Show();
+            //frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("MODIFICAR");
+            //frm.MdiParent = this;
+            //frm.Text = "COMPRAS - MODIFICAR ORDEN DE COMPRA";
+            //frm.Show();
         }
 
         private void btnConsultaIngresoProveedor_Click(object sender, EventArgs e)
         {
             frmConsultaIngresoProveedor frm = new frmConsultaIngresoProveedor();
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - LISTADO DE INGRESOS DE PROVEEDOR";
+            frm.Text = "Compras - Listado de Ingresos de Proveedor";
             frm.Show();
         }
 
@@ -328,7 +328,7 @@ namespace REAL
         {
             frmConsultaProveedor frm = new frmConsultaProveedor();
             frm.MdiParent = this;
-            frm.Text = "PROVEEDORES - LISTADO DE PROVEEDORES";
+            frm.Text = "Proveedores - Proveedores Registrados";
             frm.Show();
         }
 
@@ -336,7 +336,7 @@ namespace REAL
         {
             frmNuevoProveedor frm = new frmNuevoProveedor("MODIFICAR");
             frm.MdiParent = this;
-            frm.Text = "PROVEEDOR - MODIFICAR PROVEEDOR";
+            frm.Text = "Proveedor - Modificar Proveedor";
             frm.Show();
         }
 
@@ -344,7 +344,7 @@ namespace REAL
         {
             frmReporteIngresos frm = new frmReporteIngresos();
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - REPORTE DE INGRESOS";
+            frm.Text = "Reportes - Reporte de Ingresos";
             frm.Show();
         }
 
@@ -537,7 +537,7 @@ namespace REAL
         {
             frmConsultaPendientes frm = new frmConsultaPendientes();
             frm.MdiParent = this;
-            frm.Text = "COMPRAS - CONSULTA PENDIENTES DE ENTREGA";
+            frm.Text = "Compras - Pendientes de Entrega";
             frm.Show();
         }
 
@@ -677,6 +677,7 @@ namespace REAL
         {
             frmIngresoProveedor frm = new frmIngresoProveedor();
             frm.MdiParent = this;
+            frm.Text = "Compras - Registrar Factura de Compra";
             frm.Show();
         }
 
@@ -684,7 +685,13 @@ namespace REAL
         {
             frmRemito frm = new frmRemito();
             frm.MdiParent = this;
+            frm.Text = "Compras - Registrar Remito de Compra";
             frm.Show();
+        }
+
+        private void btnAnularOrdenCompra_Click(object sender, EventArgs e)
+        {
+
         }
 
      

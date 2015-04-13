@@ -368,7 +368,7 @@ namespace Negocio
             return _ordencompraRepository.GetByIdWithDetalle(id);
         }
 
-        public static IList<OrdenCompra> BusquedaCondicional(string? numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
+        public static IList<OrdenCompra> BusquedaCondicional(string numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
         {
             IOrdenCompraRepository _ordencompraRepository = new OrdenCompraRepository();
             return _ordencompraRepository.BusquedaCondicional(numero, proveedor_id, desde, hasta);

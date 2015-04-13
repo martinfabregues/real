@@ -50,19 +50,19 @@ namespace REAL
             dgvPendientes.Columns[1].Visible = false;
             dgvPendientes.Columns[4].Visible = false;
             dgvPendientes.Columns[6].Visible = false;
-            dgvPendientes.Columns[2].HeaderText = "N° O. COMPRA";
-            dgvPendientes.Columns[3].HeaderText = "FECHA";
-            dgvPendientes.Columns[5].HeaderText = "PROVEEDOR";
-            dgvPendientes.Columns[7].HeaderText = "CÓDIGO PROD";
-            dgvPendientes.Columns[8].HeaderText = "PRODUCTO";
-            dgvPendientes.Columns[9].HeaderText = "CANTIDAD";
-            dgvPendientes.Columns[10].HeaderText = "IMPORTE UNIT";
-            dgvPendientes.Columns[11].HeaderText = "TOTAL";
-            dgvPendientes.Columns[12].HeaderText = "SUCURSAL";
+            dgvPendientes.Columns[2].HeaderText = "Nro. Orden";
+            dgvPendientes.Columns[3].HeaderText = "Fecha";
+            dgvPendientes.Columns[5].HeaderText = "Proveedor";
+            dgvPendientes.Columns[7].HeaderText = "Cod. Prod.";
+            dgvPendientes.Columns[8].HeaderText = "Producto";
+            dgvPendientes.Columns[9].HeaderText = "Cant.";
+            dgvPendientes.Columns[10].HeaderText = "Imp. Unit.";
+            dgvPendientes.Columns[11].HeaderText = "Total";
+            dgvPendientes.Columns[12].HeaderText = "Sucursal";
 
-            dgvPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvPendientes.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
-
+            //dgvPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvPendientes.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            dgvPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvPendientes.Columns[10].DefaultCellStyle.Format = "c";
             dgvPendientes.Columns[11].DefaultCellStyle.Format = "c";
         }
@@ -94,7 +94,7 @@ namespace REAL
 
         private void frmConsultaPendientes_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             IniciarControles();
             CargarGrid();
             if (dgvPendientes.Rows.Count > 0)

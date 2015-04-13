@@ -153,9 +153,9 @@ namespace REAL
             dgvDetalle.Columns.Add(entrega);
             dgvDetalle.Columns.Add(Eliminar);
 
-            dgvDetalle.AutoResizeColumns();
-            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            //dgvDetalle.AutoResizeColumns();
+            //dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
 
         //LISTO
@@ -205,6 +205,7 @@ namespace REAL
            
             CargarComboBoxProveedor();
 
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
            
             List<Producto> list = Productos.GetTodosConsulta();
             if (list.Count > 0)

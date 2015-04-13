@@ -60,14 +60,15 @@
             this.btnListadoProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.administrarOrdenesDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comprobantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facturasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarFacturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remitosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarRemitoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNuevaOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.btnModificarOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAnularOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remitosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultasToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnListadoOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
-            this.reportesToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.pendientesDeEntregaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajustarPendienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,8 +77,6 @@
             this.reportesToolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.pendientesRegistradosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnIngresoProveedor = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnModificarIngresoProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.consultasToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConsultaIngresoProveedor = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,13 +115,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
-            this.administrarOrdenesDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarRemitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.comprobantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.remitosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarRemitoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarFacturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -372,24 +364,65 @@
             // 
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administrarOrdenesDeCompraToolStripMenuItem,
-            this.comprobantesToolStripMenuItem,
             this.btnNuevaOrdenCompra,
             this.btnModificarOrdenCompra,
             this.btnAnularOrdenCompra,
-            this.facturasToolStripMenuItem,
-            this.remitosToolStripMenuItem,
-            this.consultasToolStripMenuItem3,
-            this.reportesToolStripMenuItem3,
             this.toolStripSeparator10,
             this.pendientesDeEntregaToolStripMenuItem,
             this.toolStripSeparator1,
-            this.btnIngresoProveedor,
-            this.btnModificarIngresoProveedor,
+            this.comprobantesToolStripMenuItem,
             this.consultasToolStripMenuItem2,
             this.reportesToolStripMenuItem4});
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
             this.comprasToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.comprasToolStripMenuItem.Text = "&Compras";
+            // 
+            // administrarOrdenesDeCompraToolStripMenuItem
+            // 
+            this.administrarOrdenesDeCompraToolStripMenuItem.Name = "administrarOrdenesDeCompraToolStripMenuItem";
+            this.administrarOrdenesDeCompraToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.administrarOrdenesDeCompraToolStripMenuItem.Text = "&Administrar Ordenes de Compra";
+            this.administrarOrdenesDeCompraToolStripMenuItem.Click += new System.EventHandler(this.administrarOrdenesDeCompraToolStripMenuItem_Click);
+            // 
+            // comprobantesToolStripMenuItem
+            // 
+            this.comprobantesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.facturasToolStripMenuItem1,
+            this.remitosToolStripMenuItem1});
+            this.comprobantesToolStripMenuItem.Name = "comprobantesToolStripMenuItem";
+            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.comprobantesToolStripMenuItem.Text = "&Comprobantes";
+            // 
+            // facturasToolStripMenuItem1
+            // 
+            this.facturasToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarFacturaToolStripMenuItem});
+            this.facturasToolStripMenuItem1.Name = "facturasToolStripMenuItem1";
+            this.facturasToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.facturasToolStripMenuItem1.Text = "&Facturas";
+            // 
+            // registrarFacturaToolStripMenuItem
+            // 
+            this.registrarFacturaToolStripMenuItem.Name = "registrarFacturaToolStripMenuItem";
+            this.registrarFacturaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.registrarFacturaToolStripMenuItem.Text = "&Registrar Factura";
+            this.registrarFacturaToolStripMenuItem.Click += new System.EventHandler(this.registrarFacturaToolStripMenuItem_Click);
+            // 
+            // remitosToolStripMenuItem1
+            // 
+            this.remitosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarRemitoToolStripMenuItem1});
+            this.remitosToolStripMenuItem1.Name = "remitosToolStripMenuItem1";
+            this.remitosToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.remitosToolStripMenuItem1.Text = "&Remitos";
+            this.remitosToolStripMenuItem1.Click += new System.EventHandler(this.remitosToolStripMenuItem1_Click);
+            // 
+            // registrarRemitoToolStripMenuItem1
+            // 
+            this.registrarRemitoToolStripMenuItem1.Name = "registrarRemitoToolStripMenuItem1";
+            this.registrarRemitoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
+            this.registrarRemitoToolStripMenuItem1.Text = "&Registrar Remito";
+            this.registrarRemitoToolStripMenuItem1.Click += new System.EventHandler(this.registrarRemitoToolStripMenuItem1_Click);
             // 
             // btnNuevaOrdenCompra
             // 
@@ -410,41 +443,7 @@
             this.btnAnularOrdenCompra.Name = "btnAnularOrdenCompra";
             this.btnAnularOrdenCompra.Size = new System.Drawing.Size(245, 22);
             this.btnAnularOrdenCompra.Text = "&Anular Orden de Compra";
-            // 
-            // facturasToolStripMenuItem
-            // 
-            this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.facturasToolStripMenuItem.Text = "&Facturas";
-            // 
-            // remitosToolStripMenuItem
-            // 
-            this.remitosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarRemitoToolStripMenuItem});
-            this.remitosToolStripMenuItem.Name = "remitosToolStripMenuItem";
-            this.remitosToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.remitosToolStripMenuItem.Text = "&Remitos";
-            // 
-            // consultasToolStripMenuItem3
-            // 
-            this.consultasToolStripMenuItem3.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnListadoOrdenCompra});
-            this.consultasToolStripMenuItem3.Name = "consultasToolStripMenuItem3";
-            this.consultasToolStripMenuItem3.Size = new System.Drawing.Size(245, 22);
-            this.consultasToolStripMenuItem3.Text = "&Consultas";
-            // 
-            // btnListadoOrdenCompra
-            // 
-            this.btnListadoOrdenCompra.Name = "btnListadoOrdenCompra";
-            this.btnListadoOrdenCompra.Size = new System.Drawing.Size(185, 22);
-            this.btnListadoOrdenCompra.Text = "&Ordenes de Compras";
-            this.btnListadoOrdenCompra.Click += new System.EventHandler(this.btnListadoOrdenCompra_Click);
-            // 
-            // reportesToolStripMenuItem3
-            // 
-            this.reportesToolStripMenuItem3.Name = "reportesToolStripMenuItem3";
-            this.reportesToolStripMenuItem3.Size = new System.Drawing.Size(245, 22);
-            this.reportesToolStripMenuItem3.Text = "&Reportes";
+            this.btnAnularOrdenCompra.Click += new System.EventHandler(this.btnAnularOrdenCompra_Click);
             // 
             // toolStripSeparator10
             // 
@@ -502,20 +501,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(242, 6);
-            // 
-            // btnIngresoProveedor
-            // 
-            this.btnIngresoProveedor.Name = "btnIngresoProveedor";
-            this.btnIngresoProveedor.Size = new System.Drawing.Size(245, 22);
-            this.btnIngresoProveedor.Text = "&Ingreso de Comprobantes";
-            this.btnIngresoProveedor.Click += new System.EventHandler(this.btnIngresoProveedor_Click);
-            // 
-            // btnModificarIngresoProveedor
-            // 
-            this.btnModificarIngresoProveedor.Name = "btnModificarIngresoProveedor";
-            this.btnModificarIngresoProveedor.Size = new System.Drawing.Size(245, 22);
-            this.btnModificarIngresoProveedor.Text = "&Modificar Comprobante";
-            this.btnModificarIngresoProveedor.Click += new System.EventHandler(this.btnModificarIngresoProveedor_Click);
             // 
             // consultasToolStripMenuItem2
             // 
@@ -800,73 +785,22 @@
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Padding = new System.Windows.Forms.Padding(0, 0, 15, 0);
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(73, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(77, 17);
             this.toolStripStatusLabel1.Text = "USUARIO:";
             // 
             // lblUsuario
             // 
+            this.lblUsuario.AutoSize = false;
+            this.lblUsuario.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.lblUsuario.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.lblUsuario.ForeColor = System.Drawing.Color.Brown;
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(117, 17);
+            this.lblUsuario.Size = new System.Drawing.Size(150, 17);
             this.lblUsuario.Text = "toolStripStatusLabel2";
-            // 
-            // administrarOrdenesDeCompraToolStripMenuItem
-            // 
-            this.administrarOrdenesDeCompraToolStripMenuItem.Name = "administrarOrdenesDeCompraToolStripMenuItem";
-            this.administrarOrdenesDeCompraToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.administrarOrdenesDeCompraToolStripMenuItem.Text = "&Administrar Ordenes de Compra";
-            this.administrarOrdenesDeCompraToolStripMenuItem.Click += new System.EventHandler(this.administrarOrdenesDeCompraToolStripMenuItem_Click);
-            // 
-            // registrarRemitoToolStripMenuItem
-            // 
-            this.registrarRemitoToolStripMenuItem.Name = "registrarRemitoToolStripMenuItem";
-            this.registrarRemitoToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.registrarRemitoToolStripMenuItem.Text = "&Registrar Remito";
-            this.registrarRemitoToolStripMenuItem.Click += new System.EventHandler(this.registrarRemitoToolStripMenuItem_Click);
-            // 
-            // comprobantesToolStripMenuItem
-            // 
-            this.comprobantesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.facturasToolStripMenuItem1,
-            this.remitosToolStripMenuItem1});
-            this.comprobantesToolStripMenuItem.Name = "comprobantesToolStripMenuItem";
-            this.comprobantesToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.comprobantesToolStripMenuItem.Text = "&Comprobantes";
-            // 
-            // facturasToolStripMenuItem1
-            // 
-            this.facturasToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarFacturaToolStripMenuItem});
-            this.facturasToolStripMenuItem1.Name = "facturasToolStripMenuItem1";
-            this.facturasToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.facturasToolStripMenuItem1.Text = "&Facturas";
-            // 
-            // remitosToolStripMenuItem1
-            // 
-            this.remitosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarRemitoToolStripMenuItem1});
-            this.remitosToolStripMenuItem1.Name = "remitosToolStripMenuItem1";
-            this.remitosToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.remitosToolStripMenuItem1.Text = "&Remitos";
-            this.remitosToolStripMenuItem1.Click += new System.EventHandler(this.remitosToolStripMenuItem1_Click);
-            // 
-            // registrarRemitoToolStripMenuItem1
-            // 
-            this.registrarRemitoToolStripMenuItem1.Name = "registrarRemitoToolStripMenuItem1";
-            this.registrarRemitoToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
-            this.registrarRemitoToolStripMenuItem1.Text = "&Registrar Remito";
-            this.registrarRemitoToolStripMenuItem1.Click += new System.EventHandler(this.registrarRemitoToolStripMenuItem1_Click);
-            // 
-            // registrarFacturaToolStripMenuItem
-            // 
-            this.registrarFacturaToolStripMenuItem.Name = "registrarFacturaToolStripMenuItem";
-            this.registrarFacturaToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.registrarFacturaToolStripMenuItem.Text = "&Registrar Factura";
-            this.registrarFacturaToolStripMenuItem.Click += new System.EventHandler(this.registrarFacturaToolStripMenuItem_Click);
             // 
             // frmInicio
             // 
@@ -931,12 +865,8 @@
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem btnNuevaMarca;
         private System.Windows.Forms.ToolStripMenuItem btnNuevaOrdenCompra;
-        private System.Windows.Forms.ToolStripMenuItem btnIngresoProveedor;
-        private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem btnListadoProducto;
         private System.Windows.Forms.ToolStripMenuItem btnListadoProveedor;
-        private System.Windows.Forms.ToolStripMenuItem btnListadoOrdenCompra;
         private System.Windows.Forms.ToolStripMenuItem btnReporteProductos;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblUsuario;
@@ -945,7 +875,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem btnConsultaIngresoProveedor;
-        private System.Windows.Forms.ToolStripMenuItem btnModificarIngresoProveedor;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem btnReporteIngresos;
         private System.Windows.Forms.ToolStripMenuItem bonificacionesToolStripMenuItem;
@@ -980,11 +909,8 @@
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem listadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem facturasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem remitosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ordenesDeCompraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem administrarOrdenesDeCompraToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem registrarRemitoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprobantesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem facturasToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem remitosToolStripMenuItem1;

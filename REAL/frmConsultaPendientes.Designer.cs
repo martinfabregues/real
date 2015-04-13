@@ -47,7 +47,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -56,7 +55,7 @@
             // btnBuscar
             // 
             this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBuscar.Location = new System.Drawing.Point(754, 62);
+            this.btnBuscar.Location = new System.Drawing.Point(803, 62);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 23);
             this.btnBuscar.TabIndex = 9;
@@ -86,21 +85,21 @@
             // 
             this.dgvPendientes.AllowUserToAddRows = false;
             this.dgvPendientes.AllowUserToDeleteRows = false;
-            this.dgvPendientes.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvPendientes.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvPendientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPendientes.Location = new System.Drawing.Point(10, 131);
+            this.dgvPendientes.Location = new System.Drawing.Point(10, 107);
             this.dgvPendientes.Name = "dgvPendientes";
             this.dgvPendientes.ReadOnly = true;
             this.dgvPendientes.RowHeadersVisible = false;
             this.dgvPendientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPendientes.Size = new System.Drawing.Size(835, 312);
+            this.dgvPendientes.Size = new System.Drawing.Size(1017, 371);
             this.dgvPendientes.TabIndex = 6;
             // 
             // btnAceptar
             // 
             this.btnAceptar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAceptar.Location = new System.Drawing.Point(770, 512);
+            this.btnAceptar.Location = new System.Drawing.Point(952, 512);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(75, 23);
             this.btnAceptar.TabIndex = 5;
@@ -129,7 +128,6 @@
             // cmbProveedor
             // 
             this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProveedor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbProveedor.FormattingEnabled = true;
             this.cmbProveedor.Location = new System.Drawing.Point(113, 20);
             this.cmbProveedor.Name = "cmbProveedor";
@@ -161,9 +159,9 @@
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtProducto);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(10, 30);
+            this.groupBox1.Location = new System.Drawing.Point(10, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(835, 95);
+            this.groupBox1.Size = new System.Drawing.Size(893, 95);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
@@ -180,7 +178,6 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(539, 19);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -235,19 +232,19 @@
             // 
             this.groupBox2.Controls.Add(this.lblTotal);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(13, 449);
+            this.groupBox2.Location = new System.Drawing.Point(13, 484);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(266, 75);
+            this.groupBox2.Size = new System.Drawing.Size(210, 51);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "TOTALES";
+            this.groupBox2.Text = "Totales";
             // 
             // lblTotal
             // 
             this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.Red;
-            this.lblTotal.Location = new System.Drawing.Point(123, 30);
+            this.lblTotal.Location = new System.Drawing.Point(94, 19);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Padding = new System.Windows.Forms.Padding(3);
             this.lblTotal.Size = new System.Drawing.Size(98, 21);
@@ -257,24 +254,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 33);
+            this.label4.Location = new System.Drawing.Point(21, 22);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 0;
-            this.label4.Text = "IMPORTE TOTAL:";
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(857, 23);
-            this.lblTitulo.TabIndex = 40;
-            this.lblTitulo.Text = "Consulta Mercadería Pendiente de Entrega";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.Text = "Importe Total:";
             // 
             // frmConsultaPendientes
             // 
@@ -282,13 +266,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAceptar;
-            this.ClientSize = new System.Drawing.Size(857, 547);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(1039, 547);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvPendientes);
             this.Controls.Add(this.btnAceptar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmConsultaPendientes";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmConsultaPendientes";
             this.Load += new System.EventHandler(this.frmConsultaPendientes_Load);
             this.Resize += new System.EventHandler(this.frmConsultaPendientes_Resize);
@@ -322,6 +308,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbSucursal;
         private System.Windows.Forms.CheckBox ckbSucursal;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

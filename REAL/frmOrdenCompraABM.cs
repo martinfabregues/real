@@ -58,7 +58,11 @@ namespace REAL
         private void IniciarControles()
         {
             this.Text = "Ordenes de Compra ABM - Administrar Ordenes de Compra";
-            btnSalir.Visible = false;
+            //btnSalir.Visible = false;
+            txtNumero.Enabled = false;
+            cmbProveedor.Enabled = false;
+            dtpDesde.Enabled = false;
+            dtpHasta.Enabled = false;
         }
 
         private void CargarDatos()
@@ -265,25 +269,26 @@ namespace REAL
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
-            string nroorden = txtNumero.Text == string.Empty ? null : txtNumero.Text;
-            int? proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue) == -1 ? null : (int?)Convert.ToInt32(cmbProveedor.SelectedValue);
-            DateTime? desde   = ckbFecha.Checked ? (DateTime?)dtpDesde.Value : null;
-            DateTime? hasta   = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
-
-
+            FiltrarForm();
 
         }
 
-        private void FiltrarForm(string? numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
+        private void FiltrarForm()
         {
-            var query = (from row in OrdenesCompra.BusquedaCondicional(numero, proveedor_id, desde, hasta)
+            string nroorden = txtNumero.Text == string.Empty ? null : txtNumero.Text;
+            int? proveedor_id = ckbProveedor.Checked ? (int?)cmbProveedor.SelectedValue : null;
+            DateTime? desde = ckbFecha.Checked ? (DateTime?)dtpDesde.Value : null;
+            DateTime? hasta = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
+
+            var query = (from row in OrdenesCompra.BusquedaCondicional(nroorden, proveedor_id, desde, hasta)
                          select row).ToList();
 
             dgvOrdenes.Rows.Clear();
-            foreach(var fila in query)
+            foreach (var fila in query)
             {
                 //agreagar filas filtradas al datagrid
-                dgvOrdenes.Rows.Add();
+                dgvOrdenes.Rows.Add(fila.odcid, fila.odcnumero, fila.odcfecha.ToShortDateString(), 
+                    fila.proveedor.pronombre, fila.odcimporte, fila.estid);
             }
         }
 
@@ -316,9 +321,44 @@ namespace REAL
             {
                 errorProvider1.SetError(txtNumero, "Solo se permiten números en el campo Nro. de Orden.");
                 e.Handled = true;
-                txtCantidad1.Focus();
+                txtNumero.Focus();
                 return;
             }
+        }
+
+        private void ckbNumero_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbNumero.CheckState == CheckState.Checked)
+                txtNumero.Enabled = true;
+            else
+                txtNumero.Enabled = false;
+        }
+
+        private void ckbProveedor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbProveedor.CheckState == CheckState.Checked)
+                cmbProveedor.Enabled = true;
+            else
+                cmbProveedor.Enabled = false;
+        }
+
+        private void ckbFecha_CheckedChanged(object sender, EventArgs e)
+        {
+            if(ckbFecha.CheckState == CheckState.Checked)
+            {
+                dtpDesde.Enabled = true;
+                dtpHasta.Enabled = true;
+            }
+            else
+            {
+                dtpDesde.Enabled = false;
+                dtpHasta.Enabled = false;
+            }
+        }
+
+        private void txtNumero_TextChanged(object sender, EventArgs e)
+        {
+            FiltrarForm();
         }
     }
 }
