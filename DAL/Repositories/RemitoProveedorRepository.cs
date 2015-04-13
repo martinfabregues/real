@@ -16,8 +16,9 @@ namespace DAL.Repositories
     {
         IList<RemitoProveedor> FindAllWithSucursal();
         IList<RemitoProveedor> FindAllLikeNumero(string numero);
-        int AddDetalle(RemitoProveedorDetalle detalle);
-        int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id , int orden_id);
+        int AddDetalle(RemitoProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id , int orden_id, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int Add(RemitoProveedor remito, NpgsqlConnection _db, NpgsqlTransaction tx);
     }
 
     public class RemitoProveedorRepository : IRemitoProveedorRepository
@@ -106,13 +107,10 @@ namespace DAL.Repositories
         }
 
 
-        public int AddDetalle(RemitoProveedorDetalle detalle)
+        public int AddDetalle(RemitoProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "INSERT INTO REMITOPROVEEDORDETALLE (remitoproveedor_id, prdid, cantidad, odcid) " +
                                 "VALUES (@remitoproveedor_id, @producto, @cantidad, @orden)";
-
-            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
-            {
                 
                 return _db.Execute(query, new
                 {
@@ -120,18 +118,16 @@ namespace DAL.Repositories
                     producto = detalle.producto_id,
                     cantidad = detalle.cantidad,
                     orden = detalle.orden_id
-                });
-            }
+                }, tx);
+            
         }
 
 
-        public int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id, int orden_id)
+        public int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id, int orden_id, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string queryPendiente = "UPDATE ORDENCOMPRAPENDIENTE SET OCDCANTIDAD = OCDCANTIDAD - @cantidad " +
                                    "WHERE PRDID = @producto AND ODCID = @orden AND PROID = @proveedor AND SUCID = @sucursal";
 
-            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
-            {
                 return _db.Execute(queryPendiente, new
                 {
                     cantidad = cantidad,
@@ -139,12 +135,31 @@ namespace DAL.Repositories
                     orden = orden_id,
                     proveedor = proveedor_id,
                     sucursal = sucursal_id
-                });
-            }
+                }, tx);
+                 
+        }
 
 
-           
+        public int Add(RemitoProveedor remito, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "INSERT INTO " +
+                           "REMITOPROVEEDOR (remitoproveedor_numero, remitoproveedor_fecha, " +
+                           "remitoproveedor_fecharecepcion, sucid, proid, estid, observaciones) " +
+                           "VALUES (@numero, @fecha, @recepcion, @sucursal, @proveedor, @estado, @observaciones); " +
+                           "SELECT CURRVAL('remitoproveedor_remitoproveedor_id_seq'); ";
 
+                return _db.Query<int>(query, new
+                {
+                    numero = remito.numero,
+                    fecha = remito.fechaemision,
+                    recepcion = remito.fecharecepcion,
+                    sucursal = remito.sucursal_id,
+                    proveedor = remito.proveedor_id,
+                    estado = 1,
+                    observaciones = remito.observaciones
+                }, tx).Single();
+
+            
         }
     }
 }

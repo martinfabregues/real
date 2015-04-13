@@ -64,11 +64,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DapperExtensions.1.4.4\lib\net40\DapperExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Security">
-      <HintPath>..\..\Mono.Security.dll</HintPath>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.2.2.5\lib\net40\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\..\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=2.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.2.2.5\lib\net40\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -131,10 +133,6 @@
       <Name>Real.Entidad</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

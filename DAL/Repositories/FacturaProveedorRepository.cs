@@ -14,9 +14,10 @@ namespace DAL.Repositories
 {
     public interface IFacturaProveedorRepository : IRepository<FacturaProveedor>
     {
+        int Add(FacturaProveedor factura, NpgsqlConnection _db, NpgsqlTransaction tx);
         int VerificarFactura(string numero);
-        int AddRelacionFacturaRemito(int factura_id, int remito_id);
-        int AddDetalle(FacturaProveedorDetalle detalle);
+        int AddRelacionFacturaRemito(int factura_id, int remito_id, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int AddDetalle(FacturaProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
     }
 
     public class FacturaProveedorRepository : IFacturaProveedorRepository
@@ -49,9 +50,9 @@ namespace DAL.Repositories
         public int add(FacturaProveedor newEntity)
         {
             string query = "INSERT INTO FACTURAPROVEEDOR(FAPNUMERO, FAPFECHA, FAPFECHARECEPCION, " +
-                "PROID, ESTID, FAPIMPORTE, OBSERVACIONES, SUBTOTAL, IVA, INGBRUTOS) " +
-                "VALUES (@numero, @fecha, @fecharecepcion, @proveedor, " +
-                "@estado, @importe, @observaciones, @subtotal, @iva, @ingbrutos);" +
+                "SUCID, PROID, FAPREMITO, ESTID, FAPIMPORTE, OBSERVACIONES, SUBTOTAL, IVA, INGBRUTOS) " +
+                "VALUES (@numero, @fecha, @fecharecepcion, @sucursal, @proveedor, " +
+                "@remito, @estado, @importe, @observaciones, @subtotal, @iva, @ingbrutos);" +
                 "SELECT CURRVAL('facturaproveedor_fapid_seq');";
 
 
@@ -64,13 +65,16 @@ namespace DAL.Repositories
                     numero = newEntity.numero,
                     fecha = newEntity.fecha,
                     fecharecepcion = newEntity.fecharecepcion,
+                    sucursal = newEntity.sucursal_id,
                     proveedor = newEntity.proveedor_id,
+                    remito = string.Empty,
                     estado = 1,
                     importe = newEntity.importe,
                     observaciones = newEntity.observaciones,
                     subtotal = newEntity.subtotal,
                     iva = newEntity.iva,
                     ingbrutos = newEntity.ingbrutos
+
                 }).Single();
             }
         }
@@ -99,25 +103,20 @@ namespace DAL.Repositories
         }
 
 
-        public int AddRelacionFacturaRemito(int factura_id, int remito_id)
+        public int AddRelacionFacturaRemito(int factura_id, int remito_id, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "INSERT INTO FACTURAPROVEEDOR_REMITOPROVEEDOR (FACTURAPROVEEDOR_ID, REMITOPROVEEDOR_ID) " +
                 "VALUES (@factura, @remito)";
-
-            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
-            {
-                return _db.Execute(query, new { factura = factura_id, remito = remito_id });
-            }
+       
+                return _db.Execute(query, new { factura = factura_id, remito = remito_id }, tx);            
         }
 
 
-        public int AddDetalle(FacturaProveedorDetalle detalle)
+        public int AddDetalle(FacturaProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "INSERT INTO FACTURAPROVEEDORDETALLE (FAPID, PRDID, FPDIMPORTEUNIT, " +
               "FPDCANTIDAD, ODCID) VALUES (@factura_id, @producto_id, @importeunit, @cantidad, @orden_id)";
 
-            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
-            {
                 return _db.Execute(query, new
                 {
                     factura_id = detalle.fapid,
@@ -125,8 +124,36 @@ namespace DAL.Repositories
                     importeunit = detalle.fpdimporteunit,
                     cantidad = detalle.fpdcantidad,
                     orden_id = detalle.odcid
-                });
-            }
+                }, tx);
+            
+        }
+
+        public int Add(FacturaProveedor factura, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "INSERT INTO FACTURAPROVEEDOR(FAPNUMERO, FAPFECHA, FAPFECHARECEPCION, " +
+              "SUCID, PROID, FAPREMITO, ESTID, FAPIMPORTE, OBSERVACIONES, SUBTOTAL, IVA, INGBRUTOS) " +
+              "VALUES (@numero, @fecha, @fecharecepcion, @sucursal, @proveedor, " +
+              "@remito, @estado, @importe, @observaciones, @subtotal, @iva, @ingbrutos);" +
+              "SELECT CURRVAL('facturaproveedor_fapid_seq');";
+
+
+                //inserto el encabezado de la factura
+                return _db.Query<int>(query, new
+                {
+                    numero = factura.numero,
+                    fecha = factura.fecha,
+                    fecharecepcion = factura.fecharecepcion,
+                    sucursal = factura.sucursal_id,
+                    proveedor = factura.proveedor_id,
+                    remito = string.Empty,
+                    estado = 1,
+                    importe = factura.importe,
+                    observaciones = factura.observaciones,
+                    subtotal = factura.subtotal,
+                    iva = factura.iva,
+                    ingbrutos = factura.ingbrutos
+
+                }, tx).Single();           
         }
     }
 }

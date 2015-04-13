@@ -109,11 +109,13 @@
       <HintPath>..\..\..\Microsoft.ReportViewer.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Mono.Security">
-      <HintPath>..\..\Mono.Security.dll</HintPath>
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.2.2.5\lib\net40\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\..\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=2.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.2.2.5\lib\net40\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -1107,16 +1109,6 @@
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Negocio">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Npgsql">
       <Visible>False</Visible>
       <Group>
       </Group>

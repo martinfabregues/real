@@ -143,13 +143,13 @@ namespace Negocio
 
             using (var trans = _cnn.BeginTransaction())
             {
-                factura_id = _repository.add(newEntity);
+                factura_id = _repository.Add(newEntity, _cnn, trans);
                 if(factura_id > 0)
                 {
                     foreach(FacturaProveedorDetalle fila in newEntity.detalle)
                     {
                         fila.fapid = factura_id;
-                        int detalle = _repository.AddDetalle(fila);
+                        int detalle = _repository.AddDetalle(fila, _cnn, trans);
                         if(detalle == 0)
                         {
                             factura_id = 0;
@@ -163,7 +163,7 @@ namespace Negocio
                     {
                         foreach(RemitoProveedor fila in newEntity.remitos)
                         {
-                            int vinculo = _repository.AddRelacionFacturaRemito(factura_id, fila.id);
+                            int vinculo = _repository.AddRelacionFacturaRemito(factura_id, fila.id, _cnn, trans);
                             if(vinculo == 0)
                             {
                                 factura_id = 0;
@@ -204,15 +204,17 @@ namespace Negocio
 
             NpgsqlConnection _cnn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString());
             _cnn.Open();
-            using (var trans = _cnn.BeginTransaction())
+            //NpgsqlTransaction trans = _cnn.BeginTransaction();
+
+            using (NpgsqlTransaction trans = _cnn.BeginTransaction())
             {
-                factura_id = _repositoryFactura.add(factura);
+                factura_id = _repositoryFactura.Add(factura, _cnn, trans);
                 if (factura_id > 0)
                 {
                     foreach (FacturaProveedorDetalle fila in factura.detalle)
                     {
                         fila.fapid = factura_id;
-                        int factura_detalle = _repositoryFactura.AddDetalle(fila);
+                        int factura_detalle = _repositoryFactura.AddDetalle(fila, _cnn, trans);
                         if (factura_detalle == 0)
                         {
                             resultado = false;
@@ -230,11 +232,11 @@ namespace Negocio
                             foreach (RemitoProveedorDetalle fila in remito.detalle)
                             {
                                 fila.remitoproveedor_id = remito_id;
-                                int remito_detalle = _repositoryRemito.AddDetalle(fila);
+                                int remito_detalle = _repositoryRemito.AddDetalle(fila, _cnn, trans);
                                 if (remito_detalle > 0)
                                 {
                                     int pendiente = _repositoryRemito.ActualizarPendiente(remito.proveedor_id,
-                                        remito.sucursal_id, fila.cantidad, fila.producto_id, fila.orden_id);
+                                        remito.sucursal_id, fila.cantidad, fila.producto_id, fila.orden_id, _cnn, trans);
 
                                     if (pendiente == 0)
                                     {
@@ -255,7 +257,7 @@ namespace Negocio
 
                             if (resultado_remito == true)
                             {
-                                int relacion = _repositoryFactura.AddRelacionFacturaRemito(factura_id, remito_id);
+                                int relacion = _repositoryFactura.AddRelacionFacturaRemito(factura_id, remito_id, _cnn, trans);
                                 if (relacion > 0)
                                 {
                                     trans.Commit();

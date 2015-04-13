@@ -496,6 +496,9 @@ namespace REAL
             factura.numero = txtFactura.Text;
             factura.observaciones = txtObservacion.Text;
             factura.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+            factura.subtotal = Convert.ToDouble(txtSubtotal.Text);
+            factura.iva = Convert.ToDouble(txtIva.Text);
+            factura.ingbrutos = Convert.ToDouble(txtIngBrutos.Text);
 
             //ver
             factura.sucursal_id = Convert.ToInt32(cmbSucursal.SelectedValue);
