@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7D44B4DD-7B65-4EA7-A4D7-0AEF6D6CF398}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Negocio</RootNamespace>
+    <AssemblyName>Negocio</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Security">
+      <HintPath>..\..\Mono.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql">
+      <HintPath>..\..\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actividades.cs" />
+    <Compile Include="Barrios.cs" />
+    <Compile Include="Bonificaciones.cs" />
+    <Compile Include="BonificacionesProducto.cs" />
+    <Compile Include="Categorias.cs" />
+    <Compile Include="Ciudades.cs" />
+    <Compile Include="Clientes.cs" />
+    <Compile Include="Entregas.cs" />
+    <Compile Include="EntregasDetalle.cs" />
+    <Compile Include="Estados.cs" />
+    <Compile Include="EstadosComprobante.cs" />
+    <Compile Include="EstadosEntrega.cs" />
+    <Compile Include="FacturasProveedor.cs" />
+    <Compile Include="FacturasProveedorDetalle.cs" />
+    <Compile Include="FormasPago.cs" />
+    <Compile Include="ListasPrecio.cs" />
+    <Compile Include="ListasPrecioProducto.cs" />
+    <Compile Include="Localidades.cs" />
+    <Compile Include="Marcas.cs" />
+    <Compile Include="Movimientos.cs" />
+    <Compile Include="OrdenesCompra.cs" />
+    <Compile Include="OrdenesCompraDetalle.cs" />
+    <Compile Include="OrdenesCompraDetalleBonificacion.cs" />
+    <Compile Include="OrdenesCompraPendiente.cs" />
+    <Compile Include="Planes.cs" />
+    <Compile Include="Productos.cs" />
+    <Compile Include="Proveedores.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provincias.cs" />
+    <Compile Include="Remitos.cs" />
+    <Compile Include="RemitosProveedor.cs" />
+    <Compile Include="ServicesDevolucionDetalle.cs" />
+    <Compile Include="ServicesDevolucion.cs" />
+    <Compile Include="Services.cs" />
+    <Compile Include="ServicesAutorizacion.cs" />
+    <Compile Include="ServicesDetalle.cs" />
+    <Compile Include="Sucursales.cs" />
+    <Compile Include="TarjetasCredito.cs" />
+    <Compile Include="TiposComprobante.cs" />
+    <Compile Include="TiposEntrega.cs" />
+    <Compile Include="TiposIva.cs" />
+    <Compile Include="TiposMovimiento.cs" />
+    <Compile Include="TiposSalida.cs" />
+    <Compile Include="Usuarios.cs" />
+    <Compile Include="Vendedores.cs" />
+    <Compile Include="Ventas.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\Real.Datos.csproj">
+      <Project>{40d9abff-ee4f-4e53-b23f-cfa8ba9439aa}</Project>
+      <Name>Real.Datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entidad\Real.Entidad.csproj">
+      <Project>{174b2af8-71de-44c6-bb30-9567b696995f}</Project>
+      <Name>Real.Entidad</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

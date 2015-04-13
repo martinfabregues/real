@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Dapper.FluentMap</id>
+    <version>1.3.3</version>
+    <title>Dapper.FluentMap</title>
+    <authors>henkmollema</authors>
+    <owners>henkmollema</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>http://henkmollema.github.io/Dapper-FluentMap/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides a simple API to map POCO properties to database columns when using Dapper.</description>
+    <summary>Provides a simple API to map POCO properties to database columns when using Dapper.</summary>
+    <releaseNotes>v1.3.3
+- Implemented FIndExplicitConstructor method of the SqlMapper.ITypeMape inteface in MultiTypeMap.
+- Updated Dapper to v1.38.
+
+v1.3.2
+- Updated Dapper to v1.27.
+- Added .NET 3.5 support (csproj and assemblies). Issue #14.
+
+v1.3.1
+- Updated Dapper to v1.26.
+- Deploy Dapper.FluentMap.Dommel v1.0.3.
+
+v1.3
+- Added Dapper.FluentMap.Dommel. Issue #12.
+- Modified some core API's to provide extensibility.
+
+v1.2.1
+- Added support for case insensitive column name mapping. Issue #11.
+- Added check for duplicate property maps. Issue #3.
+
+v1.2.0
+- Added basic transformation functionality (see docs).
+- Small improvements.
+
+v1.1.1
+- Fixed bug with mapping same column names for different POCO's. (issue #5)
+- FluentMapConfiguration.AddConvention now accepts a generic type paramater with the convention type rather than the instance.
+
+v1.1
+- Added conventions. (see documentation)
+- Reorganised namespaces.
+- Hide ToString(), Equals(), etc. methods from configuration classes.
+- Updated documentation.
+- Use Dapper v1.25.
+
+v1.0.2
+- Modified comments, included documentation in release. Incremented version to 1.0.2.
+
+v1.0.1
+- Removed IPropertyMap interface, used PropertyMap class directly. Modified some properties on PropertyMap class to be internal. Incremented version to 1.0.1.
+
+v1.0
+- Initial version with basic functionality.</releaseNotes>
+    <copyright>© 2014 Henk Mollema</copyright>
+    <tags>dapper map fluent mapping mapper orm ado.net</tags>
+    <dependencies>
+      <dependency id="Dapper" version="1.38" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
