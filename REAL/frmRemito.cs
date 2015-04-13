@@ -62,6 +62,8 @@ namespace REAL
             txtCoeficiente.Visible = false;
             txtMetros.Visible = false;
             txtFecha.Visible = false;
+
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void GetProveedores()
@@ -215,7 +217,7 @@ namespace REAL
             {
                 RemitoProveedorDetalle fila = new RemitoProveedorDetalle();
                 fila.producto_id = Convert.ToInt32(row.Cells[0].Value);
-                fila.orden_id = Convert.ToInt32(row.Cells[5].Value);
+                fila.orden_id = Convert.ToInt32(row.Cells[6].Value);
                 fila.cantidad = Convert.ToInt32(row.Cells[4].Value);
                 detalle.Add(fila);
             }
@@ -244,7 +246,7 @@ namespace REAL
                 DialogResult result = MessageBox.Show("Se va a registrar el remito, corrobore los datos.", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    int resultado = RemitosProveedor.add(remito);
+                    int resultado = RemitosProveedor.AddRemito(remito);
                     if (resultado > 0)
                     {
                         MessageBox.Show("El remito se registro correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
