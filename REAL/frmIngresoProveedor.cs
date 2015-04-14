@@ -127,6 +127,7 @@ namespace REAL
                             txtIdOrden.Text = dlg.odcid.ToString();
                             txtNroOrden.Text = dlg.odcnumero.ToString();
                             txtFecha.Text = dlg.fecha.ToShortDateString();
+                            txtCosto.Text = dlg.ocdimporte.ToString();
                         }
                         else
                         {
@@ -160,9 +161,9 @@ namespace REAL
                 {
                     txtProducto.Text = producto.prddenominacion;
 
-                    ObtenerCostoProducto(producto);
+                    //ObtenerCostoProducto(producto);
 
-                    txtCosto.Text = producto.prdcosto.ToString();
+                    //txtCosto.Text = producto.prdcosto.ToString();
                     txtCodigo.Text = producto.prdcodigo;
                     //txtMetros.Text = producto.prdmetros.ToString();
                     //txtCoeficiente.Text = (CalcularBonificaciones(producto).ToString());
