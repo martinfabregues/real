@@ -373,5 +373,17 @@ namespace Negocio
             IOrdenCompraRepository _ordencompraRepository = new OrdenCompraRepository();
             return _ordencompraRepository.BusquedaCondicional(numero, proveedor_id, desde, hasta);
         }
+
+        public static IList<OrdenCompraPendiente> FindPendientes()
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();
+            return _repository.FindPendientes();
+        }
+
+        public static IList<OrdenCompraPendiente> FindPendientesCondicional(int? proveedor_id, int? sucursal_id, string numero_orden, string prod)
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();
+            return _repository.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, prod);
+        }
     }
 }

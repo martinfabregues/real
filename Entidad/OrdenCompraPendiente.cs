@@ -17,10 +17,10 @@ namespace Entidad
         public int proid { get; set; }
         public int espid { get; set; }
 
-        public OrdenCompra ordencompra { get; set; }
-        public Producto producto { get; set; }
-        public Sucursal sucursal { get; set; }
-        public Proveedor proveedor { get; set; }
+        public virtual OrdenCompra ordencompra { get; set; }
+        public virtual Producto producto { get; set; }
+        public virtual Sucursal sucursal { get; set; }
+        public virtual Proveedor proveedor { get; set; }
 
 
     }

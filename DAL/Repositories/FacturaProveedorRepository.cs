@@ -20,7 +20,7 @@ namespace DAL.Repositories
         int AddDetalle(FacturaProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<FacturaProveedorDetalle> FindDetalleById(int factura_id, NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<FacturaProveedor> GetAll(NpgsqlConnection _db, NpgsqlTransaction tx);
-        String FindFacturaProveedorPorIdRemito(int remito_id);
+        IList<FacturaProveedor> FindFacturasProveedorPorIdRemito(int remito_id);
     }
 
     public class FacturaProveedorRepository : IFacturaProveedorRepository
@@ -95,8 +95,6 @@ namespace DAL.Repositories
             throw new NotImplementedException();
         }
 
-
-
         public int VerificarFactura(string numero)
         {
             string query = "SELECT COUNT(*) FROM FACTURAPROVEEDOR " +
@@ -108,7 +106,6 @@ namespace DAL.Repositories
             }
         }
 
-
         public int AddRelacionFacturaRemito(int factura_id, int remito_id, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "INSERT INTO FACTURAPROVEEDOR_REMITOPROVEEDOR (FACTURAPROVEEDOR_ID, REMITOPROVEEDOR_ID) " +
@@ -116,7 +113,6 @@ namespace DAL.Repositories
        
                 return _db.Execute(query, new { factura = factura_id, remito = remito_id }, tx);            
         }
-
 
         public int AddDetalle(FacturaProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
@@ -163,7 +159,6 @@ namespace DAL.Repositories
                 }, tx).Single();           
         }
 
-
         public IList<FacturaProveedorDetalle> FindDetalleById(int factura_id, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "SELECT * FROM FACTURAPROVEEDORDETALLE " +
@@ -174,7 +169,6 @@ namespace DAL.Repositories
             
         }
 
-
         public IList<FacturaProveedor> GetAll(NpgsqlConnection _db, NpgsqlTransaction tx)
         {
 
@@ -184,22 +178,22 @@ namespace DAL.Repositories
         }
 
 
-        public String FindFacturaProveedorPorIdRemito(int remito_id)
+
+
+
+        public IList<FacturaProveedor> FindFacturasProveedorPorIdRemito(int remito_id)
         {
-            string resultado = string.Empty;
-            string query = "SELECT " + 
-                "FAPNUMERO " +
-                "FROM FACTURAPROVEEDOR_REMITOPROVEEDOR " +
-                "INNER JOIN FACTURAPROVEEDOR ON FACTURAPROVEEDOR.FAPID = FACTURAPROVEEDOR_REMITOPROVEEDOR.FACTURAPROVEEDOR_ID " +
+            string query = "SELECT FAPID, " + 
+            "FAPNUMERO, " + 
+            "FAPFECHA " +
+            "FROM FACTURAPROVEEDOR_REMITOPROVEEDOR " +
+            "INNER JOIN FACTURAPROVEEDOR ON FACTURAPROVEEDOR.FAPID = FACTURAPROVEEDOR_REMITOPROVEEDOR.FACTURAPROVEEDOR_ID " +
                 "WHERE FACTURAPROVEEDOR_REMITOPROVEEDOR.REMITOPROVEEDOR_ID = @remito_id";
 
             using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
             {
-                resultado =  _db.Query<string>(query, new { remito_id = remito_id }).Single();
-                if (string.IsNullOrEmpty(resultado))
-                    resultado = "S/F";
+                return _db.Query<FacturaProveedor>(query, new { remito_id = remito_id }).ToList();
             }
-            return resultado;
         }
     }
 }

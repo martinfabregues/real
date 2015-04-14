@@ -10,5 +10,7 @@ namespace DAL.Interfases
     {
         OrdenCompra GetByIdWithDetalle(int id);
         IList<OrdenCompra> BusquedaCondicional(string numero, int? proveedor_id, DateTime? desde, DateTime? hasta);
+        IList<OrdenCompraPendiente> FindPendientes();
+        IList<OrdenCompraPendiente> FindPendientesCondicional(int? proveedor_id, int? sucursal_id, string numero_orden, string prod);
     }
 }

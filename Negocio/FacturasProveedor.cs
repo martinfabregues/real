@@ -356,10 +356,10 @@ namespace Negocio
         }
 
 
-        public static String FindFacturaProveedorPorIdRemito(int remito_id)
+        public static IList<FacturaProveedor> FindFacturasProveedorPorIdRemito(int remito_id)
         {
             IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
-            return _repository.FindFacturaProveedorPorIdRemito(remito_id);
+            return _repository.FindFacturasProveedorPorIdRemito(remito_id);
         }
 
 

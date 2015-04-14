@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidad;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -83,7 +84,7 @@ namespace REAL
             var query = (from row in RemitosProveedor.FindIngresos()
                          select new
                          {
-                             row.id,                             
+                             row.remitoproveedor.id,                             
                              row.remitoproveedor.numero,
                              row.remitoproveedor.fechaemision,
                              row.remitoproveedor.fecharecepcion,
@@ -118,7 +119,7 @@ namespace REAL
             var query = (from row in RemitosProveedor.FindIngresosCondicional(nroremito, producto, proveedor_id, sucursal_id, desde, hasta)
                          select new
                          {
-                             row.id,
+                             row.remitoproveedor.id,
                              row.remitoproveedor.numero,
                              row.remitoproveedor.fechaemision,
                              row.remitoproveedor.fecharecepcion,
@@ -369,6 +370,33 @@ namespace REAL
                 txtProducto.Enabled = true;
             else
                 txtProducto.Enabled = false;
+        }
+
+        private void dgvEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(dgvEntregas.CurrentCell.ColumnIndex.Equals(9))
+            {
+                int x = dgvEntregas.CurrentRow.Index;
+                int remito_id = Convert.ToInt32(dgvEntregas.Rows[x].Cells[0].Value);
+                string remito_numero = dgvEntregas.Rows[x].Cells[1].Value.ToString();
+                IList<FacturaProveedor> facturasL = FacturasProveedor.FindFacturasProveedorPorIdRemito(remito_id);
+                if (facturasL.Count > 0)
+                {
+                    string mensaje = string.Empty;
+                    foreach (var fila in facturasL)
+                    {
+                        mensaje = mensaje + Environment.NewLine + " * " + fila.numero + " - " + fila.fecha.ToShortDateString();
+                    }
+
+                    string msg = "Facturas Asociadas al Remito: " + remito_numero + Environment.NewLine;
+                    msg = msg + mensaje;
+                    MessageBox.Show(msg, "Facturas Asociadas al Remito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("El Remito de Compra no tiene asociada ninguna Factura.", "Facturas Asociadas al Remito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
       

@@ -24,7 +24,7 @@ namespace REAL
             txtProducto.Enabled = false;
             cmbProveedor.Enabled = false;
             cmbSucursal.Enabled = false;
-            
+            dgvPendientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void CargarGrid()
@@ -72,7 +72,7 @@ namespace REAL
             decimal total = 0;
             foreach (DataGridViewRow dr in dgvPendientes.Rows)
             {
-                total = total + (Convert.ToDecimal(dr.Cells[10].Value) * Convert.ToInt32(dr.Cells[9].Value));
+                total = total + Convert.ToDecimal(dr.Cells[7].Value);
             }
             lblTotal.Text = "$ " + total;
         }
@@ -92,18 +92,81 @@ namespace REAL
 
         }
 
+        private void CargarDataGrid()
+        {
+            var query = (from row in OrdenesCompra.FindPendientes()
+                         select new
+                         {
+                             row.ordencompra.odcnumero,
+                             row.ordencompra.odcfecha,
+                             row.proveedor.pronombre,
+                             row.producto.prdcodigo,
+                             row.producto.prddenominacion,
+                             row.ocdcantidad,
+                             row.ocdimporte,
+                             total = (row.ocdcantidad * row.ocdimporte),
+                             row.sucursal.sucnombre
+
+                         }).ToList();
+
+            dgvPendientes.Rows.Clear();
+            foreach (var fila in query)
+            {
+                dgvPendientes.Rows.Add(fila.odcnumero, fila.odcfecha.ToShortDateString(), fila.pronombre, fila.prdcodigo,
+                    fila.prddenominacion, fila.ocdcantidad, fila.ocdimporte, fila.total, fila.sucnombre);
+            }
+
+            CalcularTotal();
+        }
+
+        private void FiltrarForm()
+        {
+            int? proveedor_id = ckbProveedor.Checked ? (int?)Convert.ToInt32(cmbProveedor.SelectedValue) : null;
+            int? sucursal_id = ckbSucursal.Checked ? (int?)Convert.ToInt32(cmbSucursal.SelectedValue) : null;
+            
+            string numero_orden = txtOrden.Text == string.Empty ? null : txtOrden.Text;
+            string producto = txtProducto.Text == string.Empty ? null : txtProducto.Text;
+
+            var query = (from row in OrdenesCompra.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, producto)
+                         select new
+                         {
+                             row.ordencompra.odcnumero,
+                             row.ordencompra.odcfecha,
+                             row.proveedor.pronombre,
+                             row.producto.prdcodigo,
+                             row.producto.prddenominacion,
+                             row.ocdcantidad,
+                             row.ocdimporte,
+                             total = (row.ocdcantidad * row.ocdimporte),
+                             row.sucursal.sucnombre
+
+                         }).ToList();
+
+            dgvPendientes.Rows.Clear();
+            foreach (var fila in query)
+            {
+                dgvPendientes.Rows.Add(fila.odcnumero, fila.odcfecha.ToShortDateString(), fila.pronombre, fila.prdcodigo,
+                    fila.prddenominacion, fila.ocdcantidad, fila.ocdimporte, fila.total, fila.sucnombre);
+            }
+
+            CalcularTotal();
+
+        }
+
         private void frmConsultaPendientes_Load(object sender, EventArgs e)
         {
             //this.WindowState = FormWindowState.Maximized;
             IniciarControles();
-            CargarGrid();
-            if (dgvPendientes.Rows.Count > 0)
-            {
-                PersonalizarGrid();
-            }
+            //CargarGrid();
+            //if (dgvPendientes.Rows.Count > 0)
+            //{
+            //    PersonalizarGrid();
+            //}
             
             CargarComboBoxProveedor();
             CargarComboBoxSucursal();
+
+            CargarDataGrid();
         }
 
         private void frmConsultaPendientes_Resize(object sender, EventArgs e)
@@ -121,229 +184,266 @@ namespace REAL
 
         private void ckbProveedor_CheckedChanged(object sender, EventArgs e)
         {
-            txtOrden.Text = string.Empty;
-            txtProducto.Text = string.Empty;
-            if (ckbProveedor.Checked == true)
-            {
+            cmbProveedor.SelectedIndex = 0;
+
+            if (ckbProveedor.CheckState == CheckState.Checked)
                 cmbProveedor.Enabled = true;
-                //cmbSucursal.Enabled = false;
-                txtProducto.Enabled = false;
-                txtOrden.Enabled = false;
-                ckbOrden.CheckState = CheckState.Unchecked;
-                ckbProducto.CheckState = CheckState.Unchecked;
-                //ckbSucursal.CheckState = CheckState.Unchecked;
-            }
             else
-            {
                 cmbProveedor.Enabled = false;
-            }
+
+            //txtOrden.Text = string.Empty;
+            //txtProducto.Text = string.Empty;
+            //if (ckbProveedor.Checked == true)
+            //{
+            //    cmbProveedor.Enabled = true;
+            //    //cmbSucursal.Enabled = false;
+            //    txtProducto.Enabled = false;
+            //    txtOrden.Enabled = false;
+            //    ckbOrden.CheckState = CheckState.Unchecked;
+            //    ckbProducto.CheckState = CheckState.Unchecked;
+            //    //ckbSucursal.CheckState = CheckState.Unchecked;
+            //}
+            //else
+            //{
+            //    cmbProveedor.Enabled = false;
+            //}
         }
 
         private void ckbOrden_CheckedChanged(object sender, EventArgs e)
         {
             txtOrden.Text = string.Empty;
-            txtProducto.Text = string.Empty;
-            if (ckbOrden.Checked == true)
-            {
+
+            if (ckbOrden.CheckState == CheckState.Checked)
                 txtOrden.Enabled = true;
-                cmbProveedor.Enabled = false;
-                cmbSucursal.Enabled = false;
-                txtProducto.Enabled = false;
-                ckbProducto.CheckState = CheckState.Unchecked;
-                ckbProveedor.CheckState = CheckState.Unchecked;
-                ckbSucursal.CheckState = CheckState.Unchecked;
-            }
             else
-            {
                 txtOrden.Enabled = false;
-            }
+            
+            //txtOrden.Text = string.Empty;
+            //txtProducto.Text = string.Empty;
+            //if (ckbOrden.Checked == true)
+            //{
+            //    txtOrden.Enabled = true;
+            //    cmbProveedor.Enabled = false;
+            //    cmbSucursal.Enabled = false;
+            //    txtProducto.Enabled = false;
+            //    ckbProducto.CheckState = CheckState.Unchecked;
+            //    ckbProveedor.CheckState = CheckState.Unchecked;
+            //    ckbSucursal.CheckState = CheckState.Unchecked;
+            //}
+            //else
+            //{
+            //    txtOrden.Enabled = false;
+            //}
         }
 
         private void ckbProducto_CheckedChanged(object sender, EventArgs e)
         {
-            txtOrden.Text = string.Empty;
             txtProducto.Text = string.Empty;
-            if (ckbProducto.Checked == true)
-            {
+
+            if (ckbProducto.CheckState == CheckState.Checked)
                 txtProducto.Enabled = true;
-                cmbProveedor.Enabled = false;
-                cmbSucursal.Enabled = false;
-                txtOrden.Enabled = false;
-                ckbOrden.CheckState = CheckState.Unchecked;
-                ckbProveedor.CheckState = CheckState.Unchecked;
-                ckbSucursal.CheckState = CheckState.Unchecked;
-            }
             else
-            {
                 txtProducto.Enabled = false;
-            }
+                
+            
+            //txtOrden.Text = string.Empty;
+            //txtProducto.Text = string.Empty;
+            //if (ckbProducto.Checked == true)
+            //{
+            //    txtProducto.Enabled = true;
+            //    cmbProveedor.Enabled = false;
+            //    cmbSucursal.Enabled = false;
+            //    txtOrden.Enabled = false;
+            //    ckbOrden.CheckState = CheckState.Unchecked;
+            //    ckbProveedor.CheckState = CheckState.Unchecked;
+            //    ckbSucursal.CheckState = CheckState.Unchecked;
+            //}
+            //else
+            //{
+            //    txtProducto.Enabled = false;
+            //}
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (ckbProveedor.Checked == true)
-            {
-                if (ckbSucursal.Checked == true)
-                {
-                    DataTable dt = new DataTable();
-                    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedorPorSucursal(Convert.ToInt32(cmbProveedor.SelectedValue), Convert.ToInt32(cmbSucursal.SelectedValue));
-                    if (dt.Rows.Count > 0)
-                    {
-                        dgvPendientes.DataSource = dt.DefaultView;
-                        CalcularTotal();
-                    }
-                    else
-                    {
-                        dgvPendientes.DataSource = null;
-                    }
-                }
-                else
-                {
-                    DataTable dt = new DataTable();
-                    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedor(Convert.ToInt32(cmbProveedor.SelectedValue));
-                    if (dt.Rows.Count > 0)
-                    {
-                        dgvPendientes.DataSource = dt.DefaultView;
-                        PersonalizarGrid();
-                        CalcularTotal();
-                    }
-                    else
-                    {
-                        dgvPendientes.DataSource = null;
-                    }
-                }
-            }
-            else
-            {
-                if (ckbOrden.Checked == true)
-                {
-                    DataTable dt = new DataTable();
-                    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNumeroOrden(txtOrden.Text);
-                    if (dt.Rows.Count > 0)
-                    {
-                        dgvPendientes.DataSource = dt.DefaultView;
-                        PersonalizarGrid();
-                        CalcularTotal();
-                    }
-                    else
-                    {
-                        dgvPendientes.DataSource = null;
-                    }
+            FiltrarForm();
 
-                }
-                else
-                {
-                    if (ckbProducto.Checked == true)
-                    {
-                        DataTable dt = new DataTable();
-                        dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
-                        if (dt.Rows.Count > 0)
-                        {
 
-                            dgvPendientes.DataSource = dt.DefaultView;
-                            PersonalizarGrid();
-                            CalcularTotal();
-                        }
-                        else
-                        {
-                            dgvPendientes.DataSource = null;
-                        }
-                    }
-                    else
-                    {
-                        if (ckbSucursal.Checked == true)
-                        {
-                            DataTable dt = new DataTable();
-                            dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
-                            if (dt.Rows.Count > 0)
-                            {
-                                dgvPendientes.DataSource = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdSucursal(Convert.ToInt32(cmbSucursal.SelectedValue));
-                                CalcularTotal();
-                            }
-                            else
-                            {
-                                dgvPendientes.DataSource = null;
-                            }
-                        }
-                        else
-                        {
+            //if (ckbProveedor.Checked == true)
+            //{
+            //    if (ckbSucursal.Checked == true)
+            //    {
+            //        DataTable dt = new DataTable();
+            //        dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedorPorSucursal(Convert.ToInt32(cmbProveedor.SelectedValue), Convert.ToInt32(cmbSucursal.SelectedValue));
+            //        if (dt.Rows.Count > 0)
+            //        {
+            //            dgvPendientes.DataSource = dt.DefaultView;
+            //            CalcularTotal();
+            //        }
+            //        else
+            //        {
+            //            dgvPendientes.DataSource = null;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        DataTable dt = new DataTable();
+            //        dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedor(Convert.ToInt32(cmbProveedor.SelectedValue));
+            //        if (dt.Rows.Count > 0)
+            //        {
+            //            dgvPendientes.DataSource = dt.DefaultView;
+            //            PersonalizarGrid();
+            //            CalcularTotal();
+            //        }
+            //        else
+            //        {
+            //            dgvPendientes.DataSource = null;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    if (ckbOrden.Checked == true)
+            //    {
+            //        DataTable dt = new DataTable();
+            //        dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNumeroOrden(txtOrden.Text);
+            //        if (dt.Rows.Count > 0)
+            //        {
+            //            dgvPendientes.DataSource = dt.DefaultView;
+            //            PersonalizarGrid();
+            //            CalcularTotal();
+            //        }
+            //        else
+            //        {
+            //            dgvPendientes.DataSource = null;
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        if (ckbProducto.Checked == true)
+            //        {
+            //            DataTable dt = new DataTable();
+            //            dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
+            //            if (dt.Rows.Count > 0)
+            //            {
+
+            //                dgvPendientes.DataSource = dt.DefaultView;
+            //                PersonalizarGrid();
+            //                CalcularTotal();
+            //            }
+            //            else
+            //            {
+            //                dgvPendientes.DataSource = null;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (ckbSucursal.Checked == true)
+            //            {
+            //                DataTable dt = new DataTable();
+            //                dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
+            //                if (dt.Rows.Count > 0)
+            //                {
+            //                    dgvPendientes.DataSource = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdSucursal(Convert.ToInt32(cmbSucursal.SelectedValue));
+            //                    CalcularTotal();
+            //                }
+            //                else
+            //                {
+            //                    dgvPendientes.DataSource = null;
+            //                }
+            //            }
+            //            else
+            //            {
                         
-                                CargarGrid();
-                                if (dgvPendientes.Rows.Count > 0)
-                                {
-                                    PersonalizarGrid();
-                                    CalcularTotal();
-                                }
-                                else
-                                {
-                                    dgvPendientes.DataSource = null;
-                                }
+            //                    CargarGrid();
+            //                    if (dgvPendientes.Rows.Count > 0)
+            //                    {
+            //                        PersonalizarGrid();
+            //                        CalcularTotal();
+            //                    }
+            //                    else
+            //                    {
+            //                        dgvPendientes.DataSource = null;
+            //                    }
                            
-                        }
-                    }
-                }
-            }
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private void txtProducto_TextChanged(object sender, EventArgs e)
         {
-            if (txtProducto.Text != string.Empty)
-            {
-                DataTable dt = new DataTable();
-                dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
-                if (dt.Rows.Count > 0)
-                {
+            FiltrarForm();
 
-                    dgvPendientes.DataSource = dt.DefaultView;
-                    PersonalizarGrid();
-                    CalcularTotal();
-                }
-                else
-                {
-                    dgvPendientes.DataSource = null;
-                }
-            }
+            //if (txtProducto.Text != string.Empty)
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProducto(txtProducto.Text);
+            //    if (dt.Rows.Count > 0)
+            //    {
+
+            //        dgvPendientes.DataSource = dt.DefaultView;
+            //        PersonalizarGrid();
+            //        CalcularTotal();
+            //    }
+            //    else
+            //    {
+            //        dgvPendientes.DataSource = null;
+            //    }
+            //}
         }
 
         private void txtOrden_TextChanged(object sender, EventArgs e)
         {
-            if (txtOrden.Text != string.Empty)
-            {
-                DataTable dt = new DataTable();
-                dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNumeroOrden(txtOrden.Text);
-                if (dt.Rows.Count > 0)
-                {
-                    dgvPendientes.DataSource = dt.DefaultView;
-                    PersonalizarGrid();
-                    CalcularTotal();
-                }
-                else
-                {
-                    dgvPendientes.DataSource = null;
-                }
-            }
+            FiltrarForm();
+
+            //if (txtOrden.Text != string.Empty)
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNumeroOrden(txtOrden.Text);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        dgvPendientes.DataSource = dt.DefaultView;
+            //        PersonalizarGrid();
+            //        CalcularTotal();
+            //    }
+            //    else
+            //    {
+            //        dgvPendientes.DataSource = null;
+            //    }
+            //}
         }
 
         private void ckbSucursal_CheckedChanged(object sender, EventArgs e)
         {
-            txtOrden.Text = string.Empty;
-            txtProducto.Text = string.Empty;
-            if (ckbSucursal.Checked == true)
-            {
+            cmbSucursal.SelectedIndex = 0;
+
+            if (ckbSucursal.CheckState == CheckState.Checked)
                 cmbSucursal.Enabled = true;
-                //cmbProveedor.Enabled = false;
-                txtOrden.Enabled = false;
-                txtProducto.Enabled = false;
-                //ckbProveedor.CheckState = CheckState.Unchecked;
-                ckbOrden.CheckState = CheckState.Unchecked;
-                ckbProducto.CheckState = CheckState.Unchecked;
-
-            }
             else
-            {
                 cmbSucursal.Enabled = false;
+            
+            
+            //txtOrden.Text = string.Empty;
+            //txtProducto.Text = string.Empty;
+            //if (ckbSucursal.Checked == true)
+            //{
+            //    cmbSucursal.Enabled = true;
+            //    //cmbProveedor.Enabled = false;
+            //    txtOrden.Enabled = false;
+            //    txtProducto.Enabled = false;
+            //    //ckbProveedor.CheckState = CheckState.Unchecked;
+            //    ckbOrden.CheckState = CheckState.Unchecked;
+            //    ckbProducto.CheckState = CheckState.Unchecked;
 
-            }
+            //}
+            //else
+            //{
+            //    cmbSucursal.Enabled = false;
+
+            //}
 
         }
 

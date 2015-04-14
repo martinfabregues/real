@@ -31,16 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvEntregas = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ckbProducto = new System.Windows.Forms.CheckBox();
             this.ckbSucursal = new System.Windows.Forms.CheckBox();
             this.ckbProveedor = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,7 +51,16 @@
             this.txtRemito = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ckbProducto = new System.Windows.Forms.CheckBox();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.verfacturas = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -93,7 +94,8 @@
             this.producto,
             this.cantidad,
             this.numero_orden,
-            this.fecha_orden});
+            this.fecha_orden,
+            this.verfacturas});
             this.dgvEntregas.Location = new System.Drawing.Point(12, 133);
             this.dgvEntregas.Name = "dgvEntregas";
             this.dgvEntregas.ReadOnly = true;
@@ -101,61 +103,7 @@
             this.dgvEntregas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEntregas.Size = new System.Drawing.Size(980, 385);
             this.dgvEntregas.TabIndex = 2;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // numero_remito
-            // 
-            this.numero_remito.HeaderText = "Nro. Remito";
-            this.numero_remito.Name = "numero_remito";
-            this.numero_remito.ReadOnly = true;
-            // 
-            // fechaemision
-            // 
-            this.fechaemision.HeaderText = "Fec. Emisión";
-            this.fechaemision.Name = "fechaemision";
-            this.fechaemision.ReadOnly = true;
-            // 
-            // fecharecepcion
-            // 
-            this.fecharecepcion.HeaderText = "Fec. Recep.";
-            this.fecharecepcion.Name = "fecharecepcion";
-            this.fecharecepcion.ReadOnly = true;
-            // 
-            // sucursal
-            // 
-            this.sucursal.HeaderText = "Sucursal";
-            this.sucursal.Name = "sucursal";
-            this.sucursal.ReadOnly = true;
-            // 
-            // producto
-            // 
-            this.producto.HeaderText = "Producto";
-            this.producto.Name = "producto";
-            this.producto.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cant.";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // numero_orden
-            // 
-            this.numero_orden.HeaderText = "Nro. Orden";
-            this.numero_orden.Name = "numero_orden";
-            this.numero_orden.ReadOnly = true;
-            // 
-            // fecha_orden
-            // 
-            this.fecha_orden.HeaderText = "Fec. Orden";
-            this.fecha_orden.Name = "fecha_orden";
-            this.fecha_orden.ReadOnly = true;
+            this.dgvEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellClick);
             // 
             // groupBox1
             // 
@@ -179,6 +127,16 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
+            // 
+            // ckbProducto
+            // 
+            this.ckbProducto.AutoSize = true;
+            this.ckbProducto.Location = new System.Drawing.Point(376, 45);
+            this.ckbProducto.Name = "ckbProducto";
+            this.ckbProducto.Size = new System.Drawing.Size(15, 14);
+            this.ckbProducto.TabIndex = 16;
+            this.ckbProducto.UseVisualStyleBackColor = true;
+            this.ckbProducto.CheckedChanged += new System.EventHandler(this.ckbProducto_CheckedChanged);
             // 
             // ckbSucursal
             // 
@@ -346,15 +304,68 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // ckbProducto
+            // id
             // 
-            this.ckbProducto.AutoSize = true;
-            this.ckbProducto.Location = new System.Drawing.Point(376, 45);
-            this.ckbProducto.Name = "ckbProducto";
-            this.ckbProducto.Size = new System.Drawing.Size(15, 14);
-            this.ckbProducto.TabIndex = 16;
-            this.ckbProducto.UseVisualStyleBackColor = true;
-            this.ckbProducto.CheckedChanged += new System.EventHandler(this.ckbProducto_CheckedChanged);
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // numero_remito
+            // 
+            this.numero_remito.HeaderText = "Nro. Remito";
+            this.numero_remito.Name = "numero_remito";
+            this.numero_remito.ReadOnly = true;
+            // 
+            // fechaemision
+            // 
+            this.fechaemision.HeaderText = "Fec. Emisión";
+            this.fechaemision.Name = "fechaemision";
+            this.fechaemision.ReadOnly = true;
+            // 
+            // fecharecepcion
+            // 
+            this.fecharecepcion.HeaderText = "Fec. Recep.";
+            this.fecharecepcion.Name = "fecharecepcion";
+            this.fecharecepcion.ReadOnly = true;
+            // 
+            // sucursal
+            // 
+            this.sucursal.HeaderText = "Sucursal";
+            this.sucursal.Name = "sucursal";
+            this.sucursal.ReadOnly = true;
+            // 
+            // producto
+            // 
+            this.producto.HeaderText = "Producto";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cant.";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // numero_orden
+            // 
+            this.numero_orden.HeaderText = "Nro. Orden";
+            this.numero_orden.Name = "numero_orden";
+            this.numero_orden.ReadOnly = true;
+            // 
+            // fecha_orden
+            // 
+            this.fecha_orden.HeaderText = "Fec. Orden";
+            this.fecha_orden.Name = "fecha_orden";
+            this.fecha_orden.ReadOnly = true;
+            // 
+            // verfacturas
+            // 
+            this.verfacturas.HeaderText = "Ver Facturas";
+            this.verfacturas.Name = "verfacturas";
+            this.verfacturas.ReadOnly = true;
+            this.verfacturas.Text = "Ver Facturas";
+            this.verfacturas.UseColumnTextForButtonValue = true;
             // 
             // frmConsultaIngresoProveedor
             // 
@@ -405,6 +416,7 @@
         private System.Windows.Forms.CheckBox ckbSucursal;
         private System.Windows.Forms.CheckBox ckbProveedor;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.CheckBox ckbProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero_remito;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaemision;
@@ -414,6 +426,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero_orden;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha_orden;
-        private System.Windows.Forms.CheckBox ckbProducto;
+        private System.Windows.Forms.DataGridViewButtonColumn verfacturas;
     }
 }

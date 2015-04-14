@@ -47,6 +47,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.orden_numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.codigo_producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importe_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -55,9 +64,9 @@
             // btnBuscar
             // 
             this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBuscar.Location = new System.Drawing.Point(803, 62);
+            this.btnBuscar.Location = new System.Drawing.Point(794, 49);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(84, 36);
             this.btnBuscar.TabIndex = 9;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -88,6 +97,16 @@
             this.dgvPendientes.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvPendientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPendientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.orden_numero,
+            this.fecha_orden,
+            this.proveedor,
+            this.codigo_producto,
+            this.producto,
+            this.cantidad,
+            this.importe,
+            this.importe_total,
+            this.sucursal});
             this.dgvPendientes.Location = new System.Drawing.Point(10, 107);
             this.dgvPendientes.Name = "dgvPendientes";
             this.dgvPendientes.ReadOnly = true;
@@ -119,11 +138,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 50);
+            this.label3.Location = new System.Drawing.Point(6, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 13);
+            this.label3.Size = new System.Drawing.Size(101, 13);
             this.label3.TabIndex = 11;
-            this.label3.Text = "N° Orden Compra:";
+            this.label3.Text = "Nro. Orden Compra:";
             // 
             // cmbProveedor
             // 
@@ -189,20 +208,18 @@
             this.ckbSucursal.AutoSize = true;
             this.ckbSucursal.Location = new System.Drawing.Point(694, 23);
             this.ckbSucursal.Name = "ckbSucursal";
-            this.ckbSucursal.Size = new System.Drawing.Size(58, 17);
+            this.ckbSucursal.Size = new System.Drawing.Size(15, 14);
             this.ckbSucursal.TabIndex = 17;
-            this.ckbSucursal.Text = "activar";
             this.ckbSucursal.UseVisualStyleBackColor = true;
             this.ckbSucursal.CheckedChanged += new System.EventHandler(this.ckbSucursal_CheckedChanged);
             // 
             // ckbProducto
             // 
             this.ckbProducto.AutoSize = true;
-            this.ckbProducto.Location = new System.Drawing.Point(347, 71);
+            this.ckbProducto.Location = new System.Drawing.Point(347, 72);
             this.ckbProducto.Name = "ckbProducto";
-            this.ckbProducto.Size = new System.Drawing.Size(82, 17);
+            this.ckbProducto.Size = new System.Drawing.Size(15, 14);
             this.ckbProducto.TabIndex = 16;
-            this.ckbProducto.Text = "Seleccionar";
             this.ckbProducto.UseVisualStyleBackColor = true;
             this.ckbProducto.CheckedChanged += new System.EventHandler(this.ckbProducto_CheckedChanged);
             // 
@@ -211,9 +228,8 @@
             this.ckbOrden.AutoSize = true;
             this.ckbOrden.Location = new System.Drawing.Point(219, 47);
             this.ckbOrden.Name = "ckbOrden";
-            this.ckbOrden.Size = new System.Drawing.Size(82, 17);
+            this.ckbOrden.Size = new System.Drawing.Size(15, 14);
             this.ckbOrden.TabIndex = 15;
-            this.ckbOrden.Text = "Seleccionar";
             this.ckbOrden.UseVisualStyleBackColor = true;
             this.ckbOrden.CheckedChanged += new System.EventHandler(this.ckbOrden_CheckedChanged);
             // 
@@ -222,9 +238,8 @@
             this.ckbProveedor.AutoSize = true;
             this.ckbProveedor.Location = new System.Drawing.Point(349, 23);
             this.ckbProveedor.Name = "ckbProveedor";
-            this.ckbProveedor.Size = new System.Drawing.Size(82, 17);
+            this.ckbProveedor.Size = new System.Drawing.Size(15, 14);
             this.ckbProveedor.TabIndex = 14;
-            this.ckbProveedor.Text = "Seleccionar";
             this.ckbProveedor.UseVisualStyleBackColor = true;
             this.ckbProveedor.CheckedChanged += new System.EventHandler(this.ckbProveedor_CheckedChanged);
             // 
@@ -259,6 +274,60 @@
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 0;
             this.label4.Text = "Importe Total:";
+            // 
+            // orden_numero
+            // 
+            this.orden_numero.HeaderText = "Nro. Orden";
+            this.orden_numero.Name = "orden_numero";
+            this.orden_numero.ReadOnly = true;
+            // 
+            // fecha_orden
+            // 
+            this.fecha_orden.HeaderText = "Fec. Orden";
+            this.fecha_orden.Name = "fecha_orden";
+            this.fecha_orden.ReadOnly = true;
+            // 
+            // proveedor
+            // 
+            this.proveedor.HeaderText = "Proveedor";
+            this.proveedor.Name = "proveedor";
+            this.proveedor.ReadOnly = true;
+            // 
+            // codigo_producto
+            // 
+            this.codigo_producto.HeaderText = "Cod. Prod.";
+            this.codigo_producto.Name = "codigo_producto";
+            this.codigo_producto.ReadOnly = true;
+            // 
+            // producto
+            // 
+            this.producto.HeaderText = "Producto";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cant.";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // importe
+            // 
+            this.importe.HeaderText = "Imp. Unit.";
+            this.importe.Name = "importe";
+            this.importe.ReadOnly = true;
+            // 
+            // importe_total
+            // 
+            this.importe_total.HeaderText = "Imp. Total";
+            this.importe_total.Name = "importe_total";
+            this.importe_total.ReadOnly = true;
+            // 
+            // sucursal
+            // 
+            this.sucursal.HeaderText = "Sucursal";
+            this.sucursal.Name = "sucursal";
+            this.sucursal.ReadOnly = true;
             // 
             // frmConsultaPendientes
             // 
@@ -308,5 +377,14 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbSucursal;
         private System.Windows.Forms.CheckBox ckbSucursal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orden_numero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha_orden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn codigo_producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn producto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn importe_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sucursal;
     }
 }

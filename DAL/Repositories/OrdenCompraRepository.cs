@@ -100,5 +100,63 @@ namespace DAL.Repositories
                 }, splitOn: "proid").ToList();
             }
         }
+
+
+        public IList<OrdenCompraPendiente> FindPendientes()
+        {
+            string query = "SELECT * FROM ORDENCOMPRAPENDIENTE " +
+                "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = ORDENCOMPRAPENDIENTE.PRDID " +
+                "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = ORDENCOMPRAPENDIENTE.ODCID " +
+                "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = ORDENCOMPRAPENDIENTE.SUCID " +
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = ORDENCOMPRAPENDIENTE.PROID " +
+                "WHERE ORDENCOMPRAPENDIENTE.OCDCANTIDAD > 0 " +
+                "ORDER BY ORDENCOMPRA.ODCFECHA DESC";
+
+            using (_cnn)
+            {
+                return _cnn.Query<OrdenCompraPendiente, Producto, OrdenCompra, Sucursal, Proveedor, OrdenCompraPendiente>(query, 
+                    (pendiente, producto, orden, sucursal, proveedor) =>
+                    {
+                        pendiente.producto = producto;
+                        pendiente.ordencompra = orden;
+                        pendiente.sucursal = sucursal;
+                        pendiente.proveedor = proveedor;
+                        return pendiente;
+                    }, splitOn:"prdid, odcid, sucid, proid").ToList();
+            }
+        }
+
+
+        public IList<OrdenCompraPendiente> FindPendientesCondicional(int? proveedor_id, int? sucursal_id, string numero_orden, string prod)
+        {
+            string query = "SELECT * FROM ORDENCOMPRAPENDIENTE " +
+                "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = ORDENCOMPRAPENDIENTE.PRDID " +
+                "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = ORDENCOMPRAPENDIENTE.ODCID " +
+                "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = ORDENCOMPRAPENDIENTE.SUCID " +
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = ORDENCOMPRAPENDIENTE.PROID " +
+                "WHERE ORDENCOMPRAPENDIENTE.OCDCANTIDAD > 0 " +
+                "AND ((ORDENCOMPRAPENDIENTE.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " + 
+                "AND ((ORDENCOMPRAPENDIENTE.SUCID = @sucursal_id) OR (@sucursal_id IS NULL)) " +
+                "AND ((ORDENCOMPRA.ODCNUMERO LIKE CONCAT('%', @numero_orden, '%')) OR (@numero_orden IS NULL)) " + 
+                "AND ((PRODUCTO.PRDDENOMINACION LIKE CONCAT('%', @producto, '%')) OR (@producto IS NULL)) " + 
+                "ORDER BY ORDENCOMPRA.ODCFECHA DESC";
+
+            using (_cnn)
+            {
+                return _cnn.Query<OrdenCompraPendiente, Producto, OrdenCompra, Sucursal, Proveedor, OrdenCompraPendiente>(query,
+                    (pendiente, producto, orden, sucursal, proveedor) =>
+                    {
+                        pendiente.producto = producto;
+                        pendiente.ordencompra = orden;
+                        pendiente.sucursal = sucursal;
+                        pendiente.proveedor = proveedor;
+                        return pendiente;
+                    }, new { 
+                        proveedor_id = proveedor_id, 
+                        sucursal_id = sucursal_id, 
+                        numero_orden = numero_orden, 
+                        producto = prod }, splitOn: "prdid, odcid, sucid, proid").ToList();
+            }
+        }
     }
 }
