@@ -554,7 +554,7 @@ namespace REAL
         {
             frmPendientesEliminar frm = new frmPendientesEliminar();
             frm.MdiParent = this;
-            frm.Text = "PENDIENTES DE ENTREGA - ELIMINAR ITEMS";
+            frm.Text = "Compras - Ajustar Productos Pendientes de Entrega";
             frm.Show();
         }
 

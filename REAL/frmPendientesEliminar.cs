@@ -72,8 +72,8 @@ namespace REAL
             dgvDetalle.Columns[5].HeaderText = "Cantidad";
             dgvDetalle.Columns[6].HeaderText = "Código Producto";
             dgvDetalle.Columns[7].HeaderText = "Producto";
-            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
 
         }
 
@@ -94,7 +94,7 @@ namespace REAL
 
         private void frmPendientesEliminar_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             CargarDataGrid();
             PersonalizarDataGrid();
             CrearColumnaEliminar();
@@ -204,6 +204,11 @@ namespace REAL
             {
                 BuscarPorCriterio();
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }

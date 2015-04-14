@@ -171,7 +171,7 @@
             this.MaximizeBox = false;
             this.Name = "frmRemitoSelector";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmRemitoSelector";
+            this.Text = "Compras - Selector de Remitos de Compra";
             this.Load += new System.EventHandler(this.frmRemitoSelector_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemitos)).EndInit();
             this.groupBox1.ResumeLayout(false);

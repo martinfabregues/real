@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -38,33 +37,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.IndianRed;
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(752, 20);
-            this.lblTitulo.TabIndex = 118;
-            this.lblTitulo.Text = "PENDIENTES DE ENTREGA - ANULAR ITEM";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // dgvDetalle
             // 
-            this.dgvDetalle.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvDetalle.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvDetalle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalle.Location = new System.Drawing.Point(12, 129);
+            this.dgvDetalle.Location = new System.Drawing.Point(12, 112);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDetalle.Size = new System.Drawing.Size(728, 367);
+            this.dgvDetalle.Size = new System.Drawing.Size(954, 397);
             this.dgvDetalle.TabIndex = 119;
             this.dgvDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellClick);
             // 
@@ -77,7 +64,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 29);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(728, 94);
             this.groupBox1.TabIndex = 120;
@@ -86,9 +73,9 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(539, 63);
+            this.btnBuscar.Location = new System.Drawing.Point(436, 30);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 29);
             this.btnBuscar.TabIndex = 6;
             this.btnBuscar.Text = "&Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -97,7 +84,7 @@
             // txtProducto
             // 
             this.txtProducto.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtProducto.Location = new System.Drawing.Point(147, 65);
+            this.txtProducto.Location = new System.Drawing.Point(79, 66);
             this.txtProducto.Name = "txtProducto";
             this.txtProducto.Size = new System.Drawing.Size(317, 20);
             this.txtProducto.TabIndex = 5;
@@ -107,7 +94,7 @@
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSucursal.FormattingEnabled = true;
-            this.cmbSucursal.Location = new System.Drawing.Point(147, 42);
+            this.cmbSucursal.Location = new System.Drawing.Point(79, 43);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(232, 21);
             this.cmbSucursal.TabIndex = 4;
@@ -116,7 +103,7 @@
             // 
             this.cmbProveedor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProveedor.FormattingEnabled = true;
-            this.cmbProveedor.Location = new System.Drawing.Point(147, 18);
+            this.cmbProveedor.Location = new System.Drawing.Point(79, 19);
             this.cmbProveedor.Name = "cmbProveedor";
             this.cmbProveedor.Size = new System.Drawing.Size(232, 21);
             this.cmbProveedor.TabIndex = 3;
@@ -124,7 +111,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(90, 45);
+            this.label3.Location = new System.Drawing.Point(22, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 2;
@@ -133,7 +120,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(88, 68);
+            this.label2.Location = new System.Drawing.Point(20, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 1;
@@ -142,21 +129,36 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(82, 21);
+            this.label1.Location = new System.Drawing.Point(14, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Proveedor:";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSalir.Location = new System.Drawing.Point(872, 515);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(94, 34);
+            this.btnSalir.TabIndex = 121;
+            this.btnSalir.Text = "&Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // frmPendientesEliminar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 508);
+            this.CancelButton = this.btnSalir;
+            this.ClientSize = new System.Drawing.Size(978, 561);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvDetalle);
-            this.Controls.Add(this.lblTitulo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmPendientesEliminar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmPendientesEliminar";
             this.Load += new System.EventHandler(this.frmPendientesEliminar_Load);
             this.Resize += new System.EventHandler(this.frmPendientesEliminar_Resize);
@@ -169,7 +171,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridView dgvDetalle;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtProducto;
@@ -179,5 +180,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

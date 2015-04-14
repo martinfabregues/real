@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -72,8 +72,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtIngBrutos = new System.Windows.Forms.TextBox();
             this.txtIva = new System.Windows.Forms.TextBox();
@@ -100,12 +98,13 @@
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.txtRN = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -182,6 +181,7 @@
             this.txtCosto.Name = "txtCosto";
             this.txtCosto.Size = new System.Drawing.Size(100, 20);
             this.txtCosto.TabIndex = 11;
+            this.txtCosto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCosto_KeyPress);
             // 
             // txtCantidad
             // 
@@ -263,14 +263,14 @@
             this.orden_numero,
             this.orden_fecha,
             this.eliminar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle18;
             this.dgvDetalle.Location = new System.Drawing.Point(11, 209);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersVisible = false;
@@ -298,9 +298,9 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Format = "C2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle16;
             this.Column3.HeaderText = "Costo Unit.";
             this.Column3.Name = "Column3";
             this.Column3.Width = 84;
@@ -313,9 +313,9 @@
             // 
             // total
             // 
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Format = "C2";
+            dataGridViewCellStyle17.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle17;
             this.total.HeaderText = "Total";
             this.total.Name = "total";
             this.total.Width = 56;
@@ -451,7 +451,7 @@
             this.groupBox4.Controls.Add(this.txtObservacion);
             this.groupBox4.Location = new System.Drawing.Point(11, 430);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(569, 91);
+            this.groupBox4.Size = new System.Drawing.Size(536, 91);
             this.groupBox4.TabIndex = 121;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Observaciones";
@@ -464,12 +464,13 @@
             this.txtObservacion.Multiline = true;
             this.txtObservacion.Name = "txtObservacion";
             this.txtObservacion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtObservacion.Size = new System.Drawing.Size(548, 64);
+            this.txtObservacion.Size = new System.Drawing.Size(518, 64);
             this.txtObservacion.TabIndex = 0;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.groupBox1);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.txtRN);
             this.groupBox3.Controls.Add(this.txtTotal);
             this.groupBox3.Controls.Add(this.txtIngBrutos);
             this.groupBox3.Controls.Add(this.txtIva);
@@ -478,61 +479,43 @@
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Location = new System.Drawing.Point(586, 430);
+            this.groupBox3.Location = new System.Drawing.Point(553, 430);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(306, 91);
+            this.groupBox3.Size = new System.Drawing.Size(339, 91);
             this.groupBox3.TabIndex = 122;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Totales";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Location = new System.Drawing.Point(177, 47);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(119, 42);
-            this.groupBox1.TabIndex = 125;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Autorizar Pago";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(16, 19);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(67, 17);
-            this.checkBox1.TabIndex = 124;
-            this.checkBox1.Text = "Autorizar";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // txtTotal
             // 
             this.txtTotal.BackColor = System.Drawing.Color.SeaShell;
             this.txtTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotal.Location = new System.Drawing.Point(200, 21);
+            this.txtTotal.Location = new System.Drawing.Point(222, 46);
             this.txtTotal.Name = "txtTotal";
-            this.txtTotal.Size = new System.Drawing.Size(89, 20);
+            this.txtTotal.Size = new System.Drawing.Size(107, 20);
             this.txtTotal.TabIndex = 118;
             // 
             // txtIngBrutos
             // 
-            this.txtIngBrutos.Location = new System.Drawing.Point(71, 63);
+            this.txtIngBrutos.Location = new System.Drawing.Point(84, 63);
             this.txtIngBrutos.Name = "txtIngBrutos";
             this.txtIngBrutos.Size = new System.Drawing.Size(89, 20);
             this.txtIngBrutos.TabIndex = 117;
             this.txtIngBrutos.TextChanged += new System.EventHandler(this.txtIngBrutos_TextChanged);
+            this.txtIngBrutos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIngBrutos_KeyPress);
             // 
             // txtIva
             // 
-            this.txtIva.Location = new System.Drawing.Point(71, 42);
+            this.txtIva.Location = new System.Drawing.Point(84, 42);
             this.txtIva.Name = "txtIva";
             this.txtIva.Size = new System.Drawing.Size(89, 20);
             this.txtIva.TabIndex = 116;
             this.txtIva.TextChanged += new System.EventHandler(this.txtIva_TextChanged);
+            this.txtIva.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtIva_KeyPress);
             // 
             // txtSubtotal
             // 
-            this.txtSubtotal.Location = new System.Drawing.Point(71, 21);
+            this.txtSubtotal.Location = new System.Drawing.Point(84, 21);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(89, 20);
             this.txtSubtotal.TabIndex = 115;
@@ -541,16 +524,16 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 66);
+            this.label13.Location = new System.Drawing.Point(3, 67);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 13);
+            this.label13.Size = new System.Drawing.Size(77, 13);
             this.label13.TabIndex = 114;
-            this.label13.Text = "Ing.Brut:";
+            this.label13.Text = "Ing.Brut. CBA.:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 45);
+            this.label1.Location = new System.Drawing.Point(53, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 113;
@@ -559,7 +542,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 24);
+            this.label2.Location = new System.Drawing.Point(31, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 112;
@@ -568,7 +551,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(164, 24);
+            this.label14.Location = new System.Drawing.Point(186, 49);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(34, 13);
             this.label14.TabIndex = 108;
@@ -769,6 +752,24 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
+            // txtRN
+            // 
+            this.txtRN.Location = new System.Drawing.Point(258, 21);
+            this.txtRN.Name = "txtRN";
+            this.txtRN.Size = new System.Drawing.Size(71, 20);
+            this.txtRN.TabIndex = 119;
+            this.txtRN.TextChanged += new System.EventHandler(this.txtRN_TextChanged);
+            this.txtRN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRN_KeyPress);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(186, 24);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 13);
+            this.label12.TabIndex = 120;
+            this.label12.Text = "RN 2408/08:";
+            // 
             // frmIngresoProveedor
             // 
             this.AcceptButton = this.btnRegistrar;
@@ -799,8 +800,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -865,8 +864,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox ckbRemito;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cmbSucursal;
@@ -884,5 +881,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_fecha;
         private System.Windows.Forms.DataGridViewButtonColumn eliminar;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtRN;
     }
 }

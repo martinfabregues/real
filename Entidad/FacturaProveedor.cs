@@ -22,6 +22,7 @@ namespace Entidad
         public double subtotal { get; set; }
         public double iva { get; set; }
         public double ingbrutos { get; set; }
+        public double resolucion_2408 { get; set; }
         public virtual IList<FacturaProveedorDetalle> detalle { get; set; }
         public virtual IList<RemitoProveedor> remitos { get; set; }
 

@@ -66,6 +66,7 @@ namespace REAL
             txtIdOrden.Visible = false;
             txtNroOrden.Visible = false;
             txtFecha.Visible = false;
+            txtRN.Text = "0.00";
 
             dgvDetalle.Columns[8].Visible = false;
             dgvDetalle.Columns[9].Visible = false;
@@ -276,6 +277,8 @@ namespace REAL
             txtIdOrden.Text = string.Empty;
             txtNroOrden.Text = string.Empty;
             txtFecha.Text = string.Empty;
+            txtCosto.Enabled = false;
+            ckbCosto.CheckState = CheckState.Unchecked;
         }
 
         private void CalcularSubtotal()
@@ -294,7 +297,10 @@ namespace REAL
             {
                 if (!string.IsNullOrEmpty(txtIngBrutos.Text))
                 {
-                    CalcularTotal();
+                    if (!string.IsNullOrEmpty(txtRN.Text))
+                    {
+                        CalcularTotal();
+                    }
                 }
             }
         }
@@ -302,7 +308,7 @@ namespace REAL
         private void CalcularTotal()
         {
             double total = 0;
-            total = Convert.ToDouble(txtSubtotal.Text) + Convert.ToDouble(txtIva.Text) + Convert.ToDouble(txtIngBrutos.Text);
+            total = Convert.ToDouble(txtSubtotal.Text) + Convert.ToDouble(txtIva.Text) + Convert.ToDouble(txtIngBrutos.Text) + Convert.ToDouble(txtRN.Text);
             txtTotal.Text = total.ToString();
         }
 
@@ -312,7 +318,10 @@ namespace REAL
             {
                 if (!string.IsNullOrEmpty(txtIngBrutos.Text))
                 {
-                    CalcularTotal();
+                    if (!string.IsNullOrEmpty(txtRN.Text))
+                    {
+                        CalcularTotal();
+                    }
                 }
             }
         }
@@ -323,7 +332,10 @@ namespace REAL
             {
                 if (!string.IsNullOrEmpty(txtIva.Text))
                 {
-                    CalcularTotal();
+                    if (!string.IsNullOrEmpty(txtRN.Text))
+                    {
+                        CalcularTotal();
+                    }
                 }
             }
         }
@@ -465,8 +477,11 @@ namespace REAL
             factura.importe = Convert.ToDecimal(txtTotal.Text);
             factura.numero = txtFactura.Text;
             factura.observaciones = txtObservacion.Text;
-            factura.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);   
-            
+            factura.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+            factura.subtotal = Convert.ToDouble(txtSubtotal.Text);
+            factura.iva = Convert.ToDouble(txtIva.Text);
+            factura.ingbrutos = Convert.ToDouble(txtIngBrutos.Text);
+            factura.resolucion_2408 = Convert.ToDouble(txtRN.Text);
             //ver
             factura.sucursal_id = Convert.ToInt32(cmbSucursal.SelectedValue);
             CrearDetalle();
@@ -500,6 +515,7 @@ namespace REAL
             factura.subtotal = Convert.ToDouble(txtSubtotal.Text);
             factura.iva = Convert.ToDouble(txtIva.Text);
             factura.ingbrutos = Convert.ToDouble(txtIngBrutos.Text);
+            factura.resolucion_2408 = Convert.ToDouble(txtRN.Text);
 
             //ver
             factura.sucursal_id = Convert.ToInt32(cmbSucursal.SelectedValue);
@@ -543,6 +559,7 @@ namespace REAL
             txtIva.Text = "0.00";
             txtTotal.Text = "0.00";
             txtSubtotal.Text = "0.00";
+            txtRN.Text = "0.00";
             txtRemito.Text = string.Empty;
             txtObservacion.Text = string.Empty;
             cmbProveedor.SelectedIndex = 0;
@@ -644,6 +661,68 @@ namespace REAL
                 errorProvider1.SetError(txtCantidad, "Solo se permiten números en el campo cantidad.");
                 e.Handled = true;
                 txtCantidad.Focus();
+                return;
+            }
+        }
+
+        private void txtRN_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtSubtotal.Text))
+            {
+                if (!string.IsNullOrEmpty(txtIva.Text))
+                {
+                    if (!string.IsNullOrEmpty(txtIngBrutos.Text))
+                    {
+                        CalcularTotal();
+                    }
+                }
+            }
+        }
+
+        private void txtCosto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+            {
+
+                errorProvider1.SetError(txtCosto, "Solo se permiten números en el campo costo.");
+                e.Handled = true;
+                txtCosto.Focus();
+                return;
+            }
+        }
+
+        private void txtIva_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+            {
+
+                errorProvider1.SetError(txtIva, "Solo se permiten números en el campo I.V.A.");
+                e.Handled = true;
+                txtIva.Focus();
+                return;
+            }
+        }
+
+        private void txtIngBrutos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+            {
+
+                errorProvider1.SetError(txtIngBrutos, "Solo se permiten números en el campo Ing. Brut. CBA..");
+                e.Handled = true;
+                txtIngBrutos.Focus();
+                return;
+            }
+        }
+
+        private void txtRN_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
+            {
+
+                errorProvider1.SetError(txtRN, "Solo se permiten números en el campo RN 2408/08.");
+                e.Handled = true;
+                txtRN.Focus();
                 return;
             }
         }

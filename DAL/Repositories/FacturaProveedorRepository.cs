@@ -137,9 +137,9 @@ namespace DAL.Repositories
         public int Add(FacturaProveedor factura, NpgsqlConnection _db, NpgsqlTransaction tx)
         {
             string query = "INSERT INTO FACTURAPROVEEDOR(FAPNUMERO, FAPFECHA, FAPFECHARECEPCION, " +
-              "SUCID, PROID, FAPREMITO, ESTID, FAPIMPORTE, OBSERVACIONES, SUBTOTAL, IVA, INGBRUTOS) " +
+              "SUCID, PROID, FAPREMITO, ESTID, FAPIMPORTE, OBSERVACIONES, SUBTOTAL, IVA, INGBRUTOS, RESOLUCION) " +
               "VALUES (@numero, @fecha, @fecharecepcion, @sucursal, @proveedor, " +
-              "@remito, @estado, @importe, @observaciones, @subtotal, @iva, @ingbrutos);" +
+              "@remito, @estado, @importe, @observaciones, @subtotal, @iva, @ingbrutos, @resolucion);" +
               "SELECT CURRVAL('facturaproveedor_fapid_seq');";
 
 
@@ -157,7 +157,8 @@ namespace DAL.Repositories
                     observaciones = factura.observaciones,
                     subtotal = factura.subtotal,
                     iva = factura.iva,
-                    ingbrutos = factura.ingbrutos
+                    ingbrutos = factura.ingbrutos,
+                    resolucion = factura.resolucion_2408
 
                 }, tx).Single();           
         }

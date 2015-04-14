@@ -27,7 +27,7 @@ namespace REAL
 
         private void GetRemitos()
         {
-            var resultado = (from row in RemitosProveedor.FindAllWithSucursal()
+            var resultado = (from row in RemitosProveedor.FindAllWithSucursal().OrderByDescending(x => x.fechaemision)
                              select new
                              {
                                  row.id,
@@ -58,7 +58,7 @@ namespace REAL
 
         private void BuscarPorNumero(string numero)
         {
-            var resultado = (from row in RemitosProveedor.FindAllLikeNumero(numero)
+            var resultado = (from row in RemitosProveedor.FindAllLikeNumero(numero).OrderByDescending(x => x.fechaemision)
                              select new
                              {
                                  row.id,
