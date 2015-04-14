@@ -34,7 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dgvProveedores = new System.Windows.Forms.DataGridView();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProveedores)).BeginInit();
             this.SuspendLayout();
@@ -44,9 +43,9 @@
             this.groupBox1.Controls.Add(this.btnBuscar);
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 26);
+            this.groupBox1.Location = new System.Drawing.Point(12, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(850, 81);
+            this.groupBox1.Size = new System.Drawing.Size(850, 51);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
@@ -64,7 +63,7 @@
             // txtNombre
             // 
             this.txtNombre.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtNombre.Location = new System.Drawing.Point(120, 37);
+            this.txtNombre.Location = new System.Drawing.Point(118, 19);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(291, 20);
             this.txtNombre.TabIndex = 1;
@@ -73,7 +72,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 40);
+            this.label1.Location = new System.Drawing.Point(13, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 0;
@@ -81,39 +80,26 @@
             // 
             // dgvProveedores
             // 
-            this.dgvProveedores.BackgroundColor = System.Drawing.Color.Lavender;
+            this.dgvProveedores.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgvProveedores.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvProveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProveedores.Location = new System.Drawing.Point(12, 113);
+            this.dgvProveedores.Location = new System.Drawing.Point(12, 63);
             this.dgvProveedores.Name = "dgvProveedores";
             this.dgvProveedores.RowHeadersVisible = false;
             this.dgvProveedores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProveedores.Size = new System.Drawing.Size(850, 421);
+            this.dgvProveedores.Size = new System.Drawing.Size(1005, 471);
             this.dgvProveedores.TabIndex = 1;
             // 
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCerrar.Location = new System.Drawing.Point(787, 540);
+            this.btnCerrar.Location = new System.Drawing.Point(927, 537);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(75, 23);
+            this.btnCerrar.Size = new System.Drawing.Size(90, 33);
             this.btnCerrar.TabIndex = 2;
             this.btnCerrar.Text = "&Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(874, 23);
-            this.lblTitulo.TabIndex = 40;
-            this.lblTitulo.Text = "Consulta de Proveedores Registrados";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmConsultaProveedor
             // 
@@ -121,12 +107,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCerrar;
-            this.ClientSize = new System.Drawing.Size(874, 575);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(1029, 582);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.dgvProveedores);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "frmConsultaProveedor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmConsultaProveedor";
             this.Load += new System.EventHandler(this.frmConsultaProveedor_Load);
             this.Resize += new System.EventHandler(this.frmConsultaProveedor_Resize);
@@ -145,6 +133,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvProveedores;
         private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

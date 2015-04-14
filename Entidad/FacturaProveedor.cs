@@ -25,6 +25,7 @@ namespace Entidad
         public double resolucion_2408 { get; set; }
         public virtual IList<FacturaProveedorDetalle> detalle { get; set; }
         public virtual IList<RemitoProveedor> remitos { get; set; }
+        public virtual Proveedor proveedor { get; set; }
 
     }
 

@@ -38,29 +38,29 @@ namespace REAL
         private void PersonalizarGrilla()
         {
             dgvProveedores.Columns[0].Visible = false;
-            dgvProveedores.Columns[1].HeaderText = "CÓDIGO";
-            dgvProveedores.Columns[2].HeaderText = "R.SOCIAL";
-            dgvProveedores.Columns[3].HeaderText = "NOMBRE";
-            dgvProveedores.Columns[4].HeaderText = "DIRECCIÓN";
-            dgvProveedores.Columns[5].HeaderText = "BARRIO";
-            dgvProveedores.Columns[6].HeaderText = "COD.POSTAL";
+            dgvProveedores.Columns[1].HeaderText = "Código";
+            dgvProveedores.Columns[2].HeaderText = "R.Social";
+            dgvProveedores.Columns[3].HeaderText = "Nombre";
+            dgvProveedores.Columns[4].HeaderText = "Dirección";
+            dgvProveedores.Columns[5].HeaderText = "Barrio";
+            dgvProveedores.Columns[6].HeaderText = "Cod.Postal";
             dgvProveedores.Columns[7].Visible = false;
-            dgvProveedores.Columns[8].HeaderText = "TELÉFONO";
+            dgvProveedores.Columns[8].HeaderText = "Teléfono";
             dgvProveedores.Columns[9].Visible = false;
-            dgvProveedores.Columns[10].HeaderText = "CUIT";
-            dgvProveedores.Columns[11].HeaderText = "ING.BRUTOS";
+            dgvProveedores.Columns[10].HeaderText = "Cuit";
+            dgvProveedores.Columns[11].HeaderText = "Ing.Brutos";
             dgvProveedores.Columns[12].Visible = false;
-            dgvProveedores.Columns[13].HeaderText = "EMAIL";
+            dgvProveedores.Columns[13].HeaderText = "Email";
             dgvProveedores.Columns[14].Visible = false;
 
-            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvProveedores.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dgvProveedores.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
 
 
         private void frmConsultaProveedor_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             CargarGrilla();
             PersonalizarGrilla();
         }

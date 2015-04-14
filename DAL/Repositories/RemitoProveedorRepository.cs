@@ -21,6 +21,7 @@ namespace DAL.Repositories
         int Add(RemitoProveedor remito, NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<RemitoProveedorDetalle> FindIngresos();
         IList<RemitoProveedorDetalle> FindIngresosCondicional(string remito_numero, string producto, int? proveedor_id, int? sucursal_id, DateTime? desde, DateTime? hasta);
+        IList<RemitoProveedor> FindAllByIdFactura(int factura_id);
     }
 
     public class RemitoProveedorRepository : IRemitoProveedorRepository
@@ -220,6 +221,22 @@ namespace DAL.Repositories
                         sucursal_id = sucursal_id, 
                         desde = desde, 
                         hasta = hasta }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
+            }
+        }
+
+
+        public IList<RemitoProveedor> FindAllByIdFactura(int factura_id)
+        {
+            string query = "SELECT REMITOPROVEEDOR.REMITOPROVEEDOR_ID, " +
+                "REMITOPROVEEDOR.REMITOPROVEEDOR_NUMERO, " + 
+                "REMITOPROVEEDOR.REMITOPROVEEDOR_FECHA " + 
+                "FROM FACTURAPROVEEDOR_REMITOPROVEEDOR " +
+                "INNER JOIN REMITOPROVEEDOR ON REMITOPROVEEDOR.REMITOPROVEEDOR_ID = FACTURAPROVEEDOR_REMITOPROVEEDOR.REMITOPROVEEDOR_ID " +
+                "WHERE FACTURAPROVEEDOR_REMITOPROVEEDOR.FACTURAPROVEEDOR_ID = @factura_id ";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<RemitoProveedor>(query, new { factura_id = factura_id}).ToList();
             }
         }
     }

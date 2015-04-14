@@ -709,6 +709,22 @@ namespace REAL
             }
         }
 
+        private void facturasRegistradsaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFacturasProveedorConsulta frm = new frmFacturasProveedorConsulta();
+            frm.MdiParent = this;
+            frm.Text = "Compras - Listado de Facturas de Compra Registradas";
+            frm.Show();
+        }
+
+        private void ingresosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConsultaIngresoProveedor frm = new frmConsultaIngresoProveedor();
+            frm.MdiParent = this;
+            frm.Text = "Compras - Listado de Ingresos de Proveedor";
+            frm.Show();
+        }
+
      
 
 

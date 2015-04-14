@@ -316,6 +316,12 @@
     <Compile Include="frmEstadisticaGeneral.Designer.cs">
       <DependentUpon>frmEstadisticaGeneral.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFacturasProveedorConsulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFacturasProveedorConsulta.Designer.cs">
+      <DependentUpon>frmFacturasProveedorConsulta.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmFiltro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -749,6 +755,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmEstadisticaGeneral.resx">
       <DependentUpon>frmEstadisticaGeneral.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFacturasProveedorConsulta.resx">
+      <DependentUpon>frmFacturasProveedorConsulta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmFiltro.resx">
       <DependentUpon>frmFiltro.cs</DependentUpon>

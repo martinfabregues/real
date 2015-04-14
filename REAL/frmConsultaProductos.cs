@@ -61,21 +61,21 @@ namespace REAL
         {
             dgvProductos.Columns[0].Visible = false;
 
-            dgvProductos.Columns[0].HeaderText = "ID";
-            dgvProductos.Columns[1].HeaderText = "PROVEEDOR";
-            dgvProductos.Columns[2].HeaderText = "MARCA";
-            dgvProductos.Columns[3].HeaderText = "CATEGORIA";
-            dgvProductos.Columns[4].HeaderText = "CÓDIGO";
-            dgvProductos.Columns[5].HeaderText = "PRODUCTO";
-            dgvProductos.Columns[6].HeaderText = "COSTO BRUTO";
-            dgvProductos.Columns[7].HeaderText = "METROS";
-            dgvProductos.Columns[8].HeaderText = "ESTADO";
+            dgvProductos.Columns[0].HeaderText = "Id";
+            dgvProductos.Columns[1].HeaderText = "Proveedor";
+            dgvProductos.Columns[2].HeaderText = "Marca";
+            dgvProductos.Columns[3].HeaderText = "Categoria";
+            dgvProductos.Columns[4].HeaderText = "Código";
+            dgvProductos.Columns[5].HeaderText = "Producto";
+            dgvProductos.Columns[6].HeaderText = "Costo";
+            dgvProductos.Columns[7].HeaderText = "m3";
+            dgvProductos.Columns[8].HeaderText = "Estado";
 
 
             dgvProductos.Columns[6].DefaultCellStyle.Format = "c";
 
-            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvProductos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            //dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvProductos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //dgvProductos.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
    
@@ -93,12 +93,12 @@ namespace REAL
 
         private void frmConsultaProductos_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             IniciarControles();        
             CargarComboBoxProveedor();
 
             backgroundWorker.RunWorkerAsync();
-          
+            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void ckbProveedor_CheckedChanged(object sender, EventArgs e)

@@ -21,6 +21,9 @@ namespace DAL.Repositories
         IList<FacturaProveedorDetalle> FindDetalleById(int factura_id, NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<FacturaProveedor> GetAll(NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<FacturaProveedor> FindFacturasProveedorPorIdRemito(int remito_id);
+        IList<FacturaProveedor> FindAllComplete();
+
+        IList<FacturaProveedor> FindAllCondicional(string fac_numero, int? proveedor_id, DateTime? desde, DateTime? hasta);
     }
 
     public class FacturaProveedorRepository : IFacturaProveedorRepository
@@ -193,6 +196,47 @@ namespace DAL.Repositories
             using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
             {
                 return _db.Query<FacturaProveedor>(query, new { remito_id = remito_id }).ToList();
+            }
+        }
+
+
+        public IList<FacturaProveedor> FindAllComplete()
+        {
+            string query = "SELECT * FROM FACTURAPROVEEDOR " +
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = FACTURAPROVEEDOR.PROID " +
+                "ORDER BY FACTURAPROVEEDOR.FAPFECHA, FACTURAPROVEEDOR.FAPNUMERO DESC";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<FacturaProveedor, Proveedor, FacturaProveedor>(query,
+                    (factura, proveedor) => { 
+                        factura.proveedor = proveedor; 
+                        return factura; }, splitOn:"proid").ToList();
+            }
+        }
+
+
+        public IList<FacturaProveedor> FindAllCondicional(string fac_numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
+        {
+            string query = "SELECT * FROM FACTURAPROVEEDOR " +
+              "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = FACTURAPROVEEDOR.PROID " +
+              "WHERE ((FACTURAPROVEEDOR.FAPNUMERO LIKE CONCAT('%', @factura, '%')) OR (@factura IS NULL)) " + 
+              "AND ((FACTURAPROVEEDOR.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " + 
+              "AND ((FACTURAPROVEEDOR.FAPFECHA BETWEEN @desde AND @hasta) OR ((@desde IS NULL) OR (@hasta IS NULL))) " + 
+              "ORDER BY FACTURAPROVEEDOR.FAPFECHA, FACTURAPROVEEDOR.FAPNUMERO DESC";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<FacturaProveedor, Proveedor, FacturaProveedor>(query,
+                    (factura, proveedor) =>
+                    {
+                        factura.proveedor = proveedor;
+                        return factura;
+                    }, new { 
+                        factura = fac_numero, 
+                        proveedor_id = proveedor_id, 
+                        desde = desde, 
+                        hasta = hasta}, splitOn: "proid").ToList();
             }
         }
     }

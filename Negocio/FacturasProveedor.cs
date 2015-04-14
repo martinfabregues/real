@@ -362,6 +362,18 @@ namespace Negocio
             return _repository.FindFacturasProveedorPorIdRemito(remito_id);
         }
 
+        public static IList<FacturaProveedor> FindAllComplete()
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindAllComplete();
+        }
+
+        public static IList<FacturaProveedor> FindAllCondicional(string fac_numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindAllCondicional(fac_numero, proveedor_id, desde, hasta);
+        }
+
 
     }
 }
