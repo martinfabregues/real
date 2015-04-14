@@ -31,6 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvEntregas = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ckbSucursal = new System.Windows.Forms.CheckBox();
             this.ckbProveedor = new System.Windows.Forms.CheckBox();
@@ -50,15 +59,7 @@
             this.txtRemito = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ckbProducto = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -101,8 +102,64 @@
             this.dgvEntregas.Size = new System.Drawing.Size(980, 385);
             this.dgvEntregas.TabIndex = 2;
             // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // numero_remito
+            // 
+            this.numero_remito.HeaderText = "Nro. Remito";
+            this.numero_remito.Name = "numero_remito";
+            this.numero_remito.ReadOnly = true;
+            // 
+            // fechaemision
+            // 
+            this.fechaemision.HeaderText = "Fec. Emisión";
+            this.fechaemision.Name = "fechaemision";
+            this.fechaemision.ReadOnly = true;
+            // 
+            // fecharecepcion
+            // 
+            this.fecharecepcion.HeaderText = "Fec. Recep.";
+            this.fecharecepcion.Name = "fecharecepcion";
+            this.fecharecepcion.ReadOnly = true;
+            // 
+            // sucursal
+            // 
+            this.sucursal.HeaderText = "Sucursal";
+            this.sucursal.Name = "sucursal";
+            this.sucursal.ReadOnly = true;
+            // 
+            // producto
+            // 
+            this.producto.HeaderText = "Producto";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cant.";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // numero_orden
+            // 
+            this.numero_orden.HeaderText = "Nro. Orden";
+            this.numero_orden.Name = "numero_orden";
+            this.numero_orden.ReadOnly = true;
+            // 
+            // fecha_orden
+            // 
+            this.fecha_orden.HeaderText = "Fec. Orden";
+            this.fecha_orden.Name = "fecha_orden";
+            this.fecha_orden.ReadOnly = true;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ckbProducto);
             this.groupBox1.Controls.Add(this.ckbSucursal);
             this.groupBox1.Controls.Add(this.ckbProveedor);
             this.groupBox1.Controls.Add(this.label7);
@@ -191,7 +248,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(738, 78);
+            this.btnBuscar.Location = new System.Drawing.Point(739, 60);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(85, 40);
             this.btnBuscar.TabIndex = 7;
@@ -269,7 +326,7 @@
             this.txtRemito.BackColor = System.Drawing.Color.LightBlue;
             this.txtRemito.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtRemito.Location = new System.Drawing.Point(89, 21);
-            this.txtRemito.MaxLength = 8;
+            this.txtRemito.MaxLength = 13;
             this.txtRemito.Name = "txtRemito";
             this.txtRemito.Size = new System.Drawing.Size(117, 20);
             this.txtRemito.TabIndex = 3;
@@ -289,60 +346,15 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // id
+            // ckbProducto
             // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // numero_remito
-            // 
-            this.numero_remito.HeaderText = "Nro. Remito";
-            this.numero_remito.Name = "numero_remito";
-            this.numero_remito.ReadOnly = true;
-            // 
-            // fechaemision
-            // 
-            this.fechaemision.HeaderText = "Fec. Emisión";
-            this.fechaemision.Name = "fechaemision";
-            this.fechaemision.ReadOnly = true;
-            // 
-            // fecharecepcion
-            // 
-            this.fecharecepcion.HeaderText = "Fec. Recep.";
-            this.fecharecepcion.Name = "fecharecepcion";
-            this.fecharecepcion.ReadOnly = true;
-            // 
-            // sucursal
-            // 
-            this.sucursal.HeaderText = "Sucursal";
-            this.sucursal.Name = "sucursal";
-            this.sucursal.ReadOnly = true;
-            // 
-            // producto
-            // 
-            this.producto.HeaderText = "Producto";
-            this.producto.Name = "producto";
-            this.producto.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cant.";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // numero_orden
-            // 
-            this.numero_orden.HeaderText = "Nro. Orden";
-            this.numero_orden.Name = "numero_orden";
-            this.numero_orden.ReadOnly = true;
-            // 
-            // fecha_orden
-            // 
-            this.fecha_orden.HeaderText = "Fec. Orden";
-            this.fecha_orden.Name = "fecha_orden";
-            this.fecha_orden.ReadOnly = true;
+            this.ckbProducto.AutoSize = true;
+            this.ckbProducto.Location = new System.Drawing.Point(376, 45);
+            this.ckbProducto.Name = "ckbProducto";
+            this.ckbProducto.Size = new System.Drawing.Size(15, 14);
+            this.ckbProducto.TabIndex = 16;
+            this.ckbProducto.UseVisualStyleBackColor = true;
+            this.ckbProducto.CheckedChanged += new System.EventHandler(this.ckbProducto_CheckedChanged);
             // 
             // frmConsultaIngresoProveedor
             // 
@@ -402,5 +414,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero_orden;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha_orden;
+        private System.Windows.Forms.CheckBox ckbProducto;
     }
 }

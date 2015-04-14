@@ -93,5 +93,11 @@ namespace Negocio
             IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
             return _repository.FindIngresos();
         }
+
+        public static IList<RemitoProveedorDetalle> FindIngresosCondicional(string remito_numero, string prod, int? proveedor_id, int? sucursal_id, DateTime? desde, DateTime? hasta)
+        {
+            IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
+            return _repository.FindIngresosCondicional(remito_numero, prod, proveedor_id, sucursal_id, desde, hasta);
+        }
     }
 }

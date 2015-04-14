@@ -20,7 +20,7 @@ namespace DAL.Repositories
         int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id , int orden_id, NpgsqlConnection _db, NpgsqlTransaction tx);
         int Add(RemitoProveedor remito, NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<RemitoProveedorDetalle> FindIngresos();
-        
+        IList<RemitoProveedorDetalle> FindIngresosCondicional(string remito_numero, string producto, int? proveedor_id, int? sucursal_id, DateTime? desde, DateTime? hasta);
     }
 
     public class RemitoProveedorRepository : IRemitoProveedorRepository
@@ -184,6 +184,42 @@ namespace DAL.Repositories
                         detalle.ordencompra = orden;
                         detalle.remitoproveedor.sucursal = sucursal;
                         return detalle; }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
+            }
+        }
+
+
+        public IList<RemitoProveedorDetalle> FindIngresosCondicional(string remito_numero, string prod, int? proveedor_id, int? sucursal_id, DateTime? desde, DateTime? hasta)
+        {
+            string query = "SELECT * FROM REMITOPROVEEDORDETALLE " +
+               "INNER JOIN REMITOPROVEEDOR ON REMITOPROVEEDOR.REMITOPROVEEDOR_ID = " +
+               "REMITOPROVEEDORDETALLE.REMITOPROVEEDOR_ID " +
+               "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = REMITOPROVEEDORDETALLE.PRDID " +
+               "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = REMITOPROVEEDORDETALLE.ODCID " +
+               "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = REMITOPROVEEDOR.SUCID " +
+               "WHERE ((REMITOPROVEEDOR.REMITOPROVEEDOR_NUMERO = @remito_numero) OR (@remito_numero IS NULL)) " + 
+               "AND ((PRODUCTO.PRDDENOMINACION LIKE CONCAT('%', @producto, '%')) OR (@producto IS NULL)) " +
+               "AND ((REMITOPROVEEDOR.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " + 
+               "AND ((REMITOPROVEEDORDETALLE.SUCID = @sucursal_id) OR (@sucursal_id IS NULL)) " + 
+               "AND ((REMITOPROVEEDOR.REMITOPROVEEDOR_FECHARECEPCION BETWEEN @desde AND @hasta) OR ((@desde IS NULL) OR (@hasta IS NULL))) " +
+               "ORDER BY REMITOPROVEEDOR.REMITOPROVEEDOR_FECHARECEPCION DESC";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, RemitoProveedorDetalle>
+                    (query, (detalle, remito, producto, orden, sucursal) =>
+                    {
+                        detalle.remitoproveedor = remito;
+                        detalle.producto = producto;
+                        detalle.ordencompra = orden;
+                        detalle.remitoproveedor.sucursal = sucursal;
+                        return detalle;
+                    }, new { 
+                        remito_numero = remito_numero, 
+                        producto = prod, 
+                        proveedor_id = proveedor_id, 
+                        sucursal_id = sucursal_id, 
+                        desde = desde, 
+                        hasta = hasta }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
             }
         }
     }
