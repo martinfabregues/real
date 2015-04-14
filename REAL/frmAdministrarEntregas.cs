@@ -81,8 +81,8 @@ namespace REAL
             dgvEntregas.Columns[11].HeaderText = "Tipo Entrega";
             dgvEntregas.Columns[12].HeaderText = "Estado";
             dgvEntregas.Columns[10].DefaultCellStyle.Format = "c";
-            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvEntregas.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
+            //dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //dgvEntregas.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
 
 
@@ -183,9 +183,9 @@ namespace REAL
 
         private void frmAdministrarEntregas_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
 
-           
+            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             IniciarControles();
             PersonalizarGrid();
         }

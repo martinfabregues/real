@@ -277,6 +277,91 @@ namespace Negocio
         }
 
 
+        public static int MigrarFacturas()
+        {
+            IFacturaProveedorRepository _repositoryFactura = new FacturaProveedorRepository();
+            IRemitoProveedorRepository _repositoryRemito = new RemitoProveedorRepository();
+            int remito_id = 0;
+            bool resultado = true;
+
+
+            NpgsqlConnection _cnn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString());
+            _cnn.Open();
+
+            using (NpgsqlTransaction trans = _cnn.BeginTransaction())
+            {
+                IList<FacturaProveedor> _facturas = _repositoryFactura.GetAll(_cnn, trans);
+
+                foreach (FacturaProveedor factura in _facturas)
+                {
+                    factura.detalle = _repositoryFactura.FindDetalleById(factura.id, _cnn, trans);
+
+                    RemitoProveedor remito = new RemitoProveedor();
+                    remito.activo = 1;
+                    remito.fechaemision = factura.fecha;
+                    remito.fecharecepcion = factura.fecharecepcion;
+                    
+                    if (String.IsNullOrEmpty(factura.numeroremito))
+                        remito.numero = "-";
+                    else
+                        remito.numero = factura.numeroremito;
+
+                    remito.observaciones = factura.observaciones;
+                    remito.proveedor_id = factura.proveedor_id;
+                    remito.sucursal_id = factura.sucursal_id;
+
+                    remito_id = _repositoryRemito.Add(remito, _cnn, trans);
+                    int relacion = _repositoryFactura.AddRelacionFacturaRemito(factura.id, remito_id, _cnn, trans);
+
+                    if (remito_id > 0 && relacion > 0)
+                    {
+                        foreach (FacturaProveedorDetalle fila in factura.detalle)
+                        {
+                            RemitoProveedorDetalle detalle = new RemitoProveedorDetalle();
+                            detalle.cantidad = fila.fpdcantidad;
+                            detalle.orden_id = fila.odcid;
+                            detalle.producto_id = fila.prdid;
+                            detalle.remitoproveedor_id = remito_id;
+
+                            int resultado_detalle = _repositoryRemito.AddDetalle(detalle, _cnn, trans);
+                            if (resultado_detalle == 0)
+                            {
+                                trans.Rollback();
+                                remito_id = 0;
+                                resultado = false;
+                                break;
+                            }
+                        }
+                        if (resultado == false)
+                        {
+                            trans.Rollback();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        remito_id = 0;
+                        trans.Rollback();
+                    }
+                   
+                }
+
+                if (resultado == true)
+                {
+                    trans.Commit();
+                }
+
+            }
+            return remito_id;
+        }
+
+
+        public static String FindFacturaProveedorPorIdRemito(int remito_id)
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindFacturaProveedorPorIdRemito(remito_id);
+        }
+
 
     }
 }

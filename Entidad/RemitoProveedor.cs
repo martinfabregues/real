@@ -18,6 +18,7 @@ namespace Entidad
         public string observaciones { get; set; }
         public virtual IList<RemitoProveedorDetalle> detalle { get; set; }
         public virtual Sucursal sucursal { get; set; }
+        public virtual FacturaProveedor factura { get; set; }
         
     }
 

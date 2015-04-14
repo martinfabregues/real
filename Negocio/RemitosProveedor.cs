@@ -87,5 +87,11 @@ namespace Negocio
             return _repository.FindAllLikeNumero(numero);
         }
 
+
+        public static IList<RemitoProveedorDetalle> FindIngresos()
+        {
+            IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
+            return _repository.FindIngresos();
+        }
     }
 }

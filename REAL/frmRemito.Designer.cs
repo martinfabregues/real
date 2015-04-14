@@ -29,42 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtOrden = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtFecha = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.txtNroOrden = new System.Windows.Forms.TextBox();
             this.txtIdOrden = new System.Windows.Forms.TextBox();
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.txtid = new System.Windows.Forms.TextBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.txtProducto = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.txtCoeficiente = new System.Windows.Forms.TextBox();
             this.txtMetros = new System.Windows.Forms.TextBox();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtpRecepcion = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
-            this.label18 = new System.Windows.Forms.Label();
-            this.cmbProveedor = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cmbSucursal = new System.Windows.Forms.ComboBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtRemito = new System.Windows.Forms.MaskedTextBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnRegistrar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.txtFecha = new System.Windows.Forms.TextBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ocdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +60,21 @@
             this.orden_fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtRemito = new System.Windows.Forms.MaskedTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpRecepcion = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.label18 = new System.Windows.Forms.Label();
+            this.cmbProveedor = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cmbSucursal = new System.Windows.Forms.ComboBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -133,6 +133,13 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items";
             // 
+            // txtFecha
+            // 
+            this.txtFecha.Location = new System.Drawing.Point(400, 69);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(27, 20);
+            this.txtFecha.TabIndex = 83;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.txtNroOrden);
@@ -171,6 +178,18 @@
             this.txtid.Name = "txtid";
             this.txtid.Size = new System.Drawing.Size(100, 20);
             this.txtid.TabIndex = 13;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(450, 61);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(132, 35);
+            this.btnAgregar.TabIndex = 81;
+            this.btnAgregar.Text = "&Agregar v";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // txtProducto
             // 
@@ -216,6 +235,16 @@
             this.txtCodigo.TabIndex = 76;
             this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
             // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Image = global::REAL.Properties.Resources.search;
+            this.btnBuscar.Location = new System.Drawing.Point(193, 28);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(38, 23);
+            this.btnBuscar.TabIndex = 77;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // txtCoeficiente
             // 
             this.txtCoeficiente.Location = new System.Drawing.Point(591, 533);
@@ -248,20 +277,75 @@
             this.orden_fecha,
             this.metros,
             this.eliminar});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalle.Location = new System.Drawing.Point(12, 167);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(880, 253);
             this.dgvDetalle.TabIndex = 103;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // ocdid
+            // 
+            this.ocdid.HeaderText = "Idet";
+            this.ocdid.Name = "ocdid";
+            this.ocdid.Visible = false;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Código";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Producto";
+            this.Column2.Name = "Column2";
+            // 
+            // ocdcantidad
+            // 
+            this.ocdcantidad.HeaderText = "Cant.";
+            this.ocdcantidad.Name = "ocdcantidad";
+            // 
+            // orden
+            // 
+            this.orden.HeaderText = "Nro. Orden";
+            this.orden.Name = "orden";
+            // 
+            // orden_id
+            // 
+            this.orden_id.HeaderText = "orden_id";
+            this.orden_id.Name = "orden_id";
+            this.orden_id.Visible = false;
+            // 
+            // orden_fecha
+            // 
+            this.orden_fecha.HeaderText = "Fecha Orden";
+            this.orden_fecha.Name = "orden_fecha";
+            // 
+            // metros
+            // 
+            this.metros.HeaderText = "Metros";
+            this.metros.Name = "metros";
+            // 
+            // eliminar
+            // 
+            this.eliminar.HeaderText = "Eliminar";
+            this.eliminar.Name = "eliminar";
+            this.eliminar.Text = "Eliminar";
+            this.eliminar.UseColumnTextForButtonValue = true;
             // 
             // groupBox2
             // 
@@ -276,6 +360,24 @@
             this.groupBox2.TabIndex = 101;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Comprobante";
+            // 
+            // txtRemito
+            // 
+            this.txtRemito.HidePromptOnLeave = true;
+            this.txtRemito.Location = new System.Drawing.Point(103, 62);
+            this.txtRemito.Mask = "9999-99999999";
+            this.txtRemito.Name = "txtRemito";
+            this.txtRemito.Size = new System.Drawing.Size(129, 20);
+            this.txtRemito.TabIndex = 118;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(34, 65);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 61;
+            this.label6.Text = "Nro. Remito:";
             // 
             // groupBox1
             // 
@@ -364,24 +466,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 65);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 61;
-            this.label6.Text = "Nro. Remito:";
-            // 
-            // txtRemito
-            // 
-            this.txtRemito.HidePromptOnLeave = true;
-            this.txtRemito.Location = new System.Drawing.Point(103, 62);
-            this.txtRemito.Mask = "9999-99999999";
-            this.txtRemito.Name = "txtRemito";
-            this.txtRemito.Size = new System.Drawing.Size(129, 20);
-            this.txtRemito.TabIndex = 118;
-            // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -393,6 +477,7 @@
             this.btnCancelar.TabIndex = 105;
             this.btnCancelar.Text = "&Salir";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnRegistrar
             // 
@@ -406,94 +491,11 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(450, 61);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(132, 35);
-            this.btnAgregar.TabIndex = 81;
-            this.btnAgregar.Text = "&Agregar v";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::REAL.Properties.Resources.search;
-            this.btnBuscar.Location = new System.Drawing.Point(193, 28);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(38, 23);
-            this.btnBuscar.TabIndex = 77;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // txtFecha
-            // 
-            this.txtFecha.Location = new System.Drawing.Point(400, 69);
-            this.txtFecha.Name = "txtFecha";
-            this.txtFecha.Size = new System.Drawing.Size(27, 20);
-            this.txtFecha.TabIndex = 83;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            // 
-            // ocdid
-            // 
-            this.ocdid.HeaderText = "Idet";
-            this.ocdid.Name = "ocdid";
-            this.ocdid.Visible = false;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Código";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Producto";
-            this.Column2.Name = "Column2";
-            // 
-            // ocdcantidad
-            // 
-            this.ocdcantidad.HeaderText = "Cant.";
-            this.ocdcantidad.Name = "ocdcantidad";
-            // 
-            // orden
-            // 
-            this.orden.HeaderText = "Nro. Orden";
-            this.orden.Name = "orden";
-            // 
-            // orden_id
-            // 
-            this.orden_id.HeaderText = "orden_id";
-            this.orden_id.Name = "orden_id";
-            this.orden_id.Visible = false;
-            // 
-            // orden_fecha
-            // 
-            this.orden_fecha.HeaderText = "Fecha Orden";
-            this.orden_fecha.Name = "orden_fecha";
-            // 
-            // metros
-            // 
-            this.metros.HeaderText = "Metros";
-            this.metros.Name = "metros";
-            // 
-            // eliminar
-            // 
-            this.eliminar.HeaderText = "Eliminar";
-            this.eliminar.Name = "eliminar";
-            this.eliminar.Text = "Eliminar";
-            this.eliminar.UseColumnTextForButtonValue = true;
-            // 
             // frmRemito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(904, 572);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.txtOrden);

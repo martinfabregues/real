@@ -25,17 +25,18 @@ namespace REAL
             dtpHasta.Enabled = false;
             cmbProveedor.Enabled = false;
             cmbSucursal.Enabled = false;
+            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void CargarGrilla()
         {
-            DataTable dt = new DataTable();
-            dt = FacturasProveedorDetalle.GetFacturaProveedorTodo();
-            if(dt.Rows.Count>0)
-            {
-                dgvEntregas.DataSource = dt.DefaultView;
-                PersonalizarGrilla();
-            }
+            //DataTable dt = new DataTable();
+            //dt = FacturasProveedorDetalle.GetFacturaProveedorTodo();
+            //if(dt.Rows.Count>0)
+            //{
+            //    dgvEntregas.DataSource = dt.DefaultView;
+            //    PersonalizarGrilla();
+            //}
             
         }
 
@@ -57,42 +58,72 @@ namespace REAL
 
         private void PersonalizarGrilla()
         {
-            dgvEntregas.Columns[0].Visible = false;
-            dgvEntregas.Columns[1].HeaderText = "Nro. Fac.";
-            dgvEntregas.Columns[2].HeaderText = "Nro. Rem.";
-            dgvEntregas.Columns[3].HeaderText = "Fec. Fac.";
-            dgvEntregas.Columns[4].HeaderText = "Fec. Rec.";
-            dgvEntregas.Columns[5].HeaderText = "Sucursal";
-            dgvEntregas.Columns[6].HeaderText = "Producto";
-            dgvEntregas.Columns[7].HeaderText = "Cant.";
-            dgvEntregas.Columns[8].HeaderText = "Imp. Unit.";
-            dgvEntregas.Columns[9].HeaderText = "Total";
-            dgvEntregas.Columns[10].HeaderText = "Nro. Orden";
+            //dgvEntregas.Columns[0].Visible = false;
+            //dgvEntregas.Columns[1].HeaderText = "Nro. Fac.";
+            //dgvEntregas.Columns[2].HeaderText = "Nro. Rem.";
+            //dgvEntregas.Columns[3].HeaderText = "Fec. Fac.";
+            //dgvEntregas.Columns[4].HeaderText = "Fec. Rec.";
+            //dgvEntregas.Columns[5].HeaderText = "Sucursal";
+            //dgvEntregas.Columns[6].HeaderText = "Producto";
+            //dgvEntregas.Columns[7].HeaderText = "Cant.";
+            //dgvEntregas.Columns[8].HeaderText = "Imp. Unit.";
+            //dgvEntregas.Columns[9].HeaderText = "Total";
+            //dgvEntregas.Columns[10].HeaderText = "Nro. Orden";
 
-            dgvEntregas.Columns[8].DefaultCellStyle.Format = "c";
-            dgvEntregas.Columns[9].DefaultCellStyle.Format = "c";
+            //dgvEntregas.Columns[8].DefaultCellStyle.Format = "c";
+            //dgvEntregas.Columns[9].DefaultCellStyle.Format = "c";
 
-            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             //dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             //dgvEntregas.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
         }
+
+        private void CargarDataGrid()
+        {
+            var query = (from row in RemitosProveedor.FindIngresos()
+                         select new
+                         {
+                             row.id,                             
+                             row.remitoproveedor.numero,
+                             row.remitoproveedor.fechaemision,
+                             row.remitoproveedor.fecharecepcion,
+                             row.remitoproveedor.sucursal.sucnombre,
+                             row.producto.prddenominacion,
+                             row.cantidad,
+                             row.ordencompra.odcnumero,
+                             row.ordencompra.odcfecha
+
+                         }).ToList();
+
+            dgvEntregas.Rows.Clear();
+            foreach(var fila in query)
+            {
+                dgvEntregas.Rows.Add(fila.id, fila.numero, fila.fechaemision.ToShortDateString(), 
+                    fila.fecharecepcion.ToShortDateString(), fila.sucnombre, fila.prddenominacion, 
+                    fila.cantidad, fila.odcnumero, fila.odcfecha.ToShortDateString());
+            }
+        }
+
+
 
         private void frmConsultaIngresoProveedor_Load(object sender, EventArgs e)
         {
             //this.WindowState = FormWindowState.Maximized;
             IniciarControles();
-            CargarGrilla();
+            //CargarGrilla();
             CargarComboBoxProveedor();
             CargarComboBoxSucursal();
+
+            CargarDataGrid();
         }
 
         private void frmConsultaIngresoProveedor_Resize(object sender, EventArgs e)
         {
-            dgvEntregas.Width = this.Width - 40;
-            dgvEntregas.Height = this.Height - 300;
-            groupBox1.Width = this.Width - 40;
-            btnAceptar.Location = new Point(20, this.Height - 70);
-            btnCancelar.Location = new Point(this.Width - 100, this.Height - 70);
+            //dgvEntregas.Width = this.Width - 40;
+            //dgvEntregas.Height = this.Height - 300;
+            //groupBox1.Width = this.Width - 40;
+            //btnAceptar.Location = new Point(20, this.Height - 70);
+            //btnCancelar.Location = new Point(this.Width - 100, this.Height - 70);
         }
 
         private void txtProducto_TextChanged(object sender, EventArgs e)
@@ -115,20 +146,20 @@ namespace REAL
 
         private void txtFactura_TextChanged(object sender, EventArgs e)
         {
-            if (txtFactura.Text != string.Empty)
-            {
-                DataTable dt = new DataTable();
-                dt = FacturasProveedorDetalle.GetFacturaProveedorTodoPorNumeroFactura(txtFactura.Text);
-                if (dt.Rows.Count > 0)
-                {
-                    dgvEntregas.DataSource = dt.DefaultView;
-                    PersonalizarGrilla();
-                }
-                else
-                {
-                    dgvEntregas.DataSource = null;
-                }
-            }
+            //if (txtFactura.Text != string.Empty)
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt = FacturasProveedorDetalle.GetFacturaProveedorTodoPorNumeroFactura(txtFactura.Text);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        dgvEntregas.DataSource = dt.DefaultView;
+            //        PersonalizarGrilla();
+            //    }
+            //    else
+            //    {
+            //        dgvEntregas.DataSource = null;
+            //    }
+            //}
         }
 
         private void txtRemito_TextChanged(object sender, EventArgs e)
@@ -260,7 +291,7 @@ namespace REAL
             {
                 //lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO";
                 e.Handled = true;
-                txtFactura.Focus();
+                //txtFactura.Focus();
                 return;
             }
         }

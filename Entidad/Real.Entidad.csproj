@@ -83,6 +83,7 @@
     <Compile Include="Categoria.cs" />
     <Compile Include="Ciudad.cs" />
     <Compile Include="Criteria\OrdenCompraPendienteCriteria.cs" />
+    <Compile Include="FacturaProveedorRemitoProveedor.cs" />
     <Compile Include="ListaPrecioProducto.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="CobroRemito.cs" />

@@ -19,6 +19,8 @@ namespace DAL.Repositories
         int AddDetalle(RemitoProveedorDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
         int ActualizarPendiente(int proveedor_id, int sucursal_id, int cantidad, int producto_id , int orden_id, NpgsqlConnection _db, NpgsqlTransaction tx);
         int Add(RemitoProveedor remito, NpgsqlConnection _db, NpgsqlTransaction tx);
+        IList<RemitoProveedorDetalle> FindIngresos();
+        
     }
 
     public class RemitoProveedorRepository : IRemitoProveedorRepository
@@ -160,6 +162,29 @@ namespace DAL.Repositories
                 }, tx).Single();
 
             
+        }
+
+
+        public IList<RemitoProveedorDetalle> FindIngresos()
+        {
+            string query = "SELECT * FROM REMITOPROVEEDORDETALLE " +
+                "INNER JOIN REMITOPROVEEDOR ON REMITOPROVEEDOR.REMITOPROVEEDOR_ID = " +
+                "REMITOPROVEEDORDETALLE.REMITOPROVEEDOR_ID " +
+                "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = REMITOPROVEEDORDETALLE.PRDID " +
+                "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = REMITOPROVEEDORDETALLE.ODCID " +
+                "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = REMITOPROVEEDOR.SUCID " + 
+                "ORDER BY REMITOPROVEEDOR.REMITOPROVEEDOR_FECHARECEPCION DESC";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, RemitoProveedorDetalle>
+                    (query, (detalle, remito, producto, orden, sucursal) => { 
+                        detalle.remitoproveedor = remito;
+                        detalle.producto = producto;
+                        detalle.ordencompra = orden;
+                        detalle.remitoproveedor.sucursal = sucursal;
+                        return detalle; }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
+            }
         }
     }
 }

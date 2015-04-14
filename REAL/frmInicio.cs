@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -692,6 +693,20 @@ namespace REAL
         private void btnAnularOrdenCompra_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void migrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            int resultado = FacturasProveedor.MigrarFacturas();
+            if(resultado > 0)
+            {
+                MessageBox.Show("OK");
+            }
+            else
+            {
+                MessageBox.Show("ERROR");
+            }
         }
 
      
