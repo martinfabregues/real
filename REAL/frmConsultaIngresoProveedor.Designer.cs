@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,6 +88,7 @@
             this.dgvEntregas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvEntregas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.proveedor,
             this.numero_remito,
             this.fechaemision,
             this.fecharecepcion,
@@ -311,6 +313,13 @@
             this.id.ReadOnly = true;
             this.id.Visible = false;
             // 
+            // proveedor
+            // 
+            this.proveedor.HeaderText = "Proveedor";
+            this.proveedor.Name = "proveedor";
+            this.proveedor.ReadOnly = true;
+            this.proveedor.Visible = false;
+            // 
             // numero_remito
             // 
             this.numero_remito.HeaderText = "Nro. Remito";
@@ -418,6 +427,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.CheckBox ckbProducto;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero_remito;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaemision;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecharecepcion;

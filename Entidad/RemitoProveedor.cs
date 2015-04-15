@@ -19,6 +19,7 @@ namespace Entidad
         public virtual IList<RemitoProveedorDetalle> detalle { get; set; }
         public virtual Sucursal sucursal { get; set; }
         public virtual FacturaProveedor factura { get; set; }
+        public virtual Proveedor proveedor { get; set; }
         
     }
 

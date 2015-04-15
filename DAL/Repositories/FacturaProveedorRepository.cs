@@ -223,7 +223,7 @@ namespace DAL.Repositories
               "WHERE ((FACTURAPROVEEDOR.FAPNUMERO LIKE CONCAT('%', @factura, '%')) OR (@factura IS NULL)) " + 
               "AND ((FACTURAPROVEEDOR.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " + 
               "AND ((FACTURAPROVEEDOR.FAPFECHA BETWEEN @desde AND @hasta) OR ((@desde IS NULL) OR (@hasta IS NULL))) " + 
-              "ORDER BY FACTURAPROVEEDOR.FAPFECHA, FACTURAPROVEEDOR.FAPNUMERO DESC";
+              "ORDER BY FACTURAPROVEEDOR.FAPFECHA DESC LIMIT 100 ";
 
             using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
             {

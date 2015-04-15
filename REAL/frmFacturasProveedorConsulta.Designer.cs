@@ -44,6 +44,7 @@
             this.dgvFacturas = new System.Windows.Forms.DataGridView();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pronombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero_factura = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,6 +197,7 @@
             this.dgvFacturas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFacturas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
+            this.pronombre,
             this.numero_factura,
             this.fechaemision,
             this.fecharecepcion,
@@ -228,6 +230,12 @@
             this.id.Name = "id";
             this.id.ReadOnly = true;
             this.id.Visible = false;
+            // 
+            // pronombre
+            // 
+            this.pronombre.HeaderText = "Proveedor";
+            this.pronombre.Name = "pronombre";
+            this.pronombre.ReadOnly = true;
             // 
             // numero_factura
             // 
@@ -307,13 +315,14 @@
         private System.Windows.Forms.TextBox txtFactura;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvFacturas;
+        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pronombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero_factura;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaemision;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecharecepcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn subtotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn total;
         private System.Windows.Forms.DataGridViewButtonColumn verremitos;
-        private System.Windows.Forms.Button btnCancelar;
     }
 }

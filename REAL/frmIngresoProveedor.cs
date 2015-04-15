@@ -320,7 +320,8 @@ namespace REAL
                 {
                     if (!string.IsNullOrEmpty(txtRN.Text))
                     {
-                        CalcularTotal();
+                        if(!string.IsNullOrEmpty(txtIva.Text))
+                            CalcularTotal();
                     }
                 }
             }
@@ -334,7 +335,8 @@ namespace REAL
                 {
                     if (!string.IsNullOrEmpty(txtRN.Text))
                     {
-                        CalcularTotal();
+                        if(!string.IsNullOrEmpty(txtIngBrutos.Text))
+                            CalcularTotal();
                     }
                 }
             }
@@ -673,7 +675,8 @@ namespace REAL
                 {
                     if (!string.IsNullOrEmpty(txtIngBrutos.Text))
                     {
-                        CalcularTotal();
+                        if(!string.IsNullOrEmpty(txtRN.Text))
+                            CalcularTotal();
                     }
                 }
             }

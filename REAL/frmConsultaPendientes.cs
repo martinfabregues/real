@@ -97,7 +97,7 @@ namespace REAL
             var query = (from row in OrdenesCompra.FindPendientes()
                          select new
                          {
-                             row.ordencompra.odcnumero,
+                             row.ordencompra.odcnumero,                             
                              row.ordencompra.odcfecha,
                              row.proveedor.pronombre,
                              row.producto.prdcodigo,

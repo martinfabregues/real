@@ -174,17 +174,19 @@ namespace DAL.Repositories
                 "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = REMITOPROVEEDORDETALLE.PRDID " +
                 "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = REMITOPROVEEDORDETALLE.ODCID " +
                 "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = REMITOPROVEEDOR.SUCID " + 
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = REMITOPROVEEDOR.PROID " + 
                 "ORDER BY REMITOPROVEEDOR.REMITOPROVEEDOR_FECHARECEPCION DESC";
 
             using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
             {
-                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, RemitoProveedorDetalle>
-                    (query, (detalle, remito, producto, orden, sucursal) => { 
+                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, Proveedor, RemitoProveedorDetalle>
+                    (query, (detalle, remito, producto, orden, sucursal, proveedor) => { 
                         detalle.remitoproveedor = remito;
                         detalle.producto = producto;
                         detalle.ordencompra = orden;
                         detalle.remitoproveedor.sucursal = sucursal;
-                        return detalle; }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
+                        detalle.remitoproveedor.proveedor = proveedor;
+                        return detalle; }, splitOn: "remitoproveedor_id, prdid, odcid, sucid, proid").ToList();
             }
         }
 
@@ -197,6 +199,7 @@ namespace DAL.Repositories
                "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = REMITOPROVEEDORDETALLE.PRDID " +
                "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = REMITOPROVEEDORDETALLE.ODCID " +
                "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = REMITOPROVEEDOR.SUCID " +
+               "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = REMITOPROVEEDOR.PROID " + 
                "WHERE ((REMITOPROVEEDOR.REMITOPROVEEDOR_NUMERO = @remito_numero) OR (@remito_numero IS NULL)) " + 
                "AND ((PRODUCTO.PRDDENOMINACION LIKE CONCAT('%', @producto, '%')) OR (@producto IS NULL)) " +
                "AND ((REMITOPROVEEDOR.PROID = @proveedor_id) OR (@proveedor_id IS NULL)) " + 
@@ -206,13 +209,14 @@ namespace DAL.Repositories
 
             using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
             {
-                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, RemitoProveedorDetalle>
-                    (query, (detalle, remito, producto, orden, sucursal) =>
+                return _db.Query<RemitoProveedorDetalle, RemitoProveedor, Producto, OrdenCompra, Sucursal, Proveedor, RemitoProveedorDetalle>
+                    (query, (detalle, remito, producto, orden, sucursal, proveedor) =>
                     {
                         detalle.remitoproveedor = remito;
                         detalle.producto = producto;
                         detalle.ordencompra = orden;
                         detalle.remitoproveedor.sucursal = sucursal;
+                        detalle.remitoproveedor.proveedor = proveedor;
                         return detalle;
                     }, new { 
                         remito_numero = remito_numero, 
@@ -220,7 +224,7 @@ namespace DAL.Repositories
                         proveedor_id = proveedor_id, 
                         sucursal_id = sucursal_id, 
                         desde = desde, 
-                        hasta = hasta }, splitOn: "remitoproveedor_id, prdid, odcid, sucid").ToList();
+                        hasta = hasta }, splitOn: "remitoproveedor_id, prdid, odcid, sucid, proid").ToList();
             }
         }
 

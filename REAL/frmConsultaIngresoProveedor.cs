@@ -84,7 +84,8 @@ namespace REAL
             var query = (from row in RemitosProveedor.FindIngresos()
                          select new
                          {
-                             row.remitoproveedor.id,                             
+                             row.remitoproveedor.id,  
+                             row.remitoproveedor.proveedor.pronombre,
                              row.remitoproveedor.numero,
                              row.remitoproveedor.fechaemision,
                              row.remitoproveedor.fecharecepcion,
@@ -99,7 +100,7 @@ namespace REAL
             dgvEntregas.Rows.Clear();
             foreach(var fila in query)
             {
-                dgvEntregas.Rows.Add(fila.id, fila.numero, fila.fechaemision.ToShortDateString(), 
+                dgvEntregas.Rows.Add(fila.id, fila.pronombre, fila.numero, fila.fechaemision.ToShortDateString(), 
                     fila.fecharecepcion.ToShortDateString(), fila.sucnombre, fila.prddenominacion, 
                     fila.cantidad, fila.odcnumero, fila.odcfecha.ToShortDateString());
             }
@@ -119,7 +120,8 @@ namespace REAL
             var query = (from row in RemitosProveedor.FindIngresosCondicional(nroremito, producto, proveedor_id, sucursal_id, desde, hasta)
                          select new
                          {
-                             row.remitoproveedor.id,
+                             row.remitoproveedor.id,   
+                             row.remitoproveedor.proveedor.pronombre,
                              row.remitoproveedor.numero,
                              row.remitoproveedor.fechaemision,
                              row.remitoproveedor.fecharecepcion,
@@ -134,7 +136,7 @@ namespace REAL
             dgvEntregas.Rows.Clear();
             foreach (var fila in query)
             {
-                dgvEntregas.Rows.Add(fila.id, fila.numero, fila.fechaemision.ToShortDateString(),
+                dgvEntregas.Rows.Add(fila.id, fila.pronombre, fila.numero, fila.fechaemision.ToShortDateString(),
                     fila.fecharecepcion.ToShortDateString(), fila.sucnombre, fila.prddenominacion,
                     fila.cantidad, fila.odcnumero, fila.odcfecha.ToShortDateString());
             }
@@ -374,11 +376,13 @@ namespace REAL
 
         private void dgvEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgvEntregas.CurrentCell.ColumnIndex.Equals(9))
+            if(dgvEntregas.CurrentCell.ColumnIndex.Equals(10))
             {
                 int x = dgvEntregas.CurrentRow.Index;
                 int remito_id = Convert.ToInt32(dgvEntregas.Rows[x].Cells[0].Value);
-                string remito_numero = dgvEntregas.Rows[x].Cells[1].Value.ToString();
+                string remito_numero = dgvEntregas.Rows[x].Cells[2].Value.ToString();
+                string proveedor = dgvEntregas.Rows[x].Cells[1].Value.ToString();
+
                 IList<FacturaProveedor> facturasL = FacturasProveedor.FindFacturasProveedorPorIdRemito(remito_id);
                 if (facturasL.Count > 0)
                 {
@@ -388,7 +392,7 @@ namespace REAL
                         mensaje = mensaje + Environment.NewLine + " * " + fila.numero + " - " + fila.fecha.ToShortDateString();
                     }
 
-                    string msg = "Facturas Asociadas al Remito: " + remito_numero + Environment.NewLine;
+                    string msg = "Facturas Asociadas al Remito: " + proveedor + ": " + remito_numero + Environment.NewLine;
                     msg = msg + mensaje;
                     MessageBox.Show(msg, "Facturas Asociadas al Remito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

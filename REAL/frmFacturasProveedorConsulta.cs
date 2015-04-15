@@ -37,6 +37,7 @@ namespace REAL
                          select new
                          {
                              row.id,
+                             row.proveedor.pronombre,
                              row.numero,
                              row.fecha,
                              row.fecharecepcion,
@@ -48,15 +49,21 @@ namespace REAL
             dgvFacturas.Rows.Clear();
             foreach(var fila in query)
             {
-                dgvFacturas.Rows.Add(fila.id, fila.numero, fila.fecha.ToShortDateString(),
+                dgvFacturas.Rows.Add(fila.id, fila.pronombre, fila.numero, fila.fecha.ToShortDateString(),
                     fila.fecharecepcion.ToShortDateString(), fila.subtotal, fila.importe);
             }
         }
 
-
+        private void GetProveedores()
+        {
+            cmbProveedor.DisplayMember = "pronombre";
+            cmbProveedor.ValueMember = "proid";
+            cmbProveedor.DataSource = Proveedores.FindAll();
+        }
         private void frmFacturasProveedorConsulta_Load(object sender, EventArgs e)
         {
             IniciarControles();
+            GetProveedores();
             CargarDataGrid();
         }
 
@@ -103,6 +110,7 @@ namespace REAL
                          select new
                          {
                              row.id,
+                             row.proveedor.pronombre,
                              row.numero,
                              row.fecha,
                              row.fecharecepcion,
@@ -114,7 +122,7 @@ namespace REAL
             dgvFacturas.Rows.Clear();
             foreach (var fila in query)
             {
-                dgvFacturas.Rows.Add(fila.id, fila.numero, fila.fecha.ToShortDateString(),
+                dgvFacturas.Rows.Add(fila.id, fila.pronombre, fila.numero, fila.fecha.ToShortDateString(),
                     fila.fecharecepcion.ToShortDateString(), fila.subtotal, fila.importe);
             }
 
@@ -132,10 +140,11 @@ namespace REAL
 
         private void dgvFacturas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgvFacturas.CurrentCell.ColumnIndex.Equals(6))
+            if(dgvFacturas.CurrentCell.ColumnIndex.Equals(7))
             {
                 int factura_id = (int)dgvFacturas.CurrentRow.Cells[0].Value;
-                string factura_numero = dgvFacturas.CurrentRow.Cells[1].Value.ToString();
+                string factura_numero = dgvFacturas.CurrentRow.Cells[2].Value.ToString();
+                string proveedor = dgvFacturas.CurrentRow.Cells[1].Value.ToString();
 
                 IList<RemitoProveedor> remitosL = RemitosProveedor.FindAllByIdFactura(factura_id);
                 if(remitosL.Count > 0)
@@ -146,7 +155,7 @@ namespace REAL
                         mensaje = mensaje + Environment.NewLine + " * " + fila.numero + " - " + fila.fechaemision.ToShortDateString();
                     }
 
-                    string msg = "Remitos Asociados a la Factura: " + factura_numero + Environment.NewLine;
+                    string msg = "Remitos Asociados a la Factura: " + proveedor + ": " + factura_numero + Environment.NewLine;
                     msg = msg + mensaje;
                     MessageBox.Show(msg, "Remitos Asociadas a la Factura", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
