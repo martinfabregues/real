@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbTipoSalida = new System.Windows.Forms.ComboBox();
@@ -56,26 +56,21 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtComentario = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblValidacion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvDetalle = new REAL.Controls.Grid();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sucursalsalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpFecha
@@ -98,7 +93,6 @@
             // cmbTipoSalida
             // 
             this.cmbTipoSalida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTipoSalida.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbTipoSalida.FormattingEnabled = true;
             this.cmbTipoSalida.Location = new System.Drawing.Point(333, 40);
             this.cmbTipoSalida.Name = "cmbTipoSalida";
@@ -118,7 +112,6 @@
             // cmbSucursal
             // 
             this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSucursal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbSucursal.FormattingEnabled = true;
             this.cmbSucursal.Location = new System.Drawing.Point(146, 40);
             this.cmbSucursal.Name = "cmbSucursal";
@@ -236,7 +229,6 @@
             // cmbBarrio
             // 
             this.cmbBarrio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbBarrio.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbBarrio.FormattingEnabled = true;
             this.cmbBarrio.Location = new System.Drawing.Point(513, 32);
             this.cmbBarrio.Name = "cmbBarrio";
@@ -321,86 +313,12 @@
             this.groupBox1.Controls.Add(this.cmbTipoSalida);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dtpFecha);
-            this.groupBox1.Location = new System.Drawing.Point(18, 33);
+            this.groupBox1.Location = new System.Drawing.Point(18, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(856, 318);
             this.groupBox1.TabIndex = 31;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de Entrega";
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(18, 541);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptar.TabIndex = 34;
-            this.btnAceptar.Text = "&Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(799, 540);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 35;
-            this.btnCancelar.Text = "&Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dgvDetalle);
-            this.groupBox2.Location = new System.Drawing.Point(18, 357);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(856, 177);
-            this.groupBox2.TabIndex = 36;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Detalle";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.Lavender;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblValidacion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 567);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(886, 22);
-            this.statusStrip1.TabIndex = 37;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
-            this.toolStripStatusLabel1.Text = "VALIDACIÓN:";
-            // 
-            // lblValidacion
-            // 
-            this.lblValidacion.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblValidacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblValidacion.Name = "lblValidacion";
-            this.lblValidacion.Size = new System.Drawing.Size(0, 17);
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(886, 23);
-            this.lblTitulo.TabIndex = 42;
-            this.lblTitulo.Text = "Registro de Nueva Entrega";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox3
             // 
@@ -428,6 +346,37 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Domicilio de Entrega";
             // 
+            // btnAceptar
+            // 
+            this.btnAceptar.Location = new System.Drawing.Point(18, 529);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
+            this.btnAceptar.TabIndex = 34;
+            this.btnAceptar.Text = "&Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(784, 529);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(90, 34);
+            this.btnCancelar.TabIndex = 35;
+            this.btnCancelar.Text = "&Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgvDetalle);
+            this.groupBox2.Location = new System.Drawing.Point(18, 334);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(856, 177);
+            this.groupBox2.TabIndex = 36;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Detalle";
+            // 
             // dgvDetalle
             // 
             this.dgvDetalle.AllowUserToAddRows = false;
@@ -436,11 +385,11 @@
             this.dgvDetalle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDetalle.CabeceraVisual = false;
             this.dgvDetalle.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCoral;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvDetalle.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetalle.ColumnHeadersHeight = 21;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -449,17 +398,18 @@
             this.sucursalsalida,
             this.eliminar});
             this.dgvDetalle.EnableHeadersVisualStyles = false;
-            this.dgvDetalle.GridColor = System.Drawing.Color.Gainsboro;
+            this.dgvDetalle.GridColor = System.Drawing.Color.LightGray;
             this.dgvDetalle.Location = new System.Drawing.Point(9, 19);
             this.dgvDetalle.MoveLeftToRight = true;
             this.dgvDetalle.MultiSelect = false;
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDetalle.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvDetalle.RowHeadersWidth = 17;
             this.dgvDetalle.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvDetalle.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dgvDetalle.RowTemplate.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-            this.dgvDetalle.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.MistyRose;
+            this.dgvDetalle.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.SystemColors.Control;
             this.dgvDetalle.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvDetalle.SeleccionCeldaCompleta = false;
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -488,22 +438,24 @@
             this.eliminar.Text = "Eliminar";
             this.eliminar.UseColumnTextForButtonValue = true;
             // 
-            // frmNuevaEntrega
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // frmEntrega
             // 
             this.AcceptButton = this.btnAceptar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(886, 589);
-            this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(886, 572);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "frmNuevaEntrega";
+            this.Name = "frmEntrega";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmNuevaEntrega";
             this.Activated += new System.EventHandler(this.frmNuevaEntrega_Activated);
@@ -511,15 +463,12 @@
             this.Resize += new System.EventHandler(this.frmNuevaEntrega_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -554,11 +503,7 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblValidacion;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.GroupBox groupBox3;
         private Controls.Grid dgvDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;

@@ -101,7 +101,7 @@ namespace REAL
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            lblValidacion.Text = string.Empty;
+            //lblValidacion.Text = string.Empty;
             dgvEntregas.Columns.Clear();
             errorProvider1.Clear();
             if (ckbFecha.Checked == true)
@@ -130,7 +130,7 @@ namespace REAL
                     }
                     else
                     {
-                        lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
+                        //lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
                         
                     }
 
@@ -146,7 +146,7 @@ namespace REAL
 
         private void ActualizarGrid()
         {
-            lblValidacion.Text = string.Empty;
+            //lblValidacion.Text = string.Empty;
             dgvEntregas.Columns.Clear();
 
             if (ckbFecha.Checked == true)
@@ -167,7 +167,7 @@ namespace REAL
                     }
                     else
                     {
-                        lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
+                        //lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
 
                     }
 
@@ -300,7 +300,7 @@ namespace REAL
         {
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO.";
+                //lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO.";
                 e.Handled = true;
                 txtNumero.Focus();
                 return;

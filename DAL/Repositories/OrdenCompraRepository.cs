@@ -80,7 +80,6 @@ namespace DAL.Repositories
             }
         }
 
-
         public IList<OrdenCompra> BusquedaCondicional(string numero, int? proveedor_id, DateTime? desde, DateTime? hasta)
         {
             string query = "SELECT * FROM ORDENCOMPRA " + 
@@ -100,7 +99,6 @@ namespace DAL.Repositories
                 }, splitOn: "proid").ToList();
             }
         }
-
 
         public IList<OrdenCompraPendiente> FindPendientes()
         {
@@ -125,7 +123,6 @@ namespace DAL.Repositories
                     }, splitOn:"prdid, odcid, sucid, proid").ToList();
             }
         }
-
 
         public IList<OrdenCompraPendiente> FindPendientesCondicional(int? proveedor_id, int? sucursal_id, string numero_orden, string prod)
         {
@@ -158,5 +155,89 @@ namespace DAL.Repositories
                         producto = prod }, splitOn: "prdid, odcid, sucid, proid").ToList();
             }
         }
+
+        public int Modificar(OrdenCompra orden, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "UPDATE ORDENCOMPRA SET ODCNUMERO = @numero, ODCFECHA = @fecha, " +
+                "PROID = @proveedor_id, ODCIMPORTE = @importe, ESTID = @estado, " +
+                "ODCOBSERVACION = @observacion, ODCACTIVO = @activo " +
+                "WHERE ODCID = @id";
+
+            return _db.Execute(query, new
+            {
+                numero = orden.odcnumero,
+                fecha = orden.odcfecha,
+                proveedor_id = orden.proid,
+                importe = orden.odcimporte,
+                estado = orden.estid,
+                observacion = orden.odcobservacion,
+                activo = orden.odcactivo,
+                id = orden.odcid
+            }, tx);
+        }
+
+        public int ModificarDetalle(OrdenCompraDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "UPDATE ORDENCOMPRADETALLE SET ODCID = @orden_id, PRDID = @producto_id, " +
+                "OCDCANTIDAD = @cantidad, OCDIMPORTEUNIT = @importe_unitario, SUCID = @sucursal_id, " +
+                "ECDID = @estado, OCDOBSERVACION = @observacion " +
+                "WHERE OCDID = @id";
+
+            return _db.Execute(query, new
+            {
+                orden_id = detalle.odcid,
+                producto_id = detalle.prdid,
+                cantidad = detalle.ocdcantidad,
+                importe_unitario = detalle.ocdimporteunit,
+                sucursal_id = detalle.sucid,
+                estado = detalle.ecdid,
+                observacion = string.Empty,
+                id = detalle.ocdid
+
+            }, tx);
+        }
+
+        public int AgregarDetalle(OrdenCompraDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "INSERT INTO ORDENCOMPRADETALLE (ODCID, PRDID, OCDCANTIDAD, OCDIMPORTEUNIT, SUCID, ECDID, OCDOBSERVACION) " +
+                "VALUES (@orden_id, @producto_id, @cantidad, @importe, @sucursal_id, @estado, @observacion)";
+
+            return _db.Execute(query, new
+            {
+                orden_id = detalle.odcid,
+                producto_id = detalle.prdid,
+                cantidad = detalle.ocdcantidad,
+                importe = detalle.ocdimporteunit,
+                sucursal_id = detalle.sucid,
+                estado = detalle.ecdid,
+                observacion = detalle.ocdobservacion
+            }, tx);
+        }
+
+        public int AgregarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            string query = "INSERT INTO ORDENCOMPRAPENDIENTE (ODCID, PRDID, OCDCANTIDAD, OCDIMPORTE, SUCID, PROID, ESPID) " +
+               "VALUES (@orden_id, @producto_id, @cantidad, @importe, @sucursal_id, @proveedor_id, @esp)";
+
+            return _db.Execute(query, new
+            {
+                orden_id = pendiente.odcid,
+                producto_id = pendiente.prdid,
+                cantidad = pendiente.ocdcantidad,
+                importe = pendiente.ocdimporte,
+                sucursal_id = pendiente.sucid,
+                proveedor_id = pendiente.proid,
+                esp = pendiente.espid
+            });
+           
+        }
+
+        public int EliminarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
     }
 }

@@ -202,7 +202,7 @@ namespace REAL
                                     else
                                     {
                                         res = false;
-                                        lblValidacion.Text = "EL FORMATO DE NÚMERO DE REMITO, ES INCORRECTO.";
+                                        //lblValidacion.Text = "EL FORMATO DE NÚMERO DE REMITO, ES INCORRECTO.";
                                         errorProvider.SetError(txtNumeroRemito, "EL FORMATO DE NÚMERO DE REMITO, ES INCORRECTO.");
                                         txtNumeroRemito.Focus();
                                     }
@@ -218,7 +218,7 @@ namespace REAL
                             {
                                 res = false;
                                 txtCosto.Focus();
-                                lblValidacion.Text = "DEBE COMPLETAR EL CAMPO COSTO.";
+                                //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO COSTO.";
                                 errorProvider.SetError(txtCosto, "DEBE COMPLETAR EL CAMPO COSTO.");
                             }
                         }
@@ -241,7 +241,7 @@ namespace REAL
                     {
                         res = false;
                         txtNumero.Focus();
-                        lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO.";
+                        //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO.";
                         errorProvider.SetError(txtNumero, "DEBE COMPLETAR EL CAMPO NÚMERO.");
                     }
                 }
@@ -249,7 +249,7 @@ namespace REAL
                 {
                     res = false;
                     txtCalle.Focus();
-                    lblValidacion.Text = "DEBE COMPLETAR EL CAMPO CALLE.";
+                    //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO CALLE.";
                     errorProvider.SetError(txtCalle, "DEBE COMPLETAR EL CAMPO CALLE.");
                 }
             }
@@ -257,7 +257,7 @@ namespace REAL
             {
                 res = false;
                 txtNumeroRemito.Focus();
-                lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO REMITO.";
+                //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO REMITO.";
                 errorProvider.SetError(txtNumeroRemito, "DEBE COMPLETAR EL CAMPO NÚMERO REMITO.");
             }
 
@@ -290,7 +290,7 @@ namespace REAL
                     {
                         res = false;
                         txtCosto.Focus();
-                        lblValidacion.Text = "DEBE COMPLETAR EL CAMPO COSTO.";
+                        //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO COSTO.";
                         errorProvider.SetError(txtCosto, "DEBE COMPLETAR EL CAMPO COSTO.");
                     }
                 }
@@ -313,7 +313,7 @@ namespace REAL
             {
                 res = false;
                 txtNumero.Focus();
-                lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO.";
+                //lblValidacion.Text = "DEBE COMPLETAR EL CAMPO NÚMERO.";
                 errorProvider.SetError(txtNumero, "DEBE COMPLETAR EL CAMPO NÚMERO.");
             }
 
@@ -596,7 +596,7 @@ namespace REAL
             errorProvider.Clear();
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO";
+                //lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO";
                 errorProvider.SetError(txtNumeroRemito, "SOLO SE PERMITEN NÚMEROS EN EL CAMPO REMITO");
                 e.Handled = true;
                 txtNumeroRemito.Focus();
@@ -609,7 +609,7 @@ namespace REAL
             errorProvider.Clear();
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO NÚMERO.";
+                //lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO NÚMERO.";
                 errorProvider.SetError(txtNumero, "SOLO SE PERMITEN NÚMEROS EN EL CAMPO NÚMERO.");
                 e.Handled = true;
                 txtNumero.Focus();
@@ -622,7 +622,7 @@ namespace REAL
             errorProvider.Clear();
             if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO COSTO.";
+                //lblValidacion.Text = "SOLO SE PERMITEN NÚMEROS EN EL CAMPO COSTO.";
                 errorProvider.SetError(txtCosto, "SOLO SE PERMITEN NÚMEROS EN EL CAMPO COSTO.");
                 e.Handled = true;
                 txtCosto.Focus();

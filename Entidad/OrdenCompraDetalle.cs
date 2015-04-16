@@ -15,6 +15,7 @@ namespace Entidad
         public int sucid { get; set; }
         public decimal ocdimporteunit { get; set; }
         public int ecdid { get; set; }
+        public string ocdobservacion { get; set; }
 
         public Producto producto { get; set; }
         public Sucursal sucursal { get; set; }

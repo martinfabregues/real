@@ -385,5 +385,93 @@ namespace Negocio
             IOrdenCompraRepository _repository = new OrdenCompraRepository();
             return _repository.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, prod);
         }
+
+        public static int Modificar(OrdenCompra orden)
+        {
+            IOrdenCompraRepository _repositoryOrden = new OrdenCompraRepository();
+            int orden_id = 0;
+            bool resultado = true;
+
+            NpgsqlConnection _cnn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString());
+            _cnn.Open();
+
+            using (var trans = _cnn.BeginTransaction())
+            {
+                //modifico la orden de compra
+                orden_id = _repositoryOrden.Modificar(orden, _cnn, trans);
+                if(orden_id > 0)
+                {
+                    foreach(OrdenCompraDetalle fila in orden.Detalle)
+                    {
+                        //pregunto si tiene id, si tiene modifico
+                        if(fila.ocdid != 0)
+                        {
+                            //actualizo el detalle
+                            int actualizar = _repositoryOrden.ModificarDetalle(fila, _cnn, trans);
+                            if(actualizar == 0)
+                            {
+                                trans.Rollback();
+                                resultado = false;
+                                orden_id = 0;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            //si no tiene id, lo inserto
+                            int insertar = _repositoryOrden.AgregarDetalle(fila, _cnn, trans);
+                            if (insertar > 0)
+                            {
+                                //creo el objeto OrdenCompraPendiente y asigno los valores
+                                OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
+                                _pendiente.odcid = fila.ocdid;
+                                _pendiente.prdid = fila.prdid;
+                                _pendiente.proid = orden.proid;
+                                _pendiente.sucid = fila.sucid;
+                                _pendiente.ocdcantidad = fila.ocdcantidad;
+                                _pendiente.ocdimporte = fila.ocdimporteunit;
+                                _pendiente.espid = 1;
+                                
+                                //agrego el item como pendiente de entrega
+                                int pendiente = _repositoryOrden.AgregarPendiente(_pendiente, _cnn, trans);
+                                if(pendiente == 0)
+                                {
+                                    trans.Rollback();
+                                    resultado = false;
+                                    orden_id = 0;
+                                    break;
+                                }
+                                else
+                                {
+                                    trans.Commit();
+                                }
+                            }
+                            else
+                            {
+                                trans.Rollback();
+                                resultado = false;
+                                orden_id = 0;
+                                break;
+                            }
+                          
+                        }
+                    }
+                    if(resultado == true)
+                    {
+                        trans.Commit();
+                    }
+
+                }
+                else
+                {
+                    trans.Rollback();
+                    orden_id = 0;
+                }
+            }
+            return orden_id;
+        }
+
+
+
     }
 }

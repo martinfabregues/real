@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ckbProveedor = new System.Windows.Forms.CheckBox();
+            this.ckbNumero = new System.Windows.Forms.CheckBox();
             this.btnActualizar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckbFecha = new System.Windows.Forms.CheckBox();
@@ -41,13 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnNuevo = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnModificar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAnular = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.dgvOrdenes = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,11 +53,11 @@
             this.detalle = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnSalir = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.ckbNumero = new System.Windows.Forms.CheckBox();
-            this.ckbProveedor = new System.Windows.Forms.CheckBox();
+            this.btnAnular = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.btnNuevo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -77,12 +72,32 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtNumero);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 34);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(908, 93);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de búsqueda";
+            // 
+            // ckbProveedor
+            // 
+            this.ckbProveedor.AutoSize = true;
+            this.ckbProveedor.Location = new System.Drawing.Point(288, 47);
+            this.ckbProveedor.Name = "ckbProveedor";
+            this.ckbProveedor.Size = new System.Drawing.Size(15, 14);
+            this.ckbProveedor.TabIndex = 11;
+            this.ckbProveedor.UseVisualStyleBackColor = true;
+            this.ckbProveedor.CheckedChanged += new System.EventHandler(this.ckbProveedor_CheckedChanged);
+            // 
+            // ckbNumero
+            // 
+            this.ckbNumero.AutoSize = true;
+            this.ckbNumero.Location = new System.Drawing.Point(221, 22);
+            this.ckbNumero.Name = "ckbNumero";
+            this.ckbNumero.Size = new System.Drawing.Size(15, 14);
+            this.ckbNumero.TabIndex = 10;
+            this.ckbNumero.UseVisualStyleBackColor = true;
+            this.ckbNumero.CheckedChanged += new System.EventHandler(this.ckbNumero_CheckedChanged);
             // 
             // btnActualizar
             // 
@@ -190,63 +205,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "N° de Orden:";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNuevo,
-            this.toolStripSeparator1,
-            this.btnModificar,
-            this.toolStripSeparator2,
-            this.btnAnular,
-            this.toolStripSeparator3});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(932, 25);
-            this.toolStrip1.TabIndex = 11;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // btnNuevo
-            // 
-            this.btnNuevo.Image = global::REAL.Properties.Resources.add2;
-            this.btnNuevo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(61, 22);
-            this.btnNuevo.Text = "&Nueva";
-            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click_1);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Image = global::REAL.Properties.Resources.saveAs;
-            this.btnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(78, 22);
-            this.btnModificar.Text = "&Modificar";
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnAnular
-            // 
-            this.btnAnular.Image = global::REAL.Properties.Resources.remove_icon;
-            this.btnAnular.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAnular.Name = "btnAnular";
-            this.btnAnular.Size = new System.Drawing.Size(62, 22);
-            this.btnAnular.Text = "&Anular";
-            this.btnAnular.Click += new System.EventHandler(this.btnAnular_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // dgvOrdenes
             // 
             this.dgvOrdenes.AllowUserToAddRows = false;
@@ -262,11 +220,11 @@
             this.importe,
             this.activo,
             this.detalle});
-            this.dgvOrdenes.Location = new System.Drawing.Point(12, 133);
+            this.dgvOrdenes.Location = new System.Drawing.Point(12, 111);
             this.dgvOrdenes.Name = "dgvOrdenes";
             this.dgvOrdenes.ReadOnly = true;
             this.dgvOrdenes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrdenes.Size = new System.Drawing.Size(908, 347);
+            this.dgvOrdenes.Size = new System.Drawing.Size(908, 362);
             this.dgvOrdenes.TabIndex = 12;
             this.dgvOrdenes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenes_CellClick);
             this.dgvOrdenes.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrdenes_RowEnter);
@@ -320,9 +278,9 @@
             this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSalir.Image = global::REAL.Properties.Resources.delete;
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSalir.Location = new System.Drawing.Point(796, 486);
+            this.btnSalir.Location = new System.Drawing.Point(808, 486);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(124, 38);
+            this.btnSalir.Size = new System.Drawing.Size(112, 37);
             this.btnSalir.TabIndex = 84;
             this.btnSalir.Text = "&Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -332,25 +290,39 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // ckbNumero
+            // btnAnular
             // 
-            this.ckbNumero.AutoSize = true;
-            this.ckbNumero.Location = new System.Drawing.Point(221, 22);
-            this.ckbNumero.Name = "ckbNumero";
-            this.ckbNumero.Size = new System.Drawing.Size(15, 14);
-            this.ckbNumero.TabIndex = 10;
-            this.ckbNumero.UseVisualStyleBackColor = true;
-            this.ckbNumero.CheckedChanged += new System.EventHandler(this.ckbNumero_CheckedChanged);
+            this.btnAnular.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnAnular.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAnular.Location = new System.Drawing.Point(529, 486);
+            this.btnAnular.Name = "btnAnular";
+            this.btnAnular.Size = new System.Drawing.Size(112, 37);
+            this.btnAnular.TabIndex = 85;
+            this.btnAnular.Text = "&Anular";
+            this.btnAnular.UseVisualStyleBackColor = true;
             // 
-            // ckbProveedor
+            // btnModificar
             // 
-            this.ckbProveedor.AutoSize = true;
-            this.ckbProveedor.Location = new System.Drawing.Point(288, 47);
-            this.ckbProveedor.Name = "ckbProveedor";
-            this.ckbProveedor.Size = new System.Drawing.Size(15, 14);
-            this.ckbProveedor.TabIndex = 11;
-            this.ckbProveedor.UseVisualStyleBackColor = true;
-            this.ckbProveedor.CheckedChanged += new System.EventHandler(this.ckbProveedor_CheckedChanged);
+            this.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModificar.Location = new System.Drawing.Point(411, 486);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(112, 37);
+            this.btnModificar.TabIndex = 86;
+            this.btnModificar.Text = "&Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
+            // 
+            // btnNuevo
+            // 
+            this.btnNuevo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNuevo.Location = new System.Drawing.Point(293, 486);
+            this.btnNuevo.Name = "btnNuevo";
+            this.btnNuevo.Size = new System.Drawing.Size(112, 37);
+            this.btnNuevo.TabIndex = 87;
+            this.btnNuevo.Text = "&Nuevo";
+            this.btnNuevo.UseVisualStyleBackColor = true;
             // 
             // frmOrdenCompraABM
             // 
@@ -358,9 +330,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(932, 535);
+            this.Controls.Add(this.btnNuevo);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnAnular);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.dgvOrdenes);
-            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
@@ -374,12 +348,9 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrdenes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -396,14 +367,7 @@
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnActualizar;
-        private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.DataGridView dgvOrdenes;
-        private System.Windows.Forms.ToolStripButton btnModificar;
-        private System.Windows.Forms.ToolStripButton btnNuevo;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton btnAnular;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
@@ -416,5 +380,8 @@
         private System.Windows.Forms.CheckBox ckbFecha;
         private System.Windows.Forms.CheckBox ckbProveedor;
         private System.Windows.Forms.CheckBox ckbNumero;
+        private System.Windows.Forms.Button btnNuevo;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btnAnular;
     }
 }

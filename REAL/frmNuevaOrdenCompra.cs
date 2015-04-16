@@ -417,9 +417,10 @@ namespace REAL
             decimal metros = 0;
             foreach (DataGridViewRow dr in dgvDetalle.Rows)
             {
-                metros = metros + Convert.ToDecimal(dr.Cells["metros"].Value);
+                metros = Math.Round(metros + Convert.ToDecimal(dr.Cells["metros"].Value), 2);
 
             }
+
             lblMetros.Text = metros.ToString();
         }
 
@@ -550,8 +551,9 @@ namespace REAL
                 ordencompra.Detalle = listado;
 
 
-                bool resultado = OrdenesCompra.Update(ordencompra);
-                if (resultado != false)
+                int resultado = OrdenesCompra.Modificar(ordencompra);
+
+                if (resultado > 0)
                 {
                     MessageBox.Show("La orden de compra se modifico correctamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     IniciarControlesModificar();
@@ -559,6 +561,11 @@ namespace REAL
                     LimpiarControles();
                     txtOrden.Text = string.Empty;
                 }
+                else
+                {
+                    MessageBox.Show("Ocurrio un error al modificar los datos. Intente Nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
             catch (Exception ex)
             {
@@ -620,20 +627,34 @@ namespace REAL
                 txtObservacion.Text = ordencompra.odcobservacion;
 
                 ordencompra.Detalle = OrdenesCompraDetalle.GetPorIdOrden(ordencompra);
+                //listado = ordencompra.Detalle.ToList();
 
                 if (ordencompra.Detalle.Count > 0)
                 {
  
                     foreach(OrdenCompraDetalle fila in ordencompra.Detalle)
                     {
+                        AgregarItemList(fila);
                         dgvDetalle.Rows.Add(fila.ocdid, fila.ocdid, fila.producto.prdcodigo, fila.producto.prddenominacion, fila.ocdimporteunit, fila.ocdcantidad, (fila.ocdcantidad * fila.ocdimporteunit), fila.prdid, (fila.ocdcantidad * fila.producto.prdmetros), fila.sucid);
                     }
+
                     CalcularTotal();
                     CalcularMetros();
                 }
          
             }
 
+        }
+
+
+        private void AgregarItemList(OrdenCompraDetalle _detalle)
+        {
+            listado.Add(_detalle);
+        }
+
+        private void EliminarItemList(int fila)
+        {
+            listado.RemoveAt(fila);
         }
 
         //LISTO

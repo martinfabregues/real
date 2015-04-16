@@ -23,10 +23,8 @@ namespace REAL
         private void frmOrdenCompraABM_Load(object sender, EventArgs e)
         {
             CargarDatos();
-            CargarComboProveedor();
-           
+            CargarComboProveedor();   
             IniciarControles();
-
             dgvOrdenes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             //dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
@@ -281,7 +279,7 @@ namespace REAL
             DateTime? hasta = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
 
             var query = (from row in OrdenesCompra.BusquedaCondicional(nroorden, proveedor_id, desde, hasta)
-                         select row).ToList();
+                         select row).ToList().Take(50);
 
             dgvOrdenes.Rows.Clear();
             foreach (var fila in query)
@@ -359,6 +357,20 @@ namespace REAL
         private void txtNumero_TextChanged(object sender, EventArgs e)
         {
             FiltrarForm();
+        }
+
+        private void btnModificar_Click_1(object sender, EventArgs e)
+        {
+            if (dgvOrdenes.Rows.Count != 0)
+            {
+                int orden_id = (int)dgvOrdenes.CurrentRow.Cells[0].Value;
+                string numero_orden = dgvOrdenes.CurrentRow.Cells[1].Value.ToString();
+
+                frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("MODIFICAR", orden_id);
+                frm.MdiParent = this.MdiParent;
+                frm.Text = "Compras - Modificar Orden de Compra Nro.: " + numero_orden;
+                frm.Show();
+            }
         }
     }
 }

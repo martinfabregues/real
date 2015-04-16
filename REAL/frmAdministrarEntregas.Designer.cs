@@ -40,13 +40,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.ckbNumero = new System.Windows.Forms.CheckBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblValidacion = new System.Windows.Forms.ToolStripStatusLabel();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -107,14 +103,14 @@
             this.dgvEntregas.ReadOnly = true;
             this.dgvEntregas.RowHeadersVisible = false;
             this.dgvEntregas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvEntregas.Size = new System.Drawing.Size(1007, 418);
+            this.dgvEntregas.Size = new System.Drawing.Size(1007, 430);
             this.dgvEntregas.TabIndex = 11;
             this.dgvEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellClick);
             // 
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCerrar.Location = new System.Drawing.Point(918, 519);
+            this.btnCerrar.Location = new System.Drawing.Point(918, 531);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(96, 37);
             this.btnCerrar.TabIndex = 12;
@@ -127,9 +123,8 @@
             this.ckbFecha.AutoSize = true;
             this.ckbFecha.Location = new System.Drawing.Point(222, 22);
             this.ckbFecha.Name = "ckbFecha";
-            this.ckbFecha.Size = new System.Drawing.Size(82, 17);
+            this.ckbFecha.Size = new System.Drawing.Size(15, 14);
             this.ckbFecha.TabIndex = 13;
-            this.ckbFecha.Text = "Seleccionar";
             this.ckbFecha.UseVisualStyleBackColor = true;
             this.ckbFecha.CheckedChanged += new System.EventHandler(this.ckbFecha_CheckedChanged);
             // 
@@ -156,37 +151,10 @@
             this.ckbNumero.AutoSize = true;
             this.ckbNumero.Location = new System.Drawing.Point(526, 24);
             this.ckbNumero.Name = "ckbNumero";
-            this.ckbNumero.Size = new System.Drawing.Size(82, 17);
+            this.ckbNumero.Size = new System.Drawing.Size(15, 14);
             this.ckbNumero.TabIndex = 16;
-            this.ckbNumero.Text = "Seleccionar";
             this.ckbNumero.UseVisualStyleBackColor = true;
             this.ckbNumero.CheckedChanged += new System.EventHandler(this.ckbNumero_CheckedChanged);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.Color.Lavender;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.lblValidacion});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 559);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1026, 22);
-            this.statusStrip1.TabIndex = 38;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(74, 17);
-            this.toolStripStatusLabel1.Text = "VALIDACIÓN:";
-            // 
-            // lblValidacion
-            // 
-            this.lblValidacion.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.lblValidacion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblValidacion.Name = "lblValidacion";
-            this.lblValidacion.Size = new System.Drawing.Size(0, 17);
             // 
             // errorProvider1
             // 
@@ -217,7 +185,6 @@
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(1026, 581);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.dgvEntregas);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -228,13 +195,10 @@
             this.Load += new System.EventHandler(this.frmAdministrarEntregas_Load);
             this.Resize += new System.EventHandler(this.frmAdministrarEntregas_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -251,9 +215,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.CheckBox ckbNumero;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripStatusLabel lblValidacion;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.GroupBox groupBox1;
     }
