@@ -18,5 +18,6 @@ namespace DAL.Interfases
         int AgregarDetalle(OrdenCompraDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
         int AgregarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
         int EliminarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
+        IList<OrdenCompraDetalle> FindDetalleByIdOrden(int orden_id);
     }
 }

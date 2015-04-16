@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,11 +67,11 @@
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.txtIdOrden = new System.Windows.Forms.TextBox();
             this.txtNroOrden = new System.Windows.Forms.TextBox();
-            this.btnBuscarOrden = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtRN = new System.Windows.Forms.TextBox();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtIngBrutos = new System.Windows.Forms.TextBox();
             this.txtIva = new System.Windows.Forms.TextBox();
@@ -91,15 +91,15 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.btnBuscarRemito = new System.Windows.Forms.Button();
             this.dgvRemitos = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.txtRN = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.btnBuscarOrden = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnBuscarRemito = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -263,14 +263,14 @@
             this.orden_numero,
             this.orden_fecha,
             this.eliminar});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalle.Location = new System.Drawing.Point(11, 209);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersVisible = false;
@@ -283,6 +283,7 @@
             this.prdid.HeaderText = "ID";
             this.prdid.Name = "prdid";
             this.prdid.Visible = false;
+            this.prdid.Width = 24;
             // 
             // Column1
             // 
@@ -298,9 +299,9 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.Column3.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column3.HeaderText = "Costo Unit.";
             this.Column3.Name = "Column3";
             this.Column3.Width = 84;
@@ -313,9 +314,9 @@
             // 
             // total
             // 
-            dataGridViewCellStyle17.Format = "C2";
-            dataGridViewCellStyle17.NullValue = null;
-            this.total.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.total.DefaultCellStyle = dataGridViewCellStyle2;
             this.total.HeaderText = "Total";
             this.total.Name = "total";
             this.total.Width = 56;
@@ -325,12 +326,14 @@
             this.facturaproveedordetalle_id.HeaderText = "facturaproveedordetalle_id";
             this.facturaproveedordetalle_id.Name = "facturaproveedordetalle_id";
             this.facturaproveedordetalle_id.Visible = false;
+            this.facturaproveedordetalle_id.Width = 158;
             // 
             // orden_id
             // 
             this.orden_id.HeaderText = "Id Orden";
             this.orden_id.Name = "orden_id";
             this.orden_id.Visible = false;
+            this.orden_id.Width = 73;
             // 
             // orden_numero
             // 
@@ -424,28 +427,6 @@
             this.txtNroOrden.Size = new System.Drawing.Size(100, 20);
             this.txtNroOrden.TabIndex = 19;
             // 
-            // btnBuscarOrden
-            // 
-            this.btnBuscarOrden.Image = global::REAL.Properties.Resources.search;
-            this.btnBuscarOrden.Location = new System.Drawing.Point(175, 28);
-            this.btnBuscarOrden.Name = "btnBuscarOrden";
-            this.btnBuscarOrden.Size = new System.Drawing.Size(38, 23);
-            this.btnBuscarOrden.TabIndex = 17;
-            this.btnBuscarOrden.UseVisualStyleBackColor = true;
-            this.btnBuscarOrden.Click += new System.EventHandler(this.btnBuscarOrden_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(246, 79);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(126, 36);
-            this.btnAgregar.TabIndex = 12;
-            this.btnAgregar.Text = "&Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.txtObservacion);
@@ -485,6 +466,24 @@
             this.groupBox3.TabIndex = 122;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Totales";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(186, 24);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 13);
+            this.label12.TabIndex = 120;
+            this.label12.Text = "RN 2408/08:";
+            // 
+            // txtRN
+            // 
+            this.txtRN.Location = new System.Drawing.Point(258, 21);
+            this.txtRN.Name = "txtRN";
+            this.txtRN.Size = new System.Drawing.Size(71, 20);
+            this.txtRN.TabIndex = 119;
+            this.txtRN.TextChanged += new System.EventHandler(this.txtRN_TextChanged);
+            this.txtRN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRN_KeyPress);
             // 
             // txtTotal
             // 
@@ -679,18 +678,6 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Remitos";
             // 
-            // btnBuscarRemito
-            // 
-            this.btnBuscarRemito.Image = global::REAL.Properties.Resources.document;
-            this.btnBuscarRemito.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscarRemito.Location = new System.Drawing.Point(27, 16);
-            this.btnBuscarRemito.Name = "btnBuscarRemito";
-            this.btnBuscarRemito.Size = new System.Drawing.Size(125, 23);
-            this.btnBuscarRemito.TabIndex = 0;
-            this.btnBuscarRemito.Text = "&Buscar Remitos";
-            this.btnBuscarRemito.UseVisualStyleBackColor = true;
-            this.btnBuscarRemito.Click += new System.EventHandler(this.btnBuscarRemito_Click);
-            // 
             // dgvRemitos
             // 
             this.dgvRemitos.AllowUserToAddRows = false;
@@ -742,7 +729,7 @@
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCerrar.Image = global::REAL.Properties.Resources.delete;
+            this.btnCerrar.Image = global::REAL.Properties.Resources.back_icon_16;
             this.btnCerrar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCerrar.Location = new System.Drawing.Point(763, 527);
             this.btnCerrar.Name = "btnCerrar";
@@ -752,23 +739,39 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // txtRN
+            // btnBuscarOrden
             // 
-            this.txtRN.Location = new System.Drawing.Point(258, 21);
-            this.txtRN.Name = "txtRN";
-            this.txtRN.Size = new System.Drawing.Size(71, 20);
-            this.txtRN.TabIndex = 119;
-            this.txtRN.TextChanged += new System.EventHandler(this.txtRN_TextChanged);
-            this.txtRN.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRN_KeyPress);
+            this.btnBuscarOrden.Image = global::REAL.Properties.Resources.search;
+            this.btnBuscarOrden.Location = new System.Drawing.Point(175, 28);
+            this.btnBuscarOrden.Name = "btnBuscarOrden";
+            this.btnBuscarOrden.Size = new System.Drawing.Size(38, 23);
+            this.btnBuscarOrden.TabIndex = 17;
+            this.btnBuscarOrden.UseVisualStyleBackColor = true;
+            this.btnBuscarOrden.Click += new System.EventHandler(this.btnBuscarOrden_Click);
             // 
-            // label12
+            // btnAgregar
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(186, 24);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 13);
-            this.label12.TabIndex = 120;
-            this.label12.Text = "RN 2408/08:";
+            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(246, 79);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(126, 36);
+            this.btnAgregar.TabIndex = 12;
+            this.btnAgregar.Text = "&Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnBuscarRemito
+            // 
+            this.btnBuscarRemito.Image = global::REAL.Properties.Resources.document;
+            this.btnBuscarRemito.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscarRemito.Location = new System.Drawing.Point(27, 16);
+            this.btnBuscarRemito.Name = "btnBuscarRemito";
+            this.btnBuscarRemito.Size = new System.Drawing.Size(125, 23);
+            this.btnBuscarRemito.TabIndex = 0;
+            this.btnBuscarRemito.Text = "&Buscar Remitos";
+            this.btnBuscarRemito.UseVisualStyleBackColor = true;
+            this.btnBuscarRemito.Click += new System.EventHandler(this.btnBuscarRemito_Click);
             // 
             // frmIngresoProveedor
             // 

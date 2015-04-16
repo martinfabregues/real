@@ -996,6 +996,8 @@
     <None Include="Resources\add2.png" />
     <None Include="Resources\document.png" />
     <None Include="Resources\ckech_3.png" />
+    <None Include="Resources\back-icon.png" />
+    <None Include="Resources\back-icon 16.png" />
     <Content Include="Resources\fondosis1366.jpg" />
     <None Include="Resources\fondosis_red.jpg" />
     <None Include="Resources\print.png" />

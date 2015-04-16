@@ -237,7 +237,25 @@ namespace DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public IList<OrdenCompraDetalle> FindDetalleByIdOrden(int orden_id)
+        {
+            string query = "SELECT * FROM ORDENCOMPRADETALLE " +
+                "INNER JOIN ORDENCOMPRA ON ORDENCOMPRA.ODCID = ORDENCOMPRADETALLE.ODCID " +
+                "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = ORDENCOMPRADETALLE.PRDID " + 
+                "INNER JOIN SUCURSAL ON SUCURSAL.SUCID = ORDENCOMPRADETALLE.SUCID " + 
+                "WHERE ORDENCOMPRADETALLE.ODCID = @id";
 
-
+            using (_cnn)
+            {
+                return _cnn.Query<OrdenCompraDetalle, OrdenCompra, Producto, Sucursal, OrdenCompraDetalle>(query,
+                    (detalle, orden, producto, sucursal) =>
+                    {
+                        detalle.orden = orden;
+                        detalle.producto = producto;
+                        detalle.sucursal = sucursal;
+                        return detalle;
+                    }, new { id = orden_id }, splitOn: "odcid, prdid, sucid").ToList();
+            }
+        }
     }
 }

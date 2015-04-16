@@ -407,6 +407,7 @@ namespace Negocio
                         if(fila.ocdid != 0)
                         {
                             //actualizo el detalle
+                            fila.odcid = orden.odcid;
                             int actualizar = _repositoryOrden.ModificarDetalle(fila, _cnn, trans);
                             if(actualizar == 0)
                             {
@@ -419,12 +420,13 @@ namespace Negocio
                         else
                         {
                             //si no tiene id, lo inserto
+                            fila.odcid = orden.odcid;
                             int insertar = _repositoryOrden.AgregarDetalle(fila, _cnn, trans);
                             if (insertar > 0)
                             {
                                 //creo el objeto OrdenCompraPendiente y asigno los valores
                                 OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
-                                _pendiente.odcid = fila.ocdid;
+                                _pendiente.odcid = orden.odcid;
                                 _pendiente.prdid = fila.prdid;
                                 _pendiente.proid = orden.proid;
                                 _pendiente.sucid = fila.sucid;
@@ -440,11 +442,7 @@ namespace Negocio
                                     resultado = false;
                                     orden_id = 0;
                                     break;
-                                }
-                                else
-                                {
-                                    trans.Commit();
-                                }
+                                }                            
                             }
                             else
                             {
@@ -456,6 +454,7 @@ namespace Negocio
                           
                         }
                     }
+
                     if(resultado == true)
                     {
                         trans.Commit();
@@ -472,6 +471,12 @@ namespace Negocio
         }
 
 
+
+        public static IList<OrdenCompraDetalle> FindDetalleByIdOrden(int orden_id)
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();
+            return _repository.FindDetalleByIdOrden(orden_id);
+        }
 
     }
 }

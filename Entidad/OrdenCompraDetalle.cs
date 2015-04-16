@@ -19,5 +19,6 @@ namespace Entidad
 
         public Producto producto { get; set; }
         public Sucursal sucursal { get; set; }
+        public virtual OrdenCompra orden { get; set; }
     }
 }

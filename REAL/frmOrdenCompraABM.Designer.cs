@@ -276,7 +276,7 @@
             // btnSalir
             // 
             this.btnSalir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSalir.Image = global::REAL.Properties.Resources.delete;
+            this.btnSalir.Image = global::REAL.Properties.Resources.back_icon_16;
             this.btnSalir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSalir.Location = new System.Drawing.Point(808, 486);
             this.btnSalir.Name = "btnSalir";
@@ -293,6 +293,7 @@
             // btnAnular
             // 
             this.btnAnular.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnAnular.Image = global::REAL.Properties.Resources.error;
             this.btnAnular.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAnular.Location = new System.Drawing.Point(529, 486);
             this.btnAnular.Name = "btnAnular";
@@ -304,6 +305,7 @@
             // btnModificar
             // 
             this.btnModificar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnModificar.Image = global::REAL.Properties.Resources.saveAs;
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnModificar.Location = new System.Drawing.Point(411, 486);
             this.btnModificar.Name = "btnModificar";
@@ -316,6 +318,7 @@
             // btnNuevo
             // 
             this.btnNuevo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnNuevo.Image = global::REAL.Properties.Resources.add2;
             this.btnNuevo.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnNuevo.Location = new System.Drawing.Point(293, 486);
             this.btnNuevo.Name = "btnNuevo";

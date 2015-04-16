@@ -57,6 +57,7 @@ namespace REAL
             txtProducto.Enabled = false;
             lblTotal.Text = "0.00";
             dgvDetalle.DataSource = null;
+            txtNumero.Visible = false;
 
             Bitmap img = new Bitmap(Properties.Resources.search, new Size(16, 16));
 
@@ -88,7 +89,7 @@ namespace REAL
         
             txtOrden.Visible = false;
             txtIdOrden.Visible = false;
-         
+            txtNumero.Visible = false;
             //label8.Visible = false;
             txtid.Visible = false;
             txtCodigo.Text = string.Empty;
@@ -542,9 +543,10 @@ namespace REAL
             {
                 //actualizo la orden de compra
                 OrdenCompra ordencompra = new OrdenCompra();
-                ordencompra.odcid = Convert.ToInt32(txtIdOrden.Text);
+                ordencompra.odcid = orden_id;
                 ordencompra.estid = 1;
                 ordencompra.odcfecha = dtpFecha.Value;
+                ordencompra.odcnumero = txtNumero.Text;
                 ordencompra.odcimporte = Convert.ToDecimal(lblSubtotal.Text);
                 ordencompra.proid = Convert.ToInt32(cmbProveedor.SelectedValue);
                 ordencompra.odcobservacion = txtObservacion.Text;
@@ -559,7 +561,9 @@ namespace REAL
                     IniciarControlesModificar();
                     dgvDetalle.Rows.Clear();
                     LimpiarControles();
+                    listado.Clear();
                     txtOrden.Text = string.Empty;
+                    txtNumero.Text = string.Empty;
                 }
                 else
                 {
@@ -625,8 +629,9 @@ namespace REAL
                 dtpFecha.Value = ordencompra.odcfecha;
                 lblTotal.Text = ordencompra.odcimporte.ToString();
                 txtObservacion.Text = ordencompra.odcobservacion;
+                txtNumero.Text = ordencompra.odcnumero;
 
-                ordencompra.Detalle = OrdenesCompraDetalle.GetPorIdOrden(ordencompra);
+                ordencompra.Detalle = OrdenesCompra.FindDetalleByIdOrden(odcid);
                 //listado = ordencompra.Detalle.ToList();
 
                 if (ordencompra.Detalle.Count > 0)
@@ -635,7 +640,10 @@ namespace REAL
                     foreach(OrdenCompraDetalle fila in ordencompra.Detalle)
                     {
                         AgregarItemList(fila);
-                        dgvDetalle.Rows.Add(fila.ocdid, fila.ocdid, fila.producto.prdcodigo, fila.producto.prddenominacion, fila.ocdimporteunit, fila.ocdcantidad, (fila.ocdcantidad * fila.ocdimporteunit), fila.prdid, (fila.ocdcantidad * fila.producto.prdmetros), fila.sucid);
+                        dgvDetalle.Rows.Add(fila.ocdid, fila.ocdid, fila.producto.prdcodigo, 
+                            fila.producto.prddenominacion, fila.ocdimporteunit, fila.ocdcantidad,
+                            (fila.ocdcantidad * fila.ocdimporteunit), fila.prdid, 
+                            Math.Round((fila.ocdcantidad * fila.producto.prdmetros), 2), fila.sucid);
                     }
 
                     CalcularTotal();

@@ -31,6 +31,17 @@
             this.components = new System.ComponentModel.Container();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvEntregas = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.verfacturas = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ckbProducto = new System.Windows.Forms.CheckBox();
             this.ckbSucursal = new System.Windows.Forms.CheckBox();
@@ -51,17 +62,6 @@
             this.txtRemito = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_remito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaemision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecharecepcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.producto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_orden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.verfacturas = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntregas)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,6 +71,8 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::REAL.Properties.Resources.back_icon_16;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelar.Location = new System.Drawing.Point(893, 524);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(99, 35);
@@ -106,6 +108,76 @@
             this.dgvEntregas.Size = new System.Drawing.Size(980, 385);
             this.dgvEntregas.TabIndex = 2;
             this.dgvEntregas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEntregas_CellClick);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            // 
+            // proveedor
+            // 
+            this.proveedor.HeaderText = "Proveedor";
+            this.proveedor.Name = "proveedor";
+            this.proveedor.ReadOnly = true;
+            this.proveedor.Visible = false;
+            // 
+            // numero_remito
+            // 
+            this.numero_remito.HeaderText = "Nro. Remito";
+            this.numero_remito.Name = "numero_remito";
+            this.numero_remito.ReadOnly = true;
+            // 
+            // fechaemision
+            // 
+            this.fechaemision.HeaderText = "Fec. Emisión";
+            this.fechaemision.Name = "fechaemision";
+            this.fechaemision.ReadOnly = true;
+            // 
+            // fecharecepcion
+            // 
+            this.fecharecepcion.HeaderText = "Fec. Recep.";
+            this.fecharecepcion.Name = "fecharecepcion";
+            this.fecharecepcion.ReadOnly = true;
+            // 
+            // sucursal
+            // 
+            this.sucursal.HeaderText = "Sucursal";
+            this.sucursal.Name = "sucursal";
+            this.sucursal.ReadOnly = true;
+            // 
+            // producto
+            // 
+            this.producto.HeaderText = "Producto";
+            this.producto.Name = "producto";
+            this.producto.ReadOnly = true;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "Cant.";
+            this.cantidad.Name = "cantidad";
+            this.cantidad.ReadOnly = true;
+            // 
+            // numero_orden
+            // 
+            this.numero_orden.HeaderText = "Nro. Orden";
+            this.numero_orden.Name = "numero_orden";
+            this.numero_orden.ReadOnly = true;
+            // 
+            // fecha_orden
+            // 
+            this.fecha_orden.HeaderText = "Fec. Orden";
+            this.fecha_orden.Name = "fecha_orden";
+            this.fecha_orden.ReadOnly = true;
+            // 
+            // verfacturas
+            // 
+            this.verfacturas.HeaderText = "Ver Facturas";
+            this.verfacturas.Name = "verfacturas";
+            this.verfacturas.ReadOnly = true;
+            this.verfacturas.Text = "Ver Facturas";
+            this.verfacturas.UseColumnTextForButtonValue = true;
             // 
             // groupBox1
             // 
@@ -208,6 +280,8 @@
             // 
             // btnBuscar
             // 
+            this.btnBuscar.Image = global::REAL.Properties.Resources.search;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBuscar.Location = new System.Drawing.Point(739, 60);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(85, 40);
@@ -305,76 +379,6 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.Visible = false;
-            // 
-            // proveedor
-            // 
-            this.proveedor.HeaderText = "Proveedor";
-            this.proveedor.Name = "proveedor";
-            this.proveedor.ReadOnly = true;
-            this.proveedor.Visible = false;
-            // 
-            // numero_remito
-            // 
-            this.numero_remito.HeaderText = "Nro. Remito";
-            this.numero_remito.Name = "numero_remito";
-            this.numero_remito.ReadOnly = true;
-            // 
-            // fechaemision
-            // 
-            this.fechaemision.HeaderText = "Fec. Emisión";
-            this.fechaemision.Name = "fechaemision";
-            this.fechaemision.ReadOnly = true;
-            // 
-            // fecharecepcion
-            // 
-            this.fecharecepcion.HeaderText = "Fec. Recep.";
-            this.fecharecepcion.Name = "fecharecepcion";
-            this.fecharecepcion.ReadOnly = true;
-            // 
-            // sucursal
-            // 
-            this.sucursal.HeaderText = "Sucursal";
-            this.sucursal.Name = "sucursal";
-            this.sucursal.ReadOnly = true;
-            // 
-            // producto
-            // 
-            this.producto.HeaderText = "Producto";
-            this.producto.Name = "producto";
-            this.producto.ReadOnly = true;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "Cant.";
-            this.cantidad.Name = "cantidad";
-            this.cantidad.ReadOnly = true;
-            // 
-            // numero_orden
-            // 
-            this.numero_orden.HeaderText = "Nro. Orden";
-            this.numero_orden.Name = "numero_orden";
-            this.numero_orden.ReadOnly = true;
-            // 
-            // fecha_orden
-            // 
-            this.fecha_orden.HeaderText = "Fec. Orden";
-            this.fecha_orden.Name = "fecha_orden";
-            this.fecha_orden.ReadOnly = true;
-            // 
-            // verfacturas
-            // 
-            this.verfacturas.HeaderText = "Ver Facturas";
-            this.verfacturas.Name = "verfacturas";
-            this.verfacturas.ReadOnly = true;
-            this.verfacturas.Text = "Ver Facturas";
-            this.verfacturas.UseColumnTextForButtonValue = true;
             // 
             // frmConsultaIngresoProveedor
             // 
