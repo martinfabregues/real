@@ -62,8 +62,6 @@
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.administrarOrdenesDeCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNuevaOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnModificarOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAnularOrdenCompra = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.pendientesDeEntregaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ajustarPendienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,8 +73,10 @@
             this.comprobantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturasToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarFacturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.facturasRegistradsaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remitosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.registrarRemitoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.btnReporteIngresos = new System.Windows.Forms.ToolStripMenuItem();
             this.entregasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,8 +113,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUsuario = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ingresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.facturasRegistradsaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -365,8 +363,6 @@
             this.comprasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.administrarOrdenesDeCompraToolStripMenuItem,
             this.btnNuevaOrdenCompra,
-            this.btnModificarOrdenCompra,
-            this.btnAnularOrdenCompra,
             this.toolStripSeparator10,
             this.pendientesDeEntregaToolStripMenuItem,
             this.toolStripSeparator1,
@@ -389,20 +385,6 @@
             this.btnNuevaOrdenCompra.Size = new System.Drawing.Size(245, 22);
             this.btnNuevaOrdenCompra.Text = "&Nueva Orden de Compra";
             this.btnNuevaOrdenCompra.Click += new System.EventHandler(this.btnNuevaOrdenCompra_Click);
-            // 
-            // btnModificarOrdenCompra
-            // 
-            this.btnModificarOrdenCompra.Name = "btnModificarOrdenCompra";
-            this.btnModificarOrdenCompra.Size = new System.Drawing.Size(245, 22);
-            this.btnModificarOrdenCompra.Text = "&Modificar Orden de Compra";
-            this.btnModificarOrdenCompra.Click += new System.EventHandler(this.btnModificarOrdenCompra_Click);
-            // 
-            // btnAnularOrdenCompra
-            // 
-            this.btnAnularOrdenCompra.Name = "btnAnularOrdenCompra";
-            this.btnAnularOrdenCompra.Size = new System.Drawing.Size(245, 22);
-            this.btnAnularOrdenCompra.Text = "&Anular Orden de Compra";
-            this.btnAnularOrdenCompra.Click += new System.EventHandler(this.btnAnularOrdenCompra_Click);
             // 
             // toolStripSeparator10
             // 
@@ -476,7 +458,7 @@
             this.registrarFacturaToolStripMenuItem,
             this.facturasRegistradsaToolStripMenuItem});
             this.facturasToolStripMenuItem1.Name = "facturasToolStripMenuItem1";
-            this.facturasToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.facturasToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.facturasToolStripMenuItem1.Text = "&Facturas";
             // 
             // registrarFacturaToolStripMenuItem
@@ -486,13 +468,20 @@
             this.registrarFacturaToolStripMenuItem.Text = "&Registrar Factura";
             this.registrarFacturaToolStripMenuItem.Click += new System.EventHandler(this.registrarFacturaToolStripMenuItem_Click);
             // 
+            // facturasRegistradsaToolStripMenuItem
+            // 
+            this.facturasRegistradsaToolStripMenuItem.Name = "facturasRegistradsaToolStripMenuItem";
+            this.facturasRegistradsaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.facturasRegistradsaToolStripMenuItem.Text = "&Facturas Registradas";
+            this.facturasRegistradsaToolStripMenuItem.Click += new System.EventHandler(this.facturasRegistradsaToolStripMenuItem_Click);
+            // 
             // remitosToolStripMenuItem1
             // 
             this.remitosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.registrarRemitoToolStripMenuItem1,
             this.ingresosToolStripMenuItem});
             this.remitosToolStripMenuItem1.Name = "remitosToolStripMenuItem1";
-            this.remitosToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.remitosToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
             this.remitosToolStripMenuItem1.Text = "&Remitos";
             this.remitosToolStripMenuItem1.Click += new System.EventHandler(this.remitosToolStripMenuItem1_Click);
             // 
@@ -502,6 +491,13 @@
             this.registrarRemitoToolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
             this.registrarRemitoToolStripMenuItem1.Text = "&Registrar Remito";
             this.registrarRemitoToolStripMenuItem1.Click += new System.EventHandler(this.registrarRemitoToolStripMenuItem1_Click);
+            // 
+            // ingresosToolStripMenuItem
+            // 
+            this.ingresosToolStripMenuItem.Name = "ingresosToolStripMenuItem";
+            this.ingresosToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.ingresosToolStripMenuItem.Text = "&Ingresos Registrados";
+            this.ingresosToolStripMenuItem.Click += new System.EventHandler(this.ingresosToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem4
             // 
@@ -788,20 +784,6 @@
             this.lblUsuario.Size = new System.Drawing.Size(150, 17);
             this.lblUsuario.Text = "toolStripStatusLabel2";
             // 
-            // ingresosToolStripMenuItem
-            // 
-            this.ingresosToolStripMenuItem.Name = "ingresosToolStripMenuItem";
-            this.ingresosToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.ingresosToolStripMenuItem.Text = "&Ingresos Registrados";
-            this.ingresosToolStripMenuItem.Click += new System.EventHandler(this.ingresosToolStripMenuItem_Click);
-            // 
-            // facturasRegistradsaToolStripMenuItem
-            // 
-            this.facturasRegistradsaToolStripMenuItem.Name = "facturasRegistradsaToolStripMenuItem";
-            this.facturasRegistradsaToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.facturasRegistradsaToolStripMenuItem.Text = "&Facturas Registradas";
-            this.facturasRegistradsaToolStripMenuItem.Click += new System.EventHandler(this.facturasRegistradsaToolStripMenuItem_Click);
-            // 
             // frmInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -870,8 +852,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnReporteProductos;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel lblUsuario;
-        private System.Windows.Forms.ToolStripMenuItem btnModificarOrdenCompra;
-        private System.Windows.Forms.ToolStripMenuItem btnAnularOrdenCompra;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem btnReporteIngresos;

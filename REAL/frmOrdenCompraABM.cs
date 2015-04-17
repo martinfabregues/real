@@ -307,6 +307,7 @@ namespace REAL
                 //{
                     frmReporteOrdenCompra frm = new frmReporteOrdenCompra(id);
                     frm.MdiParent = this.MdiParent;
+                    frm.Text = "Reportes - Orden de Compra Nro.: " + numero;
                     frm.Show();
                 //}
             }

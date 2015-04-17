@@ -183,7 +183,7 @@ namespace REAL
             btnRecepcionEntrega.Enabled = false;
             //btnListadoProveedor.Enabled = false;
             //btnModificarOrdenCompra.Enabled = false;
-            btnAnularOrdenCompra.Enabled = false;
+            //btnAnularOrdenCompra.Enabled = false;
             //btnModificarIngresoProveedor.Enabled = false;
 
             //_toolbar.Visible = false;
