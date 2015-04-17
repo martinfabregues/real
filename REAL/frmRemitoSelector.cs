@@ -27,10 +27,11 @@ namespace REAL
 
         private void GetRemitos()
         {
-            var resultado = (from row in RemitosProveedor.FindAllWithSucursal().OrderByDescending(x => x.fechaemision)
+            var resultado = (from row in RemitosProveedor.FindAllSinFactura().OrderByDescending(x => x.fecharecepcion)
                              select new
                              {
                                  row.id,
+                                 row.proveedor.pronombre,
                                  row.sucursal.sucnombre,
                                  row.fechaemision,
                                  row.numero
@@ -38,7 +39,7 @@ namespace REAL
 
             foreach(var row in resultado)
             {
-                dgvRemitos.Rows.Add(row.id, row.sucnombre, row.fechaemision.ToShortDateString(), row.numero);
+                dgvRemitos.Rows.Add(row.id, row.pronombre, row.sucnombre, row.fechaemision.ToShortDateString(), row.numero);
             }
            
         }
@@ -58,10 +59,12 @@ namespace REAL
 
         private void BuscarPorNumero(string numero)
         {
-            var resultado = (from row in RemitosProveedor.FindAllLikeNumero(numero).OrderByDescending(x => x.fechaemision)
+            var resultado = (from row in RemitosProveedor.FindAllSinFactura().OrderByDescending(x => x.fecharecepcion)
+                             where row.numero.Contains(numero)
                              select new
                              {
                                  row.id,
+                                 row.proveedor.pronombre,
                                  row.sucursal.sucnombre,
                                  row.fechaemision,
                                  row.numero
@@ -70,7 +73,7 @@ namespace REAL
             dgvRemitos.Rows.Clear();
             foreach (var row in resultado)
             {
-                dgvRemitos.Rows.Add(row.id, row.sucnombre, row.fechaemision.ToShortDateString(), row.numero);
+                dgvRemitos.Rows.Add(row.id, row.pronombre, row.sucnombre, row.fechaemision.ToShortDateString(), row.numero);
             }
         }
 
@@ -95,12 +98,12 @@ namespace REAL
         {           
             foreach(DataGridViewRow row in dgvRemitos.Rows)
             {
-                if (Convert.ToBoolean(row.Cells[4].Value) == true)
+                if (Convert.ToBoolean(row.Cells[5].Value) == true)
                 {
                     RemitoProveedor remito = new RemitoProveedor();
                     remito.id = Convert.ToInt32(row.Cells[0].Value);
-                    remito.numero = row.Cells[3].Value.ToString();
-                    remito.fechaemision = Convert.ToDateTime(row.Cells[2].Value);
+                    remito.numero = row.Cells[4].Value.ToString();
+                    remito.fechaemision = Convert.ToDateTime(row.Cells[3].Value);
                     remitos.Add(remito);
                 }
             }

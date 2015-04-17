@@ -105,5 +105,12 @@ namespace Negocio
             IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
             return _repository.FindAllByIdFactura(factura_id);
         }
+
+        public static IList<RemitoProveedor> FindAllSinFactura()
+        {
+            IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
+            return _repository.FindAllSinFactura();
+        }
+
     }
 }

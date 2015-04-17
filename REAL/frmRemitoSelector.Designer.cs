@@ -31,15 +31,16 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.dgvRemitos = new System.Windows.Forms.DataGridView();
-            this.remito_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.remito_numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
+            this.remito_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.proveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sucursal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.remito_numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRemitos)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             this.dgvRemitos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRemitos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.remito_id,
+            this.proveedor,
             this.sucursal,
             this.fecha,
             this.remito_numero,
@@ -87,32 +89,6 @@
             this.dgvRemitos.Name = "dgvRemitos";
             this.dgvRemitos.Size = new System.Drawing.Size(737, 301);
             this.dgvRemitos.TabIndex = 8;
-            // 
-            // remito_id
-            // 
-            this.remito_id.HeaderText = "Id";
-            this.remito_id.Name = "remito_id";
-            this.remito_id.Visible = false;
-            // 
-            // sucursal
-            // 
-            this.sucursal.HeaderText = "Sucursal";
-            this.sucursal.Name = "sucursal";
-            // 
-            // fecha
-            // 
-            this.fecha.HeaderText = "Fecha";
-            this.fecha.Name = "fecha";
-            // 
-            // remito_numero
-            // 
-            this.remito_numero.HeaderText = "Nro. Remito";
-            this.remito_numero.Name = "remito_numero";
-            // 
-            // check
-            // 
-            this.check.HeaderText = "Seleccionar";
-            this.check.Name = "check";
             // 
             // groupBox1
             // 
@@ -155,6 +131,37 @@
             this.btnBuscar.UseVisualStyleBackColor = true;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
+            // remito_id
+            // 
+            this.remito_id.HeaderText = "Id";
+            this.remito_id.Name = "remito_id";
+            this.remito_id.Visible = false;
+            // 
+            // proveedor
+            // 
+            this.proveedor.HeaderText = "Proveedor";
+            this.proveedor.Name = "proveedor";
+            // 
+            // sucursal
+            // 
+            this.sucursal.HeaderText = "Sucursal";
+            this.sucursal.Name = "sucursal";
+            // 
+            // fecha
+            // 
+            this.fecha.HeaderText = "Fecha";
+            this.fecha.Name = "fecha";
+            // 
+            // remito_numero
+            // 
+            this.remito_numero.HeaderText = "Nro. Remito";
+            this.remito_numero.Name = "remito_numero";
+            // 
+            // check
+            // 
+            this.check.HeaderText = "Seleccionar";
+            this.check.Name = "check";
+            // 
             // frmRemitoSelector
             // 
             this.AcceptButton = this.btnAceptar;
@@ -190,6 +197,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn remito_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn proveedor;
         private System.Windows.Forms.DataGridViewTextBoxColumn sucursal;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn remito_numero;
