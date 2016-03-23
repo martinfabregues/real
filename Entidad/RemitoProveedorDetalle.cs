@@ -13,6 +13,8 @@ namespace Entidad
         public int cantidad { get; set; }
         public int orden_id { get; set; }
 
+        public int ordendetalle_id { get; set; }
+
         public virtual RemitoProveedor remitoproveedor { get; set; }
         public virtual Producto producto { get; set; }
         public virtual OrdenCompra ordencompra { get; set; }

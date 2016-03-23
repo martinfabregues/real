@@ -17,7 +17,16 @@ namespace DAL.Interfases
         int ModificarDetalle(OrdenCompraDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
         int AgregarDetalle(OrdenCompraDetalle detalle, NpgsqlConnection _db, NpgsqlTransaction tx);
         int AgregarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
-        int EliminarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int EliminarPendiente(int ordencomprapendiente_id);
         IList<OrdenCompraDetalle> FindDetalleByIdOrden(int orden_id);
+        int Agregar(OrdenCompra newEntity, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int DescontarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int ProximoNumeroOrden(int proveedor_id, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int ActualizarProximoNumeroOrden(int proveedor_id, string numero, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int InsertarProximoNumeroOrden(int proveedor_id, string numero, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int ActualizarIngreso(int ordendetalle_id, int cantidad, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int ModificarPendiente(OrdenCompraPendiente pendiente, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int EliminarItemDetalle(int id, NpgsqlConnection _db, NpgsqlTransaction tx);
+        int EliminarItemPendiente(int id, NpgsqlConnection _db, NpgsqlTransaction tx);
     }
 }

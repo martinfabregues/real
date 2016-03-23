@@ -16,10 +16,10 @@ namespace DAL
         public static OrdenCompraPendiente CargarPendiente(NpgsqlDataReader reader)
         {
             OrdenCompraPendiente ordenpendiente = new OrdenCompraPendiente();
-            ordenpendiente.espid = (Int32)reader["espid"];
-            ordenpendiente.ocdcantidad = (Int32)reader["ocdcantidad"];
-            ordenpendiente.ocdimporte = (Decimal)reader["ocdimporte"];
-            ordenpendiente.ocpid = (Int32)reader["ocpid"];
+            ordenpendiente.estado_id = (Int32)reader["espid"];
+            ordenpendiente.cantidad = (Int32)reader["ocdcantidad"];
+            ordenpendiente.importe_unitario = (Decimal)reader["ocdimporte"];
+            ordenpendiente.id = (Int32)reader["ocpid"];
             ordenpendiente.ordencompra = OrdenCompraDAL.GetDatosPorId(Convert.ToInt32(reader["odcid"]));
             ordenpendiente.producto = ProductoDAL.GetPorId(Convert.ToInt32(reader["prdid"]));
             ordenpendiente.proveedor = ProveedorDAL.GetPorId(Convert.ToInt32(reader["proid"]));
@@ -50,12 +50,12 @@ namespace DAL
                         ordenpendiente.producto = new Producto();
                         ordenpendiente.proveedor = new Proveedor();
 
-                        ordenpendiente.ocpid = (Int32)reader["ocpid"];
+                        ordenpendiente.id = (Int32)reader["ocpid"];
                         ordenpendiente.sucursal.sucnombre = (String)reader["sucnombre"];
                         ordenpendiente.proveedor.pronombre = (String)reader["pronombre"];
-                        ordenpendiente.ordencompra.odcnumero = (String)reader["odcnumero"];
-                        ordenpendiente.ordencompra.odcfecha = (DateTime)reader["odcfecha"];
-                        ordenpendiente.ocdcantidad = (Int32)reader["ocdcantidad"];
+                        ordenpendiente.ordencompra.numero = (String)reader["odcnumero"];
+                        ordenpendiente.ordencompra.fecha = (DateTime)reader["odcfecha"];
+                        ordenpendiente.cantidad = (Int32)reader["ocdcantidad"];
                         ordenpendiente.producto.prdcodigo = (String)reader["prdcodigo"];
                         ordenpendiente.producto.prddenominacion = (String)reader["prddenominacion"];
 
@@ -147,12 +147,12 @@ namespace DAL
                         ordenpendiente.producto = new Producto();
                         ordenpendiente.proveedor = new Proveedor();
 
-                        ordenpendiente.ocpid = (Int32)reader["ocpid"];
+                        ordenpendiente.id = (Int32)reader["ocpid"];
                         ordenpendiente.sucursal.sucnombre = (String)reader["sucnombre"];
                         ordenpendiente.proveedor.pronombre = (String)reader["pronombre"];
-                        ordenpendiente.ordencompra.odcnumero = (String)reader["odcnumero"];
-                        ordenpendiente.ordencompra.odcfecha = (DateTime)reader["odcfecha"];
-                        ordenpendiente.ocdcantidad = (Int32)reader["ocdcantidad"];
+                        ordenpendiente.ordencompra.numero = (String)reader["odcnumero"];
+                        ordenpendiente.ordencompra.fecha = (DateTime)reader["odcfecha"];
+                        ordenpendiente.cantidad = (Int32)reader["ocdcantidad"];
                         ordenpendiente.producto.prdcodigo = (String)reader["prdcodigo"];
                         ordenpendiente.producto.prddenominacion = (String)reader["prddenominacion"];
 

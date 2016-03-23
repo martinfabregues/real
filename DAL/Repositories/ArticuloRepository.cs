@@ -39,7 +39,13 @@ namespace DAL.Repositories
 
         public Producto FindById(int id)
         {
-            throw new NotImplementedException();
+            const string query = "SELECT * FROM PRODUCTO " + 
+                "WHERE PRDID = @id";
+
+            using (_cnn)
+            {
+                return _cnn.Query<Producto>(query, new { id = id }).SingleOrDefault();
+            }
         }
 
         public int add(Producto newEntity)
@@ -55,6 +61,17 @@ namespace DAL.Repositories
         public int Modify(Producto entity)
         {
             throw new NotImplementedException();
+        }
+
+        public Producto FindByCodigo(string codigo)
+        {
+            const string query = "SELECT * FROM PRODUCTO " +
+                "WHERE PRDCODIGO = @codigo";
+
+            using (_cnn)
+            {
+                return _cnn.Query<Producto>(query, new { codigo = codigo }).SingleOrDefault();
+            }
         }
     }
 }

@@ -39,8 +39,14 @@ namespace Negocio
                         int detalle = _repository.AddDetalle(fila, _cnn, trans);
                         if(detalle > 0)
                         {
-                            int pendiente = _repository.ActualizarPendiente(newEntity.proveedor_id, newEntity.sucursal_id,
-                                fila.cantidad, fila.producto_id, fila.orden_id, _cnn, trans);
+                            OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
+                            _pendiente.cantidad = fila.cantidad;
+                            _pendiente.ordendetalle_id = fila.ordendetalle_id;
+                            _pendiente.orden_id = fila.orden_id;
+                            _pendiente.producto_id = fila.producto_id;
+                            _pendiente.sucursal_id = newEntity.sucursal_id;
+
+                            int pendiente = _repository.DescontarPendiente(_pendiente, _cnn, trans);
                             if(pendiente == 0 )
                             {
                                 resultado_detalle = false;
@@ -111,6 +117,19 @@ namespace Negocio
             IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
             return _repository.FindAllSinFactura();
         }
+
+        public static IList<RemitoProveedorDetalle> FindDetalleByIdRemito(int remito_id)
+        {
+            IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
+            return _repository.FindDetalleByIdRemito(remito_id);
+        }
+
+        public static RemitoProveedor FindById(int id)
+        {
+            IRemitoProveedorRepository _repository = new RemitoProveedorRepository();
+            return _repository.FindById(id);
+        }
+
 
     }
 }

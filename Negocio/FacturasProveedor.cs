@@ -235,8 +235,14 @@ namespace Negocio
                                 int remito_detalle = _repositoryRemito.AddDetalle(fila, _cnn, trans);
                                 if (remito_detalle > 0)
                                 {
-                                    int pendiente = _repositoryRemito.ActualizarPendiente(remito.proveedor_id,
-                                        remito.sucursal_id, fila.cantidad, fila.producto_id, fila.orden_id, _cnn, trans);
+                                    OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
+                                    _pendiente.cantidad = fila.cantidad;
+                                    _pendiente.ordendetalle_id = fila.ordendetalle_id;
+                                    _pendiente.orden_id = fila.orden_id;
+                                    _pendiente.producto_id = fila.producto_id;
+                                    _pendiente.sucursal_id = remito.sucursal_id;
+
+                                    int pendiente = _repositoryRemito.DescontarPendiente(_pendiente, _cnn, trans);
 
                                     if (pendiente == 0)
                                     {
@@ -374,6 +380,22 @@ namespace Negocio
             return _repository.FindAllCondicional(fac_numero, proveedor_id, desde, hasta);
         }
 
+        public static double FindPrecioProductoByOrdenProductoSucursal(int orden_id, int producto_id, int sucursal_id)
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindPrecioProductoByOrdenProductoSucursal(orden_id, producto_id, sucursal_id);
+        }
 
+        public static dynamic FindComprasMes(DateTime desde, DateTime hasta)
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindComprasMes(desde, hasta);
+        }
+
+        public static Dictionary<string, int> FindProductosMasComprados(DateTime desde, DateTime hasta)
+        {
+            IFacturaProveedorRepository _repository = new FacturaProveedorRepository();
+            return _repository.FindProductosMasComprados(desde, hasta);
+        }
     }
 }

@@ -32,14 +32,14 @@ namespace Negocio
                 string procedureName = "sp_ordencompra_insertar";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
                 
-                parametros.Add(Datos.DAL.crearParametro("odc_fecha", NpgsqlDbType.Date, odc.odcfecha));
-                parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, odc.proid));
-                parametros.Add(Datos.DAL.crearParametro("odc_importe", NpgsqlDbType.Numeric, odc.odcimporte));
-                parametros.Add(Datos.DAL.crearParametro("est_id", NpgsqlDbType.Integer, odc.estid));
-                parametros.Add(Datos.DAL.crearParametro("odc_observacion", NpgsqlDbType.Text, odc.odcobservacion));
+                parametros.Add(Datos.DAL.crearParametro("odc_fecha", NpgsqlDbType.Date, odc.fecha));
+                parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, odc.proveedor_id));
+                parametros.Add(Datos.DAL.crearParametro("odc_importe", NpgsqlDbType.Numeric, odc.importe));
+                parametros.Add(Datos.DAL.crearParametro("est_id", NpgsqlDbType.Integer, odc.estado_id));
+                parametros.Add(Datos.DAL.crearParametro("odc_observacion", NpgsqlDbType.Text, odc.observacion));
                 int resultado = Datos.DAL.EjecutarStoreInsertTransaccion(procedureName, parametros, db);
 
-                odc.odcid = resultado;
+                odc.id = resultado;
                 return odc;
 
             }
@@ -162,9 +162,9 @@ namespace Negocio
             {
                 string procedureName = "sp_ordencompra_actualizar";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, odc.odcid));
-                parametros.Add(Datos.DAL.crearParametro("odc_importe", NpgsqlDbType.Numeric, odc.odcimporte));
-                parametros.Add(Datos.DAL.crearParametro("odcobservacion", NpgsqlDbType.Text, odc.odcobservacion));
+                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, odc.id));
+                parametros.Add(Datos.DAL.crearParametro("odc_importe", NpgsqlDbType.Numeric, odc.importe));
+                parametros.Add(Datos.DAL.crearParametro("odcobservacion", NpgsqlDbType.Text, odc.observacion));
                 int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
                 return resultado;
 
@@ -194,13 +194,13 @@ namespace Negocio
                 foreach (DataRow dr in dt.Rows)
                 {
                     OrdenCompra odc = new OrdenCompra();
-                    odc.estid = Convert.ToInt32(dr["estid"]);
-                    odc.odcfecha = Convert.ToDateTime(dr["odcfecha"]);
-                    odc.odcid = Convert.ToInt32(dr["odcid"]);
-                    odc.odcimporte = Convert.ToDecimal(dr["odcimporte"]);
-                    odc.odcnumero = dr["odcnumero"].ToString();
-                    odc.odcobservacion = dr["odcobservacion"].ToString();
-                    odc.proid = Convert.ToInt32(dr["proid"]);
+                    odc.estado_id = Convert.ToInt32(dr["estid"]);
+                    odc.fecha = Convert.ToDateTime(dr["odcfecha"]);
+                    odc.id = Convert.ToInt32(dr["odcid"]);
+                    odc.importe = Convert.ToDecimal(dr["odcimporte"]);
+                    odc.numero = dr["odcnumero"].ToString();
+                    odc.observacion = dr["odcobservacion"].ToString();
+                    odc.proveedor_id = Convert.ToInt32(dr["proid"]);
                     odcs.Add(odc);
                 }
             }
@@ -346,7 +346,7 @@ namespace Negocio
         {
             try
             {
-                ordencompra = OrdenCompraDAL.GetDatosPorId(ordencompra.odcid);
+                ordencompra = OrdenCompraDAL.GetDatosPorId(ordencompra.id);
             }
             catch (Exception)
             {
@@ -404,35 +404,41 @@ namespace Negocio
                     foreach(OrdenCompraDetalle fila in orden.Detalle)
                     {
                         //pregunto si tiene id, si tiene modifico
-                        if(fila.ocdid != 0)
+                        if(fila.id != 0)
                         {
                             //actualizo el detalle
-                            fila.odcid = orden.odcid;
+                            fila.orden_id = orden.id;
                             int actualizar = _repositoryOrden.ModificarDetalle(fila, _cnn, trans);
-                            if(actualizar == 0)
+                            if (actualizar > 0)
+                            {
+                               
+                            }
+                            else
                             {
                                 trans.Rollback();
                                 resultado = false;
                                 orden_id = 0;
                                 break;
                             }
+
+                            
                         }
                         else
                         {
                             //si no tiene id, lo inserto
-                            fila.odcid = orden.odcid;
+                            fila.orden_id = orden.id;
                             int insertar = _repositoryOrden.AgregarDetalle(fila, _cnn, trans);
                             if (insertar > 0)
                             {
                                 //creo el objeto OrdenCompraPendiente y asigno los valores
                                 OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
-                                _pendiente.odcid = orden.odcid;
-                                _pendiente.prdid = fila.prdid;
-                                _pendiente.proid = orden.proid;
-                                _pendiente.sucid = fila.sucid;
-                                _pendiente.ocdcantidad = fila.ocdcantidad;
-                                _pendiente.ocdimporte = fila.ocdimporteunit;
-                                _pendiente.espid = 1;
+                                _pendiente.orden_id = orden.id;
+                                _pendiente.producto_id = fila.producto_id;
+                                _pendiente.proveedor_id = orden.proveedor_id;
+                                _pendiente.sucursal_id = fila.sucursal_id;
+                                _pendiente.cantidad = fila.cantidad;
+                                _pendiente.importe_unitario = fila.importe_unitario;
+                                _pendiente.estado_id = 1;
                                 
                                 //agrego el item como pendiente de entrega
                                 int pendiente = _repositoryOrden.AgregarPendiente(_pendiente, _cnn, trans);
@@ -477,6 +483,135 @@ namespace Negocio
             IOrdenCompraRepository _repository = new OrdenCompraRepository();
             return _repository.FindDetalleByIdOrden(orden_id);
         }
+
+        public static OrdenCompra FindById(int id)
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();
+            return _repository.FindById(id);
+        }
+
+        public static int Agregar(OrdenCompra newEntity)
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();
+            int orden_id = 0;
+            bool resultado = true;
+
+            NpgsqlConnection _cnn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString());
+            _cnn.Open();
+
+            using (var trans = _cnn.BeginTransaction())
+            {
+                //obtengo el proximo nro de orden
+                int numero_orden = _repository.ProximoNumeroOrden(newEntity.proveedor_id, _cnn, trans);
+                string numero = String.Format("{0:00000000}", (numero_orden + 1));
+
+                newEntity.numero = numero;
+
+                if(numero_orden == 0)
+                {
+                    int numero_insert = _repository.InsertarProximoNumeroOrden(newEntity.proveedor_id, numero, _cnn, trans);
+                }
+                else
+                {
+                    int numero_update = _repository.ActualizarProximoNumeroOrden(newEntity.proveedor_id, numero, _cnn, trans);
+                }
+
+                orden_id = _repository.Agregar(newEntity, _cnn, trans);
+                if(orden_id > 0)
+                {
+                    foreach(OrdenCompraDetalle fila in newEntity.Detalle)
+                    {
+                        fila.orden_id = orden_id;
+                        int ordendetalle_id = _repository.AgregarDetalle(fila, _cnn, trans);
+                        if(ordendetalle_id > 0)
+                        {
+                            OrdenCompraPendiente _pendiente = new OrdenCompraPendiente();
+                            _pendiente.cantidad = fila.cantidad;
+                            _pendiente.estado_id = 1;
+                            _pendiente.importe_unitario = fila.importe_unitario;
+                            _pendiente.orden_id = orden_id;
+                            _pendiente.ordendetalle_id = ordendetalle_id;
+                            _pendiente.producto_id = fila.producto_id;
+                            _pendiente.proveedor_id = newEntity.proveedor_id;
+                            _pendiente.sucursal_id = fila.sucursal_id;
+
+                            int pendiente = _repository.AgregarPendiente(_pendiente, _cnn, trans);
+                            if(pendiente == 0)
+                            {
+                                resultado = false;
+                                orden_id = 0;
+                                trans.Rollback();
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            trans.Rollback();
+                            resultado = false;
+                            orden_id = 0;
+                            break;
+                        }
+                    }
+
+                    //preguntar por resultado
+                    if(resultado == true)
+                    {
+                        trans.Commit();
+                    }
+
+                }
+                else
+                {
+                    trans.Rollback();
+                    orden_id = 0;
+                }
+            }
+
+            return orden_id;
+        }
+
+
+        public static int EliminarItemDetalle(int detalle_id)
+        {
+            IOrdenCompraRepository _repository = new OrdenCompraRepository();           
+            bool resultado = true;
+            int filasAfectadas = 0;
+
+            NpgsqlConnection _cnn = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString());
+            _cnn.Open();
+
+            using (var trans = _cnn.BeginTransaction())
+            {
+                filasAfectadas = _repository.EliminarItemDetalle(detalle_id, _cnn, trans);
+                if(filasAfectadas > 0)
+                {
+                    int pendiente = _repository.EliminarItemPendiente(detalle_id, _cnn, trans);
+                    if(pendiente == 0)
+                    {
+                        resultado = false;
+                        trans.Rollback();
+                        filasAfectadas = 0;
+                    }
+                }
+                else
+                {
+                    resultado = false;
+                    trans.Rollback();
+                    filasAfectadas = 0;
+                }
+
+                if(resultado == true)
+                {
+                    trans.Commit();
+                }
+            }
+            return filasAfectadas;
+        }
+
+
+
+
+
 
     }
 }

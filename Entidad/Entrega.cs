@@ -23,7 +23,11 @@ namespace Entidad
         public int eseid { get; set; }
         public int tpsid { get; set; }
 
-      
+        public virtual Barrio barrio { get; set; }
+        public virtual Sucursal sucursal { get; set; }
+        public virtual TipoEntrega tipo_entrega { get; set; }
+        public virtual TipoSalida tipo_salida { get; set; }
+        public virtual EstadoEntrega estado_entrega { get; set; }
 
     }
 

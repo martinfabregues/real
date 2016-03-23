@@ -20,13 +20,13 @@ namespace DAL
         {
             OrdenCompra ordencompra = new OrdenCompra();
 
-            ordencompra.estid = Convert.ToInt32(reader["estid"]);
-            ordencompra.odcfecha = Convert.ToDateTime(reader["odcfecha"]);
-            ordencompra.odcid = Convert.ToInt32(reader["odcid"]);
-            ordencompra.odcimporte = Convert.ToDecimal(reader["odcimporte"]);
-            ordencompra.odcnumero = reader["odcnumero"].ToString();
-            ordencompra.odcobservacion = reader["odcobservacion"].ToString();
-            ordencompra.proid = Convert.ToInt32(reader["proid"]);
+            ordencompra.estado_id = Convert.ToInt32(reader["estid"]);
+            ordencompra.fecha = Convert.ToDateTime(reader["odcfecha"]);
+            ordencompra.id = Convert.ToInt32(reader["odcid"]);
+            ordencompra.importe = Convert.ToDecimal(reader["odcimporte"]);
+            ordencompra.numero = reader["odcnumero"].ToString();
+            ordencompra.observacion = reader["odcobservacion"].ToString();
+            ordencompra.proveedor_id = Convert.ToInt32(reader["proid"]);
 
             ordencompra.proveedor = ProveedorDAL.GetPorId(Convert.ToInt32(reader["proid"]));
 
@@ -55,26 +55,26 @@ namespace DAL
                         NpgsqlCommand command = new NpgsqlCommand("sp_ordencompra_insertar", db);
                         command.CommandTimeout = 5 * 60;
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("odc_fecha", ordencompra.odcfecha);
-                        command.Parameters.AddWithValue("pro_id", ordencompra.proid);
-                        command.Parameters.AddWithValue("odc_importe", ordencompra.odcimporte);
-                        command.Parameters.AddWithValue("est_id", ordencompra.estid);
-                        command.Parameters.AddWithValue("odc_observacion", ordencompra.odcobservacion);
+                        command.Parameters.AddWithValue("odc_fecha", ordencompra.fecha);
+                        command.Parameters.AddWithValue("pro_id", ordencompra.proveedor_id);
+                        command.Parameters.AddWithValue("odc_importe", ordencompra.importe);
+                        command.Parameters.AddWithValue("est_id", ordencompra.estado_id);
+                        command.Parameters.AddWithValue("odc_observacion", ordencompra.observacion);
 
                         
-                        ordencompra.odcid = Convert.ToInt32(command.ExecuteScalar());
+                        ordencompra.id = Convert.ToInt32(command.ExecuteScalar());
                         //inserto el detalle de orden de compra
                         foreach (OrdenCompraDetalle filadetalle in ordencompra.Detalle)
                         {
                             command.Parameters.Clear();
                             command.CommandType = CommandType.StoredProcedure;
                             command.CommandText = "sp_ordencompradetalle_insertar";
-                            command.Parameters.AddWithValue("odc_id", ordencompra.odcid);
-                            command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
-                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.ocdcantidad);
-                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.ocdimporteunit);
-                            command.Parameters.AddWithValue("suc_id", filadetalle.sucid);
-                            command.Parameters.AddWithValue("ecd_id", filadetalle.ecdid);
+                            command.Parameters.AddWithValue("odc_id", ordencompra.id);
+                            command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
+                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.cantidad);
+                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.importe_unitario);
+                            command.Parameters.AddWithValue("suc_id", filadetalle.sucursal_id);
+                            command.Parameters.AddWithValue("ecd_id", filadetalle.estado_id);
 
                             int resultadodetalle = Convert.ToInt32(command.ExecuteScalar());
 
@@ -82,18 +82,18 @@ namespace DAL
                             command.Parameters.Clear();
                             command.CommandType = CommandType.StoredProcedure;
                             command.CommandText = "sp_ordencomprapendiente_insertar";
-                            command.Parameters.AddWithValue("odc_id", ordencompra.odcid);
-                            command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
-                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.ocdcantidad);
-                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.ocdimporteunit);
-                            command.Parameters.AddWithValue("suc_id", filadetalle.sucid);
-                            command.Parameters.AddWithValue("pro_id", ordencompra.proid);
+                            command.Parameters.AddWithValue("odc_id", ordencompra.id);
+                            command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
+                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.cantidad);
+                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.importe_unitario);
+                            command.Parameters.AddWithValue("suc_id", filadetalle.sucursal_id);
+                            command.Parameters.AddWithValue("pro_id", ordencompra.proveedor_id);
                             command.Parameters.AddWithValue("esp_id", 1);
 
                             int resultadopendiente = Convert.ToInt32(command.ExecuteScalar());
 
                             List<BonificacionProducto> bonificaciones = new List<BonificacionProducto>();
-                            bonificaciones = BonificacionProductoDAL.GetPorProducto(Convert.ToInt32(filadetalle.prdid));
+                            bonificaciones = BonificacionProductoDAL.GetPorProducto(Convert.ToInt32(filadetalle.producto_id));
                             if (bonificaciones.Count > 0)
                             {
                                 foreach (BonificacionProducto fila in bonificaciones)
@@ -102,7 +102,7 @@ namespace DAL
                                     command.CommandType = CommandType.StoredProcedure;
                                     command.CommandText = "sp_ordencompradetallebonificacion_insertar";
                                     command.Parameters.AddWithValue("ocd_id", resultadodetalle);
-                                    command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
+                                    command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
                                     command.Parameters.AddWithValue("bon_id", fila.bonificacion.bonid);                                 
 
                                     int resultadobonificacion = Convert.ToInt32(command.ExecuteScalar());
@@ -152,9 +152,9 @@ namespace DAL
                         //actualizo la orden de compra
                         NpgsqlCommand command = new NpgsqlCommand("sp_ordencompra_actualizar", db);
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("odc_id", ordencompra.odcid);
-                        command.Parameters.AddWithValue("odc_importe", ordencompra.odcimporte);
-                        command.Parameters.AddWithValue("odc_observacion", ordencompra.odcobservacion);
+                        command.Parameters.AddWithValue("odc_id", ordencompra.id);
+                        command.Parameters.AddWithValue("odc_importe", ordencompra.importe);
+                        command.Parameters.AddWithValue("odc_observacion", ordencompra.observacion);
                        
                         int resultadoorden = Convert.ToInt32(command.ExecuteScalar());
 
@@ -173,15 +173,15 @@ namespace DAL
                             command.Parameters.Clear();
                             command.CommandType = CommandType.StoredProcedure;
                             command.CommandText = "sp_ordencompradetalle_insertar";
-                            command.Parameters.AddWithValue("odc_id", ordencompra.odcid);
-                            command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
-                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.ocdcantidad);
-                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.ocdimporteunit);
-                            command.Parameters.AddWithValue("suc_id", filadetalle.sucid);
-                            command.Parameters.AddWithValue("ecd_id", filadetalle.ecdid);
+                            command.Parameters.AddWithValue("odc_id", ordencompra.id);
+                            command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
+                            command.Parameters.AddWithValue("ocd_cantidad", filadetalle.cantidad);
+                            command.Parameters.AddWithValue("ocd_importeunit", filadetalle.importe_unitario);
+                            command.Parameters.AddWithValue("suc_id", filadetalle.sucursal_id);
+                            command.Parameters.AddWithValue("ecd_id", filadetalle.estado_id);
 
                             //si el detalle no tiene id, lo inserto ya que no esta registrado en la base de datos
-                            if (filadetalle.ocdid == 0)
+                            if (filadetalle.id == 0)
                             {
                                 int resultadodetalle = Convert.ToInt32(command.ExecuteScalar());
 
@@ -200,12 +200,12 @@ namespace DAL
                                 command.Parameters.Clear();
                                 command.CommandType = CommandType.StoredProcedure;
                                 command.CommandText = "sp_ordencomprapendiente_insertar";
-                                command.Parameters.AddWithValue("odc_id", ordencompra.odcid);
-                                command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
-                                command.Parameters.AddWithValue("ocd_cantidad", filadetalle.ocdcantidad);
-                                command.Parameters.AddWithValue("ocd_importeunit", filadetalle.ocdimporteunit);
-                                command.Parameters.AddWithValue("suc_id", filadetalle.sucid);
-                                command.Parameters.AddWithValue("pro_id", ordencompra.proid);
+                                command.Parameters.AddWithValue("odc_id", ordencompra.id);
+                                command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
+                                command.Parameters.AddWithValue("ocd_cantidad", filadetalle.cantidad);
+                                command.Parameters.AddWithValue("ocd_importeunit", filadetalle.importe_unitario);
+                                command.Parameters.AddWithValue("suc_id", filadetalle.sucursal_id);
+                                command.Parameters.AddWithValue("pro_id", ordencompra.proveedor_id);
                                 command.Parameters.AddWithValue("esp_id", 1);
 
                                 int resultadopendiente = Convert.ToInt32(command.ExecuteScalar());
@@ -220,7 +220,7 @@ namespace DAL
                                 }
 
                                 List<BonificacionProducto> bonificaciones = new List<BonificacionProducto>();
-                                bonificaciones = BonificacionProductoDAL.GetPorProducto(Convert.ToInt32(filadetalle.prdid));
+                                bonificaciones = BonificacionProductoDAL.GetPorProducto(Convert.ToInt32(filadetalle.producto_id));
                                 if (bonificaciones.Count > 0)
                                 {
                                     foreach (BonificacionProducto fila in bonificaciones)
@@ -229,7 +229,7 @@ namespace DAL
                                         command.CommandType = CommandType.StoredProcedure;
                                         command.CommandText = "sp_ordencompradetallebonificacion_insertar";
                                         command.Parameters.AddWithValue("ocd_id", resultadodetalle);
-                                        command.Parameters.AddWithValue("prd_id", filadetalle.prdid);
+                                        command.Parameters.AddWithValue("prd_id", filadetalle.producto_id);
                                         command.Parameters.AddWithValue("bon_id", fila.bonificacion.bonid);
 
                                         int resultadobonificacion = Convert.ToInt32(command.ExecuteScalar());

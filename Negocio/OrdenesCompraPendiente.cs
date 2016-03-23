@@ -1,4 +1,6 @@
 ﻿using DAL;
+using DAL.Interfases;
+using DAL.Repositories;
 using Datos;
 using Entidad;
 using Entidad.Criteria;
@@ -31,13 +33,13 @@ namespace Negocio
             {
                 string procedureName = "sp_ordencomprapendiente_insertar";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.odcid));
-                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.prdid));
-                parametros.Add(Datos.DAL.crearParametro("odc_cantidad", NpgsqlDbType.Integer, ocp.ocdcantidad));
-                parametros.Add(Datos.DAL.crearParametro("ocd_importe", NpgsqlDbType.Numeric, ocp.ocdimporte));
-                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucid));
-                parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proid));
-                parametros.Add(Datos.DAL.crearParametro("esp_id", NpgsqlDbType.Integer, ocp.espid));
+                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.orden_id));
+                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.producto_id));
+                parametros.Add(Datos.DAL.crearParametro("odc_cantidad", NpgsqlDbType.Integer, ocp.cantidad));
+                parametros.Add(Datos.DAL.crearParametro("ocd_importe", NpgsqlDbType.Numeric, ocp.importe_unitario));
+                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucursal_id));
+                parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proveedor_id));
+                parametros.Add(Datos.DAL.crearParametro("esp_id", NpgsqlDbType.Integer, ocp.estado_id));
 
                 int resultado = Datos.DAL.EjecutarStoreInsertTransaccion(procedureName, parametros, db);
                 return resultado;
@@ -84,10 +86,10 @@ namespace Negocio
             {
                 string procedureName = "sp_ordencomprapendiente_actualiza";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.odcid));
-                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.prdid));
-                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucid));
-                parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.ocdcantidad));
+                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.orden_id));
+                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.producto_id));
+                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucursal_id));
+                parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.cantidad));
 
                 int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
                 return resultado;
@@ -205,11 +207,11 @@ namespace Negocio
               {
                   string procedureName = "sp_ordencomprapendiente_sumarproducto";
                   List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                  parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.odcid));
-                  parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.prdid));
-                  parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.ocdcantidad));
-                  parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucid));
-                  parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proid));
+                  parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.orden_id));
+                  parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.producto_id));
+                  parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.cantidad));
+                  parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucursal_id));
+                  parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proveedor_id));
 
 
                   int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
@@ -233,11 +235,11 @@ namespace Negocio
               {
                   string procedureName = "sp_ordencomprapendiente_quitarproducto";
                   List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                  parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.odcid));
-                  parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.prdid));
-                  parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.ocdcantidad));
-                  parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucid));
-                  parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proid));
+                  parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocp.orden_id));
+                  parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocp.producto_id));
+                  parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocp.cantidad));
+                  parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocp.sucursal_id));
+                  parametros.Add(Datos.DAL.crearParametro("pro_id", NpgsqlDbType.Integer, ocp.proveedor_id));
 
 
                   int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
@@ -275,10 +277,10 @@ namespace Negocio
               return list;
           }
 
-          public static Boolean EliminarPendiente(int ocp_id)
+          public static int EliminarPendiente(int ordencomprapendiente_id)
           {
-              bool resultado = OrdenCompraPendienteDAL.EliminarPendiente(ocp_id);
-              return resultado;
+              IOrdenCompraRepository _repository = new OrdenCompraRepository();
+              return _repository.EliminarPendiente(ordencomprapendiente_id);
           }
 
 
@@ -287,6 +289,8 @@ namespace Negocio
               List<OrdenCompraPendiente> list = OrdenCompraPendienteDAL.GetByCriteria(filtro);
               return list;
           }
+
+       
 
     }
 }

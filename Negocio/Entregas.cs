@@ -1,4 +1,5 @@
-﻿using Datos;
+﻿using DAL.Repositories;
+using Datos;
 using Entidad;
 using Npgsql;
 using NpgsqlTypes;
@@ -48,7 +49,7 @@ namespace Negocio
           
         }
 
-        public static int EntregaModificar(Entrega ent)
+        public static int EntregaModificar(Entrega ent, IList<EntregaDetalle> detalle)
         {
             try
             {
@@ -69,6 +70,37 @@ namespace Negocio
                 parametros.Add(Datos.DAL.crearParametro("tpsid", NpgsqlDbType.Integer, ent.tpsid));
                 parametros.Add(Datos.DAL.crearParametro("ent_id", NpgsqlDbType.Integer, ent.entid));
                 int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
+
+                if(resultado > 0)
+                {
+                    foreach(var row in detalle)
+                    {
+                        int res = 0;
+
+                        if (Convert.ToInt32(row.edeid) == 0)
+                        {
+                            res = EntregasDetalle.EntregaDetalleInsertar(row);
+                            if(res == 0)
+                            {
+                                resultado = 0;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            res = ModificarDetalle(row);
+                            if (res == 0)
+                            {
+                                resultado = 0;
+                                break;
+                            }
+                        }
+                        
+                        
+                    }
+                }
+
+
                 return resultado;
 
             }
@@ -466,5 +498,29 @@ namespace Negocio
              DataTable dt = Datos.DAL.EjecutarStoreConsultaConParametros(procedureName, parametros);
              return dt;
          }
+
+
+
+
+         public static IList<Entrega> FindAll()
+         {
+             IEntregaRepository _repository = new EntregaRepository();
+             return _repository.FindAll();
+         }
+
+
+         public static IList<Entrega> FindAllFiltro(DateTime? desde, DateTime? hasta, string nro_remito)
+         {
+             IEntregaRepository _repository = new EntregaRepository();
+             return _repository.FindAllFiltro(desde, hasta, nro_remito);
+         }
+
+
+         public static int ModificarDetalle(EntregaDetalle detalle)
+         {
+             IEntregaRepository _repository = new EntregaRepository();
+             return _repository.ModificarDetalle(detalle);
+         }
+
     }
 }

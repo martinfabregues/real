@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using Dapper;
 using DapperExtensions;
+using System.Dynamic;
 
 namespace DAL.Repositories
 {
@@ -22,8 +23,10 @@ namespace DAL.Repositories
         IList<FacturaProveedor> GetAll(NpgsqlConnection _db, NpgsqlTransaction tx);
         IList<FacturaProveedor> FindFacturasProveedorPorIdRemito(int remito_id);
         IList<FacturaProveedor> FindAllComplete();
-
         IList<FacturaProveedor> FindAllCondicional(string fac_numero, int? proveedor_id, DateTime? desde, DateTime? hasta);
+        double FindPrecioProductoByOrdenProductoSucursal(int orden_id, int producto_id, int sucursal_id);
+        dynamic FindComprasMes(DateTime desde, DateTime hasta);
+        Dictionary<string, int> FindProductosMasComprados(DateTime desde, DateTime hasta);
     }
 
     public class FacturaProveedorRepository : IFacturaProveedorRepository
@@ -238,6 +241,65 @@ namespace DAL.Repositories
                         desde = desde, 
                         hasta = hasta}, splitOn: "proid").ToList();
             }
+        }
+
+
+        public double FindPrecioProductoByOrdenProductoSucursal(int orden_id, int producto_id, int sucursal_id)
+        {
+            string query = "SELECT OCDIMPORTEUNIT FROM ORDENCOMPRADETALLE " +
+                "WHERE ODCID = @orden_id AND PRDID = @producto_id AND SUCID = @sucursal_id";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<double>(query, new
+                {
+                    orden_id = orden_id,
+                    producto_id = producto_id,
+                    sucursal_id = sucursal_id
+                }).FirstOrDefault();
+            }
+        }
+
+
+        public dynamic FindComprasMes(DateTime desde, DateTime hasta)
+        {
+            var dict = new Dictionary<string, int>();
+            string query = "SELECT PROVEEDOR.PRONOMBRE, SUM(FACTURAPROVEEDOR.FAPIMPORTE) AS TOTAL FROM FACTURAPROVEEDOR " +
+                "INNER JOIN PROVEEDOR ON PROVEEDOR.PROID = FACTURAPROVEEDOR.PROID " +
+                "WHERE FACTURAPROVEEDOR.FAPFECHA BETWEEN @desde AND @hasta " +
+                "GROUP BY FACTURAPROVEEDOR.PROID, PROVEEDOR.PRONOMBRE";
+
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                return _db.Query<dynamic>(query, new { desde = desde, hasta = hasta });
+            }
+        }
+
+
+        public Dictionary<string, int> FindProductosMasComprados(DateTime desde, DateTime hasta)
+        {
+            Dictionary<string, int> dict = new Dictionary<string, int>();
+
+            string query = "SELECT PRODUCTO.PRDDENOMINACION, SUM(FPDCANTIDAD) AS CANTIDAD FROM FACTURAPROVEEDORDETALLE " +
+                        "INNER JOIN PRODUCTO ON PRODUCTO.PRDID = FACTURAPROVEEDORDETALLE.PRDID " +
+                        "INNER JOIN FACTURAPROVEEDOR ON FACTURAPROVEEDOR.FAPID = FACTURAPROVEEDORDETALLE.FAPID " +
+                        "WHERE FACTURAPROVEEDOR.FAPFECHA BETWEEN @desde AND @hasta " +
+                        "GROUP BY FACTURAPROVEEDORDETALLE.PRDID,  PRODUCTO.PRDDENOMINACION " +
+                        "ORDER BY CANTIDAD DESC " +
+                        "LIMIT 10";
+            
+            using (IDbConnection _db = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["RWORLD"].ToString()))
+            {
+                dynamic result = _db.Query<dynamic>(query, new { desde = desde, hasta = hasta });
+
+                foreach(var fila in result)
+                {
+                    dict.Add((string)fila.prddenominacion, (int)fila.cantidad);
+                }
+
+                return dict;
+            }
+
         }
     }
 }

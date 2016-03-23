@@ -858,7 +858,7 @@ namespace REAL
             rpt.Clear();
             rpt.LocalReport.DataSources.Clear();
             rpt.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            rpt.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\_reporteOrdenCompra.rdl";
+            rpt.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\ordencompra.rdl";
             rpt.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
 
             //GENERO EL PDF

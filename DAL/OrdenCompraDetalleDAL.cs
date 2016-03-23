@@ -21,13 +21,13 @@ namespace DAL
         {
             OrdenCompraDetalle ordencompradetalle = new OrdenCompraDetalle();
 
-            ordencompradetalle.ecdid = Convert.ToInt32(reader["ecdid"]);
-            ordencompradetalle.ocdcantidad = Convert.ToInt32(reader["ocdcantidad"]);
-            ordencompradetalle.ocdid = Convert.ToInt32(reader["ocdid"]);
-            ordencompradetalle.ocdimporteunit = Convert.ToDecimal(reader["ocdimporteunit"]);
-            ordencompradetalle.odcid = Convert.ToInt32(reader["odcid"]);
-            ordencompradetalle.prdid = Convert.ToInt32(reader["prdid"]);
-            ordencompradetalle.sucid = Convert.ToInt32(reader["sucid"]);
+            ordencompradetalle.estado_id = Convert.ToInt32(reader["ecdid"]);
+            ordencompradetalle.cantidad = Convert.ToInt32(reader["ocdcantidad"]);
+            ordencompradetalle.id = Convert.ToInt32(reader["ocdid"]);
+            ordencompradetalle.importe_unitario = Convert.ToDecimal(reader["ocdimporteunit"]);
+            ordencompradetalle.orden_id = Convert.ToInt32(reader["odcid"]);
+            ordencompradetalle.producto_id = Convert.ToInt32(reader["prdid"]);
+            ordencompradetalle.sucursal_id = Convert.ToInt32(reader["sucid"]);
 
             ordencompradetalle.producto = ProductoDAL.GetPorId(Convert.ToInt32(reader["prdid"]));
             ordencompradetalle.sucursal = SucursalDAL.GetPorId(Convert.ToInt32(reader["sucid"]));
@@ -93,7 +93,7 @@ namespace DAL
                         //elimino las bonificaciones asignadas al item
                         NpgsqlCommand command = new NpgsqlCommand("sp_ordencompradetallebonificacion_eliminar", db);
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("ocd_id", ordencompradetalle.ocdid);
+                        command.Parameters.AddWithValue("ocd_id", ordencompradetalle.id);
 
                         db.Open();
                         int filasafectadas = Convert.ToInt32(command.ExecuteScalar());
@@ -106,7 +106,7 @@ namespace DAL
                         command.Parameters.Clear();
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "sp_ordencompradetalle_eliminar";
-                        command.Parameters.AddWithValue("ocd_id", ordencompradetalle.ocdid);
+                        command.Parameters.AddWithValue("ocd_id", ordencompradetalle.id);
 
                         int filasafectadasdetalle = Convert.ToInt32(command.ExecuteScalar());
                         if (filasafectadasdetalle <= 0)
@@ -120,11 +120,11 @@ namespace DAL
                         command.Parameters.Clear();
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "sp_ordencomprapendiente_quitarproducto";
-                        command.Parameters.AddWithValue("odc_id", ordencomprapendiente.odcid);
-                        command.Parameters.AddWithValue("prd_id", ordencomprapendiente.prdid);
-                        command.Parameters.AddWithValue("ocd_cantidad", ordencomprapendiente.ocdcantidad);
-                        command.Parameters.AddWithValue("suc_id", ordencomprapendiente.sucid);
-                        command.Parameters.AddWithValue("pro_id", ordencomprapendiente.proid);
+                        command.Parameters.AddWithValue("odc_id", ordencomprapendiente.orden_id);
+                        command.Parameters.AddWithValue("prd_id", ordencomprapendiente.producto_id);
+                        command.Parameters.AddWithValue("ocd_cantidad", ordencomprapendiente.cantidad);
+                        command.Parameters.AddWithValue("suc_id", ordencomprapendiente.sucursal_id);
+                        command.Parameters.AddWithValue("pro_id", ordencomprapendiente.proveedor_id);
 
                         int filasafectadaspendiente = Convert.ToInt32(command.ExecuteScalar());
                         if (filasafectadaspendiente <= 0)

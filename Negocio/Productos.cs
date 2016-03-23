@@ -376,6 +376,20 @@ namespace Negocio
             return _articuloRepository.FindAll();
         }
 
+
+
+        public static Producto FindByCodigo(string codigo)
+        {
+            IArticuloRepository _articuloRepository = new ArticuloRepository();
+            return _articuloRepository.FindByCodigo(codigo);
+        }
+
+        public static Producto FindById(int id)
+        {
+            IArticuloRepository _articuloRepository = new ArticuloRepository();
+            return _articuloRepository.FindById(id);
+        }
+
     }
 
 

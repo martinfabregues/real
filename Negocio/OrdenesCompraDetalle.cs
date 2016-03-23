@@ -22,12 +22,12 @@ namespace Negocio
             {
                 string procedureName = "sp_ordencompradetalle_insertar";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocd.odcid));
-                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocd.prdid));
-                parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocd.ocdcantidad));
-                parametros.Add(Datos.DAL.crearParametro("ocd_importeunit", NpgsqlDbType.Numeric, ocd.ocdimporteunit));
-                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocd.sucid));
-                parametros.Add(Datos.DAL.crearParametro("ecd_id", NpgsqlDbType.Integer, ocd.ecdid));
+                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocd.orden_id));
+                parametros.Add(Datos.DAL.crearParametro("prd_id", NpgsqlDbType.Integer, ocd.producto_id));
+                parametros.Add(Datos.DAL.crearParametro("ocd_cantidad", NpgsqlDbType.Integer, ocd.cantidad));
+                parametros.Add(Datos.DAL.crearParametro("ocd_importeunit", NpgsqlDbType.Numeric, ocd.importe_unitario));
+                parametros.Add(Datos.DAL.crearParametro("suc_id", NpgsqlDbType.Integer, ocd.sucursal_id));
+                parametros.Add(Datos.DAL.crearParametro("ecd_id", NpgsqlDbType.Integer, ocd.estado_id));
 
 
                 int resultado = Datos.DAL.EjecutarStoreInsertTransaccion(procedureName, parametros, db);
@@ -51,7 +51,7 @@ namespace Negocio
             {
                 string procedureName = "sp_ordencompradetalle_actualizarmodificado";
                 List<NpgsqlParameter> parametros = new List<NpgsqlParameter>();
-                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocd.ocdid));
+                parametros.Add(Datos.DAL.crearParametro("odc_id", NpgsqlDbType.Integer, ocd.id));
 
                 int resultado = Datos.DAL.EjecutarStoreInsert(procedureName, parametros);
                 return resultado;
@@ -132,11 +132,11 @@ namespace Negocio
                         command.Parameters.Clear();
                         command.CommandType = CommandType.StoredProcedure;
                         command.CommandText = "sp_ordencomprapendiente_quitarproducto";
-                        command.Parameters.AddWithValue("odc_id", ordenpendiente.odcid);
-                        command.Parameters.AddWithValue("prd_id", ordenpendiente.prdid);
-                        command.Parameters.AddWithValue("ocd_cantidad", ordenpendiente.ocdcantidad);
-                        command.Parameters.AddWithValue("suc_id", ordenpendiente.sucid);
-                        command.Parameters.AddWithValue("pro_id", ordenpendiente.proid);
+                        command.Parameters.AddWithValue("odc_id", ordenpendiente.orden_id);
+                        command.Parameters.AddWithValue("prd_id", ordenpendiente.producto_id);
+                        command.Parameters.AddWithValue("ocd_cantidad", ordenpendiente.cantidad);
+                        command.Parameters.AddWithValue("suc_id", ordenpendiente.sucursal_id);
+                        command.Parameters.AddWithValue("pro_id", ordenpendiente.proveedor_id);
 
                         filasafectadas = Convert.ToInt32(command.ExecuteScalar());
 
@@ -169,7 +169,7 @@ namespace Negocio
             List<OrdenCompraDetalle> list = new List<OrdenCompraDetalle>();
             try
             {
-                list = OrdenCompraDetalleDAL.GetPorIdOrden(ordencompra.odcid);
+                list = OrdenCompraDetalleDAL.GetPorIdOrden(ordencompra.id);
             }
             catch (Exception)
             {

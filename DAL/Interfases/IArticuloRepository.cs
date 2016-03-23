@@ -8,5 +8,6 @@ namespace DAL.Interfases
 {
     public interface IArticuloRepository : IRepository<Producto>
     {
+        Producto FindByCodigo(string codigo);
     }
 }

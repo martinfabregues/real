@@ -114,6 +114,7 @@
     <Compile Include="RemitoDAL.cs" />
     <Compile Include="RemitoDetalleDAL.cs" />
     <Compile Include="Repositories\ArticuloRepository.cs" />
+    <Compile Include="Repositories\EntregaRepository.cs" />
     <Compile Include="Repositories\FacturaProveedorRepository.cs" />
     <Compile Include="Repositories\OrdenCompraRepository.cs" />
     <Compile Include="Repositories\ProveedorRepository.cs" />
