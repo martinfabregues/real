@@ -69,7 +69,7 @@ namespace REAL
 
             foreach(OrdenCompra row in ordenes)
             {
-                dgvOrdenes.Rows.Add(row.odcid, row.odcnumero, row.odcfecha.ToShortDateString(), row.proveedor.pronombre, row.odcimporte, row.odcactivo);
+                dgvOrdenes.Rows.Add(row.id, row.numero, row.fecha.ToShortDateString(), row.proveedor.pronombre, row.importe, row.activo);
             }
 
          
@@ -131,7 +131,7 @@ namespace REAL
             {
                 int id = Convert.ToInt32(dgvOrdenes.Rows[e.RowIndex].Cells[1].Value);
                 OrdenCompra orden = new OrdenCompra();
-                orden.odcid = id;
+                orden.id = id;
                 //ObtenerDetalle(orden);
             }
         }
@@ -285,8 +285,8 @@ namespace REAL
             foreach (var fila in query)
             {
                 //agreagar filas filtradas al datagrid
-                dgvOrdenes.Rows.Add(fila.odcid, fila.odcnumero, fila.odcfecha.ToShortDateString(), 
-                    fila.proveedor.pronombre, fila.odcimporte, fila.estid);
+                dgvOrdenes.Rows.Add(fila.id, fila.numero, fila.fecha.ToShortDateString(), 
+                    fila.proveedor.pronombre, fila.importe, fila.estado_id);
             }
         }
 
@@ -367,11 +367,19 @@ namespace REAL
                 int orden_id = (int)dgvOrdenes.CurrentRow.Cells[0].Value;
                 string numero_orden = dgvOrdenes.CurrentRow.Cells[1].Value.ToString();
 
-                frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("MODIFICAR", orden_id);
+                frmOrdenCompraTest frm = new frmOrdenCompraTest("Modificar", orden_id);
                 frm.MdiParent = this.MdiParent;
                 frm.Text = "Compras - Modificar Orden de Compra Nro.: " + numero_orden;
                 frm.Show();
             }
+        }
+
+        private void btnNuevo_Click_2(object sender, EventArgs e)
+        {
+            frmOrdenCompraTest frm = new frmOrdenCompraTest();
+            frm.MdiParent = this.MdiParent;
+            frm.Text = "Compras - Nueva Orden de Compra";
+            frm.Show();
         }
     }
 }

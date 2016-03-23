@@ -56,6 +56,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -305,7 +306,7 @@
             // 
             this.groupBox2.Controls.Add(this.lblTotal);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(13, 484);
+            this.groupBox2.Location = new System.Drawing.Point(141, 484);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(210, 51);
             this.groupBox2.TabIndex = 15;
@@ -333,6 +334,19 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Importe Total:";
             // 
+            // btnImprimir
+            // 
+            this.btnImprimir.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnImprimir.Image = global::REAL.Properties.Resources.printer;
+            this.btnImprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImprimir.Location = new System.Drawing.Point(12, 493);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(98, 39);
+            this.btnImprimir.TabIndex = 16;
+            this.btnImprimir.Text = "&Imprimir";
+            this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
             // frmConsultaPendientes
             // 
             this.AcceptButton = this.btnBuscar;
@@ -340,6 +354,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAceptar;
             this.ClientSize = new System.Drawing.Size(1039, 547);
+            this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvPendientes);
@@ -390,5 +405,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn importe_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn sucursal;
+        private System.Windows.Forms.Button btnImprimir;
     }
 }

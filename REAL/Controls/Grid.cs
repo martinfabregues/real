@@ -46,36 +46,36 @@ namespace REAL.Controls
      
         private void EstiloGrid()
         {
-            this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.BackgroundColor = Color.White;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            this.ColumnHeadersHeight = 21;
-            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.GridColor = Color.LightGray;
-            this.MultiSelect = false;
-            this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.RowHeadersWidth = 17;
+            //this.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //this.BackgroundColor = Color.White;
+            //this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            //this.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            //this.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            //this.ColumnHeadersHeight = 21;
+            //this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            //this.GridColor = Color.LightGray;
+            //this.MultiSelect = false;
+            //this.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            //this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            //this.RowHeadersWidth = 17;
 
-            DataGridViewCellStyle style = new DataGridViewCellStyle();
-            style.BackColor = Color.WhiteSmoke;
-            style.ForeColor = Color.Black;
-            style.SelectionBackColor = SystemColors.Control;
-            style.SelectionForeColor = Color.Black;
+            //DataGridViewCellStyle style = new DataGridViewCellStyle();
+            //style.BackColor = Color.WhiteSmoke;
+            //style.ForeColor = Color.Black;
+            //style.SelectionBackColor = SystemColors.Control;
+            //style.SelectionForeColor = Color.Black;
 
-            this.ColumnHeadersDefaultCellStyle = style;
+            //this.ColumnHeadersDefaultCellStyle = style;
 
-            DataGridViewCellStyle styleCell = new DataGridViewCellStyle();
-            styleCell.BackColor = Color.White;
-            styleCell.ForeColor = Color.Black;
-            styleCell.SelectionBackColor = SystemColors.Control;
-            styleCell.SelectionForeColor = Color.Black;
+            //DataGridViewCellStyle styleCell = new DataGridViewCellStyle();
+            //styleCell.BackColor = Color.White;
+            //styleCell.ForeColor = Color.Black;
+            //styleCell.SelectionBackColor = SystemColors.Control;
+            //styleCell.SelectionForeColor = Color.Black;
 
-            this.RowTemplate.DefaultCellStyle = styleCell;
+            //this.RowTemplate.DefaultCellStyle = styleCell;
 
-            this.RowHeadersDefaultCellStyle = style;
+            //this.RowHeadersDefaultCellStyle = style;
 
             if (SeleccionCeldaCompleta == true)
             {

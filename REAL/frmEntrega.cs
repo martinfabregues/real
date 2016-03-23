@@ -93,7 +93,8 @@ namespace REAL
            
             cmbBarrio.DataSource = Barrios.BarrioObtenerTodo().DefaultView;
 
-            
+            cmbBarrio.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbBarrio.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void CargarComboBoxTipoSalida()

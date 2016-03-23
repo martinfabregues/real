@@ -68,21 +68,21 @@ namespace REAL
             if (ckbProveedor.Checked == true)
             {
 
-                frmReportePendientesEntrega frm = new frmReportePendientesEntrega("PROVEEDOR", Convert.ToInt32(cmbProveedor.SelectedValue));
-                frm.MdiParent = this.MdiParent;
-                frm.Text = "REPORTE PENDIENTES DE ENTREGA - FILTRO POR PROVEEDOR";
-                this.Hide();
-                frm.Show();
+                //frmReportePendientesEntrega frm = new frmReportePendientesEntrega("PROVEEDOR", Convert.ToInt32(cmbProveedor.SelectedValue));
+                //frm.MdiParent = this.MdiParent;
+                //frm.Text = "REPORTE PENDIENTES DE ENTREGA - FILTRO POR PROVEEDOR";
+                //this.Hide();
+                //frm.Show();
             }
             else
             {
                 if (ckbCompleto.Checked == true)
                 {
-                    frmReportePendientesEntrega frm = new frmReportePendientesEntrega("COMPLETO", Convert.ToInt32(cmbProveedor.SelectedValue));
-                    frm.MdiParent = this.MdiParent;
-                    frm.Text = "REPORTE PENDIENTES DE ENTREGA - COMPLETO";
-                    this.Hide();
-                    frm.Show();
+                    //frmReportePendientesEntrega frm = new frmReportePendientesEntrega("COMPLETO", Convert.ToInt32(cmbProveedor.SelectedValue));
+                    //frm.MdiParent = this.MdiParent;
+                    //frm.Text = "REPORTE PENDIENTES DE ENTREGA - COMPLETO";
+                    //this.Hide();
+                    //frm.Show();
                 }
                 else
                 {

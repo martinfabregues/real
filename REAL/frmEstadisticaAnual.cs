@@ -184,7 +184,7 @@ namespace REAL
 
         private void frmEstadisticaAnual_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+       
         }
 
         private void frmEstadisticaAnual_Resize(object sender, EventArgs e)

@@ -13,14 +13,14 @@ namespace REAL.Utils
     public class GenerarPdf
     {
 
-        public static String ExportReportViewer2Pdf(ReportViewer rpt, OrdenCompra ordencompra)
+        public static String ExportReportViewer2Pdf(ReportViewer rpt, int orden_id)
         {
             try
-            {
+            {                          
 
                 DataTable dt = new DataTable();
                 dt.Clear();
-                dt = OrdenesCompraDetalle.GetOrdencompraDetalleDatosPodId(ordencompra.odcid);
+                dt = OrdenesCompraDetalle.GetOrdencompraDetalleDatosPodId(orden_id);
                 rpt.Clear();
                 rpt.LocalReport.DataSources.Clear();
                 rpt.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -35,7 +35,9 @@ namespace REAL.Utils
                 string deviceInfo = "<DeviceInfo><OutputFormat>PDF</OutputFormat></DeviceInfo>";
                 byte[] bytes = rpt.LocalReport.Render("PDF", deviceInfo, out mimeType, out encoding, out extension, out streamids, out warnings) as byte[];
 
-                string path = ordencompra.proveedor.pronombre + " - " + ordencompra.odcnumero +  ".pdf";
+                OrdenCompra ordencompra = OrdenesCompra.FindById(orden_id);
+
+                string path = ordencompra.proveedor.pronombre + " - " + ordencompra.numero +  ".pdf";
 
                 FileStream fs = System.IO.File.Create("C:/ORDENES DE COMPRA/" + path);
                 fs.Write(bytes, 0, bytes.Length);

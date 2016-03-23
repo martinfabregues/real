@@ -66,7 +66,7 @@ namespace REAL
 
         private void frmEstadisticaGeneral_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
             cmbAno.SelectedIndex = 0;
             cmbMes.SelectedIndex = 0;
         }

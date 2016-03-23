@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,16 +56,19 @@
             this.txtid = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.metros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ocdcantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.odcimporteunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ocdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtNumero = new System.Windows.Forms.TextBox();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
+            this.producto_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.odcimporteunit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ocdcantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prdid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.miniToolStrip = new System.Windows.Forms.StatusStrip();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -82,11 +85,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.ProgressBar1 = new System.Windows.Forms.ProgressBar();
             this.txtOrden = new System.Windows.Forms.TextBox();
-            this.txtNumero = new System.Windows.Forms.TextBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -318,68 +318,34 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Items";
             // 
-            // metros
+            // txtNumero
             // 
-            this.metros.HeaderText = "Metros C.";
-            this.metros.Name = "metros";
-            this.metros.Width = 77;
+            this.txtNumero.Location = new System.Drawing.Point(163, -4);
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(100, 20);
+            this.txtNumero.TabIndex = 101;
             // 
-            // prdid
+            // btnAgregar
             // 
-            this.prdid.HeaderText = "prdid";
-            this.prdid.Name = "prdid";
-            this.prdid.Visible = false;
-            this.prdid.Width = 55;
+            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(333, 99);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(132, 35);
+            this.btnAgregar.TabIndex = 81;
+            this.btnAgregar.Text = "&Agregar v";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click_1);
             // 
-            // Column6
+            // btnBuscar
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Column6.HeaderText = "Total";
-            this.Column6.Name = "Column6";
-            this.Column6.Width = 56;
-            // 
-            // ocdcantidad
-            // 
-            this.ocdcantidad.HeaderText = "Cant.";
-            this.ocdcantidad.Name = "ocdcantidad";
-            this.ocdcantidad.Width = 57;
-            // 
-            // odcimporteunit
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.odcimporteunit.DefaultCellStyle = dataGridViewCellStyle4;
-            this.odcimporteunit.HeaderText = "Costo";
-            this.odcimporteunit.Name = "odcimporteunit";
-            this.odcimporteunit.Width = 59;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Producto";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 75;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Código";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 65;
-            // 
-            // ocdid
-            // 
-            this.ocdid.HeaderText = "Idet";
-            this.ocdid.Name = "ocdid";
-            this.ocdid.Visible = false;
-            this.ocdid.Width = 31;
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            this.id.Width = 22;
+            this.btnBuscar.Image = global::REAL.Properties.Resources.search;
+            this.btnBuscar.Location = new System.Drawing.Point(193, 32);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(38, 23);
+            this.btnBuscar.TabIndex = 77;
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // dgvDetalle
             // 
@@ -390,8 +356,8 @@
             this.dgvDetalle.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.id,
-            this.ocdid,
+            this.producto_id,
+            this.id_detalle,
             this.Column1,
             this.Column2,
             this.odcimporteunit,
@@ -399,20 +365,83 @@
             this.Column6,
             this.prdid,
             this.metros});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalle.Location = new System.Drawing.Point(12, 166);
             this.dgvDetalle.Name = "dgvDetalle";
             this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.Size = new System.Drawing.Size(880, 253);
             this.dgvDetalle.TabIndex = 70;
             this.dgvDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellClick_1);
+            // 
+            // producto_id
+            // 
+            this.producto_id.HeaderText = "Producto Id";
+            this.producto_id.Name = "producto_id";
+            this.producto_id.Visible = false;
+            this.producto_id.Width = 68;
+            // 
+            // id_detalle
+            // 
+            this.id_detalle.HeaderText = "Id Detalle";
+            this.id_detalle.Name = "id_detalle";
+            this.id_detalle.Visible = false;
+            this.id_detalle.Width = 58;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Código";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 65;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Producto";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 75;
+            // 
+            // odcimporteunit
+            // 
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.odcimporteunit.DefaultCellStyle = dataGridViewCellStyle1;
+            this.odcimporteunit.HeaderText = "Costo";
+            this.odcimporteunit.Name = "odcimporteunit";
+            this.odcimporteunit.Width = 59;
+            // 
+            // ocdcantidad
+            // 
+            this.ocdcantidad.HeaderText = "Cant.";
+            this.ocdcantidad.Name = "ocdcantidad";
+            this.ocdcantidad.Width = 57;
+            // 
+            // Column6
+            // 
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column6.HeaderText = "Total";
+            this.Column6.Name = "Column6";
+            this.Column6.Width = 56;
+            // 
+            // prdid
+            // 
+            this.prdid.HeaderText = "prdid";
+            this.prdid.Name = "prdid";
+            this.prdid.Visible = false;
+            this.prdid.Width = 55;
+            // 
+            // metros
+            // 
+            this.metros.HeaderText = "Metros C.";
+            this.metros.Name = "metros";
+            this.metros.Width = 77;
             // 
             // txtObservacion
             // 
@@ -587,13 +616,6 @@
             this.txtOrden.Size = new System.Drawing.Size(100, 20);
             this.txtOrden.TabIndex = 89;
             // 
-            // txtNumero
-            // 
-            this.txtNumero.Location = new System.Drawing.Point(163, -4);
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(100, 20);
-            this.txtNumero.TabIndex = 101;
-            // 
             // btnRegistrar
             // 
             this.btnRegistrar.Image = global::REAL.Properties.Resources.save;
@@ -618,28 +640,6 @@
             this.btnCancelar.Text = "&Salir";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_2);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(333, 99);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(132, 35);
-            this.btnAgregar.TabIndex = 81;
-            this.btnAgregar.Text = "&Agregar v";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click_1);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Image = global::REAL.Properties.Resources.search;
-            this.btnBuscar.Location = new System.Drawing.Point(193, 32);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(38, 23);
-            this.btnBuscar.TabIndex = 77;
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click_1);
             // 
             // frmNuevaOrdenCompra
             // 
@@ -713,15 +713,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtObservacion;
         private System.Windows.Forms.DataGridView dgvDetalle;
-        private System.Windows.Forms.DataGridViewTextBoxColumn id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ocdid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn odcimporteunit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ocdcantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn prdid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn metros;
         private System.Windows.Forms.StatusStrip miniToolStrip;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label lblIngBrutos;
@@ -738,5 +729,14 @@
         private System.Windows.Forms.ProgressBar ProgressBar1;
         private System.Windows.Forms.TextBox txtOrden;
         private System.Windows.Forms.TextBox txtNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn producto_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_detalle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn odcimporteunit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ocdcantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn prdid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn metros;
     }
 }

@@ -43,7 +43,7 @@ namespace REAL
                                   filaproducto.prdcodigo,
                                   filaproducto.prddenominacion,
                                   filaproducto.prdcosto,
-                                  filaproducto.prdmetros,
+                                  prdmetros = Math.Round(filaproducto.prdmetros, 2),
                                   filaproducto.estado.estestado
                               }).ToList();
 
@@ -70,7 +70,6 @@ namespace REAL
             dgvProductos.Columns[6].HeaderText = "Costo";
             dgvProductos.Columns[7].HeaderText = "m3";
             dgvProductos.Columns[8].HeaderText = "Estado";
-
 
             dgvProductos.Columns[6].DefaultCellStyle.Format = "c";
 
@@ -138,8 +137,7 @@ namespace REAL
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            
+            }            
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -175,6 +173,9 @@ namespace REAL
             CargarGrid(e.Result as List<Producto>);
             PersonalizarGrid();
         }
+
+
+
 
     }
 }

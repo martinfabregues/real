@@ -59,6 +59,7 @@
             this.orden_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orden_fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.metros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ordendetalle_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtRemito = new System.Windows.Forms.MaskedTextBox();
@@ -75,6 +76,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
+            this.txtIdDetalle = new System.Windows.Forms.TextBox();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -276,6 +278,7 @@
             this.orden_id,
             this.orden_fecha,
             this.metros,
+            this.ordendetalle_id,
             this.eliminar});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
@@ -291,6 +294,7 @@
             this.dgvDetalle.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDetalle.Size = new System.Drawing.Size(880, 253);
             this.dgvDetalle.TabIndex = 103;
+            this.dgvDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellClick);
             // 
             // id
             // 
@@ -339,6 +343,12 @@
             // 
             this.metros.HeaderText = "Metros";
             this.metros.Name = "metros";
+            // 
+            // ordendetalle_id
+            // 
+            this.ordendetalle_id.HeaderText = "ordendetalle_id";
+            this.ordendetalle_id.Name = "ordendetalle_id";
+            this.ordendetalle_id.Visible = false;
             // 
             // eliminar
             // 
@@ -491,12 +501,20 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
+            // txtIdDetalle
+            // 
+            this.txtIdDetalle.Location = new System.Drawing.Point(581, 26);
+            this.txtIdDetalle.Name = "txtIdDetalle";
+            this.txtIdDetalle.Size = new System.Drawing.Size(100, 20);
+            this.txtIdDetalle.TabIndex = 109;
+            // 
             // frmRemito
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(904, 572);
+            this.Controls.Add(this.txtIdDetalle);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.txtOrden);
             this.Controls.Add(this.groupBox4);
@@ -568,6 +586,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.MaskedTextBox txtRemito;
         private System.Windows.Forms.TextBox txtFecha;
+        private System.Windows.Forms.TextBox txtIdDetalle;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn ocdid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -577,6 +596,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn metros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ordendetalle_id;
         private System.Windows.Forms.DataGridViewButtonColumn eliminar;
     }
 }

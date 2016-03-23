@@ -34,7 +34,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCargar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstadistica)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +41,7 @@
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCerrar.Location = new System.Drawing.Point(542, 393);
+            this.btnCerrar.Location = new System.Drawing.Point(542, 363);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
             this.btnCerrar.TabIndex = 0;
@@ -58,7 +57,7 @@
             this.dgvEstadistica.BackgroundColor = System.Drawing.Color.Lavender;
             this.dgvEstadistica.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvEstadistica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEstadistica.Location = new System.Drawing.Point(12, 87);
+            this.dgvEstadistica.Location = new System.Drawing.Point(12, 60);
             this.dgvEstadistica.Name = "dgvEstadistica";
             this.dgvEstadistica.ReadOnly = true;
             this.dgvEstadistica.RowHeadersVisible = false;
@@ -70,7 +69,6 @@
             // cmbAnos
             // 
             this.cmbAnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAnos.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbAnos.FormattingEnabled = true;
             this.cmbAnos.Location = new System.Drawing.Point(45, 21);
             this.cmbAnos.Name = "cmbAnos";
@@ -101,33 +99,19 @@
             this.groupBox1.Controls.Add(this.btnCargar);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.cmbAnos);
-            this.groupBox1.Location = new System.Drawing.Point(12, 32);
+            this.groupBox1.Location = new System.Drawing.Point(12, 8);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(331, 49);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros de Búsqueda";
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(629, 23);
-            this.lblTitulo.TabIndex = 41;
-            this.lblTitulo.Text = "Estadística de Entregas Anual";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmEstadisticaAnual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCerrar;
-            this.ClientSize = new System.Drawing.Size(629, 422);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(629, 394);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvEstadistica);
             this.Controls.Add(this.btnCerrar);
@@ -153,6 +137,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnCargar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,7 +50,6 @@
             this.dgvDias = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.cmbAno = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -166,10 +165,10 @@
             // 
             // crtSucursal
             // 
-            chartArea11.Name = "ChartArea1";
-            this.crtSucursal.ChartAreas.Add(chartArea11);
-            legend11.Name = "Legend1";
-            this.crtSucursal.Legends.Add(legend11);
+            chartArea1.Name = "ChartArea1";
+            this.crtSucursal.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.crtSucursal.Legends.Add(legend1);
             this.crtSucursal.Location = new System.Drawing.Point(4, 5);
             this.crtSucursal.Name = "crtSucursal";
             this.crtSucursal.Size = new System.Drawing.Size(745, 468);
@@ -178,16 +177,16 @@
             // 
             // crtBarrios
             // 
-            chartArea12.Name = "ChartArea1";
-            this.crtBarrios.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.crtBarrios.Legends.Add(legend12);
+            chartArea2.Name = "ChartArea1";
+            this.crtBarrios.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.crtBarrios.Legends.Add(legend2);
             this.crtBarrios.Location = new System.Drawing.Point(1, 3);
             this.crtBarrios.Name = "crtBarrios";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.crtBarrios.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.crtBarrios.Series.Add(series1);
             this.crtBarrios.Size = new System.Drawing.Size(745, 467);
             this.crtBarrios.TabIndex = 13;
             this.crtBarrios.Text = "chart1";
@@ -222,7 +221,7 @@
             this.dgvDias.BackgroundColor = System.Drawing.Color.Lavender;
             this.dgvDias.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDias.Location = new System.Drawing.Point(6, 48);
+            this.dgvDias.Location = new System.Drawing.Point(6, 6);
             this.dgvDias.Name = "dgvDias";
             this.dgvDias.ReadOnly = true;
             this.dgvDias.RowHeadersVisible = false;
@@ -237,7 +236,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 447);
+            this.tabPage2.Size = new System.Drawing.Size(752, 396);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Barrios Mas Concurridos";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -247,23 +246,10 @@
             this.tabPage3.Controls.Add(this.crtSucursal);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(752, 447);
+            this.tabPage3.Size = new System.Drawing.Size(752, 396);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Entregas Por Sucursal";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(784, 23);
-            this.lblTitulo.TabIndex = 41;
-            this.lblTitulo.Text = "Estadística de Entregas General";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnImprimir
             // 
@@ -278,7 +264,6 @@
             // cmbAno
             // 
             this.cmbAno.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.cmbAno.FormattingEnabled = true;
             this.cmbAno.Items.AddRange(new object[] {
             "2013",
@@ -302,7 +287,6 @@
             // cmbMes
             // 
             this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMes.FormattingEnabled = true;
             this.cmbMes.Items.AddRange(new object[] {
             "ENERO",
@@ -348,7 +332,7 @@
             this.groupBox2.Controls.Add(this.cmbMes);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.btnBuscar);
-            this.groupBox2.Location = new System.Drawing.Point(18, 29);
+            this.groupBox2.Location = new System.Drawing.Point(22, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(482, 57);
             this.groupBox2.TabIndex = 48;
@@ -363,7 +347,6 @@
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnImprimir);
-            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnCerrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -406,7 +389,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dgvDias;
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.ComboBox cmbAno;
         private System.Windows.Forms.Label label7;

@@ -20,6 +20,7 @@ namespace REAL
         public decimal ocdimporte { get; set; }
         public int proid { get; set; }
         public int sucid { get; set; }
+        public int ordendetalle_id { get; set; }
 
         public DateTime fecha { get; set; }
         public dlgPendientesEntrega(int pi, int si)
@@ -37,14 +38,34 @@ namespace REAL
 
         private void CargarGrid()
         {
-            DataTable dt = new DataTable();
-            dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedorIdSucursal(proid, sucid);
-            if (dt.Rows.Count > 0)
+
+            var query = (from fila in OrdenesCompra.FindPendientes()
+                         where fila.proveedor_id == proid && fila.sucursal_id == sucid
+                         select new
+                         {
+                             fila.id,
+                             fila.orden_id,
+                             fila.ordendetalle_id,
+                             fila.producto.prdid,
+                             fila.ordencompra.numero,
+                             fila.ordencompra.fecha,
+                             fila.producto.prdcodigo,
+                             fila.producto.prddenominacion,
+                             cantidad = (fila.cantidad - fila.ingreso),
+                             fila.importe_unitario,
+                             total = fila.importe_unitario * fila.cantidad,
+                             fila.sucursal.sucnombre
+
+                         }).ToList();
+
+            dgvPendientes.Rows.Clear();
+            foreach(var row in query)
             {
-                dgvPendientes.DataSource = dt.DefaultView;
-                dgvPendientes.CurrentRow.Selected = false;
-                PersonalizarGrid();
+                dgvPendientes.Rows.Add(row.id, row.orden_id, row.ordendetalle_id, row.prdid, row.numero,
+                    row.fecha.ToShortDateString(), row.prdcodigo, row.prddenominacion, row.cantidad, row.importe_unitario,
+                    row.total, row.sucnombre);
             }
+
         }
 
         private void PersonalizarGrid()
@@ -81,52 +102,53 @@ namespace REAL
             {
                 if (dgvPendientes.CurrentRow.Index > -1)
                 {
-                    prdid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[6].Value);
-                    ocdimporte = Convert.ToDecimal(dgvPendientes.CurrentRow.Cells[10].Value);
+                    prdid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[3].Value);
+                    ocdimporte = Convert.ToDecimal(dgvPendientes.CurrentRow.Cells[9].Value);
                     odcid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[1].Value);
-                    odcnumero = dgvPendientes.CurrentRow.Cells[2].Value.ToString();
-                    prdcodigo = dgvPendientes.CurrentRow.Cells[7].Value.ToString();
-                    fecha = Convert.ToDateTime(dgvPendientes.CurrentRow.Cells[3].Value);
+                    odcnumero = dgvPendientes.CurrentRow.Cells[4].Value.ToString();
+                    prdcodigo = dgvPendientes.CurrentRow.Cells[6].Value.ToString();
+                    fecha = Convert.ToDateTime(dgvPendientes.CurrentRow.Cells[5].Value);
+                    ordendetalle_id = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[2].Value);
                 }
             }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (txtProducto.Text != string.Empty)
-            {
-                DataTable dt = new DataTable();
-                dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProductoPorProveedorPorSucursal(txtProducto.Text, proid, sucid);
-                if (dt.Rows.Count > 0)
-                {
-                    dgvPendientes.DataSource = dt.DefaultView;
-                    dgvPendientes.CurrentRow.Selected = false;
-                    PersonalizarGrid();
-                }
+            //if (txtProducto.Text != string.Empty)
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProductoPorProveedorPorSucursal(txtProducto.Text, proid, sucid);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        dgvPendientes.DataSource = dt.DefaultView;
+            //        dgvPendientes.CurrentRow.Selected = false;
+            //        PersonalizarGrid();
+            //    }
 
 
-            }
-            else
-            {
-                CargarGrid();
-                PersonalizarGrid();
-            }
+            //}
+            //else
+            //{
+            //    CargarGrid();
+            //    PersonalizarGrid();
+            //}
         }
 
         private void txtProducto_TextChanged(object sender, EventArgs e)
         {
-            if (txtProducto.Text != string.Empty)
-            {
-                DataTable dt = new DataTable();
-                dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProductoPorProveedorPorSucursal(txtProducto.Text, proid,sucid);
-                if (dt.Rows.Count > 0)
-                {
-                    dgvPendientes.DataSource = dt.DefaultView;
-                    PersonalizarGrid();
-                }
+            //if (txtProducto.Text != string.Empty)
+            //{
+            //    DataTable dt = new DataTable();
+            //    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorNombreProductoPorProveedorPorSucursal(txtProducto.Text, proid,sucid);
+            //    if (dt.Rows.Count > 0)
+            //    {
+            //        dgvPendientes.DataSource = dt.DefaultView;
+            //        PersonalizarGrid();
+            //    }
 
 
-            }
+            //}
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -154,12 +176,13 @@ namespace REAL
             // Obtenemos la fila actual 
             //
             DataGridViewRow row = dgvPendientes.CurrentRow;
-            prdid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[6].Value);
-            ocdimporte = Convert.ToDecimal(dgvPendientes.CurrentRow.Cells[10].Value);
+            prdid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[3].Value);
+            ocdimporte = Convert.ToDecimal(dgvPendientes.CurrentRow.Cells[9].Value);
             odcid = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[1].Value);
-            odcnumero = dgvPendientes.CurrentRow.Cells[2].Value.ToString();
-            prdcodigo = dgvPendientes.CurrentRow.Cells[7].Value.ToString();
-            fecha = Convert.ToDateTime(dgvPendientes.CurrentRow.Cells[3].Value);
+            odcnumero = dgvPendientes.CurrentRow.Cells[4].Value.ToString();
+            prdcodigo = dgvPendientes.CurrentRow.Cells[6].Value.ToString();
+            fecha = Convert.ToDateTime(dgvPendientes.CurrentRow.Cells[5].Value);
+            ordendetalle_id = Convert.ToInt32(dgvPendientes.CurrentRow.Cells[2].Value);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             //frmSeleccion frm = new frmSeleccion(cuenta, desc);
             //frm.ShowDialog();

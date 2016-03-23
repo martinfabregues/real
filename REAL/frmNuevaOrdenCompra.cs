@@ -464,18 +464,18 @@ namespace REAL
             {
                 // inserto la orden de compra
                 OrdenCompra ordencompra = new OrdenCompra();
-                ordencompra.estid = 1;
-                ordencompra.odcfecha = dtpFecha.Value;
-                ordencompra.odcimporte = Convert.ToDecimal(lblSubtotal.Text);
-                ordencompra.proid = Convert.ToInt32(cmbProveedor.SelectedValue);
-                ordencompra.odcobservacion = txtObservacion.Text;
+                ordencompra.estado_id = 1;
+                ordencompra.fecha = dtpFecha.Value;
+                ordencompra.importe = Convert.ToDecimal(lblSubtotal.Text);
+                ordencompra.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+                ordencompra.observacion = txtObservacion.Text;
                 ordencompra.Detalle = listado;
                 ordencompra = OrdenesCompra.Create(ordencompra);
                 if (ordencompra != null)
                 {
                     ordencompra = OrdenesCompra.GetDatosPorId(ordencompra);
                    
-                    MessageBox.Show("La orden de compra se registro con el número: " + ordencompra.odcnumero, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La orden de compra se registro con el número: " + ordencompra.numero, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     //CREO EL REPORTE
                     //DataTable dt = new DataTable();
@@ -514,11 +514,11 @@ namespace REAL
                         LimpiarControles();
 
                         //genero el pdf
-                        string path = GenerarPdf(ordencompra);
+                        string path = GenerarPdf(orden_id);
 
-                        frmReporteOrdenCompra frm = new frmReporteOrdenCompra(ordencompra.odcid);
+                        frmReporteOrdenCompra frm = new frmReporteOrdenCompra(ordencompra.id);
                         frm.MdiParent = this.MdiParent;
-                        frm.Text = "REPORTE DE ORDEN DE COMPRA N° " + ordencompra.odcnumero;
+                        frm.Text = "REPORTE DE ORDEN DE COMPRA N° " + ordencompra.numero;
                         frm.Show();
                     }
                     
@@ -543,13 +543,13 @@ namespace REAL
             {
                 //actualizo la orden de compra
                 OrdenCompra ordencompra = new OrdenCompra();
-                ordencompra.odcid = orden_id;
-                ordencompra.estid = 1;
-                ordencompra.odcfecha = dtpFecha.Value;
-                ordencompra.odcnumero = txtNumero.Text;
-                ordencompra.odcimporte = Convert.ToDecimal(lblSubtotal.Text);
-                ordencompra.proid = Convert.ToInt32(cmbProveedor.SelectedValue);
-                ordencompra.odcobservacion = txtObservacion.Text;
+                ordencompra.id = orden_id;
+                ordencompra.estado_id = 1;
+                ordencompra.fecha = dtpFecha.Value;
+                ordencompra.numero = txtNumero.Text;
+                ordencompra.importe = Convert.ToDecimal(lblSubtotal.Text);
+                ordencompra.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+                ordencompra.observacion = txtObservacion.Text;
                 ordencompra.Detalle = listado;
 
 
@@ -618,7 +618,7 @@ namespace REAL
         private void BuscarDatosOrdenCompra(int odcid)
         {
             OrdenCompra ordencompra = new OrdenCompra();
-            ordencompra.odcid = odcid;
+            ordencompra.id = odcid;
 
             ordencompra = OrdenesCompra.GetDatosPorId(ordencompra);
             if (ordencompra != null)
@@ -626,10 +626,10 @@ namespace REAL
                 
                 cmbProveedor.Enabled = false;
                 cmbProveedor.Text = ordencompra.proveedor.pronombre;
-                dtpFecha.Value = ordencompra.odcfecha;
-                lblTotal.Text = ordencompra.odcimporte.ToString();
-                txtObservacion.Text = ordencompra.odcobservacion;
-                txtNumero.Text = ordencompra.odcnumero;
+                dtpFecha.Value = ordencompra.fecha;
+                lblTotal.Text = ordencompra.importe.ToString();
+                txtObservacion.Text = ordencompra.observacion;
+                txtNumero.Text = ordencompra.numero;
 
                 ordencompra.Detalle = OrdenesCompra.FindDetalleByIdOrden(odcid);
                 //listado = ordencompra.Detalle.ToList();
@@ -640,10 +640,10 @@ namespace REAL
                     foreach(OrdenCompraDetalle fila in ordencompra.Detalle)
                     {
                         AgregarItemList(fila);
-                        dgvDetalle.Rows.Add(fila.ocdid, fila.ocdid, fila.producto.prdcodigo, 
-                            fila.producto.prddenominacion, fila.ocdimporteunit, fila.ocdcantidad,
-                            (fila.ocdcantidad * fila.ocdimporteunit), fila.prdid, 
-                            Math.Round((fila.ocdcantidad * fila.producto.prdmetros), 2), fila.sucid);
+                        dgvDetalle.Rows.Add(fila.id, fila.id, fila.producto.prdcodigo, 
+                            fila.producto.prddenominacion, fila.importe_unitario, fila.cantidad,
+                            (fila.cantidad * fila.importe_unitario), fila.producto_id, 
+                            Math.Round((fila.cantidad * fila.producto.prdmetros), 2), fila.sucursal_id);
                     }
 
                     CalcularTotal();
@@ -755,11 +755,11 @@ namespace REAL
                         foreach (DataGridViewRow dr in dgvDetalle.Rows)
                         {
                             OrdenCompraDetalle detalle = new OrdenCompraDetalle();
-                            detalle.ecdid = 1;
-                            detalle.ocdcantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
-                            detalle.ocdimporteunit = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
-                            detalle.prdid = Convert.ToInt32(dr.Cells["prdid"].Value);
-                            detalle.sucid = Convert.ToInt32(dr.Cells["sucid"].Value);
+                            detalle.estado_id = 1;
+                            detalle.cantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
+                            detalle.importe_unitario = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
+                            detalle.producto_id = Convert.ToInt32(dr.Cells["prdid"].Value);
+                            detalle.sucursal_id = Convert.ToInt32(dr.Cells["sucid"].Value);
                             listado.Add(detalle);
                         }
 
@@ -781,16 +781,16 @@ namespace REAL
                         foreach (DataGridViewRow dr in dgvDetalle.Rows)
                         {
                             OrdenCompraDetalle detalle = new OrdenCompraDetalle();
-                            detalle.ecdid = 1;
-                            detalle.ocdcantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
-                            detalle.ocdimporteunit = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
+                            detalle.estado_id = 1;
+                            detalle.cantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
+                            detalle.importe_unitario = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
                             if (String.IsNullOrEmpty(dr.Cells["ocdid"].Value.ToString()))
                             {
                                 dr.Cells["ocdid"].Value = 0;
                             }
-                            detalle.ocdid = Convert.ToInt32(dr.Cells["ocdid"].Value);
-                            detalle.prdid = Convert.ToInt32(dr.Cells["prdid"].Value);
-                            detalle.sucid = Convert.ToInt32(dr.Cells["sucid"].Value);
+                            detalle.id = Convert.ToInt32(dr.Cells["ocdid"].Value);
+                            detalle.producto_id = Convert.ToInt32(dr.Cells["prdid"].Value);
+                            detalle.sucursal_id = Convert.ToInt32(dr.Cells["sucid"].Value);
                             listado.Add(detalle);
                         }
 
@@ -838,14 +838,14 @@ namespace REAL
                                 if (Convert.ToInt32(fil.Cells[1].Value) != 0)
                                 {
                                     OrdenCompraDetalle ordencompradetalle = new OrdenCompraDetalle();
-                                    ordencompradetalle.ocdid = Convert.ToInt32(fil.Cells["ocdid"].Value);
+                                    ordencompradetalle.id = Convert.ToInt32(fil.Cells["ocdid"].Value);
 
                                     OrdenCompraPendiente ordencomprapendiente = new OrdenCompraPendiente();
-                                    ordencomprapendiente.odcid = Convert.ToInt32(txtIdOrden.Text);
-                                    ordencomprapendiente.ocdcantidad = Convert.ToInt32(fil.Cells["ocdcantidad"].Value);
-                                    ordencomprapendiente.prdid = Convert.ToInt32(fil.Cells["prdid"].Value);
-                                    ordencomprapendiente.proid = Convert.ToInt32(cmbProveedor.SelectedValue);
-                                    ordencomprapendiente.sucid = Convert.ToInt32(fil.Cells["sucid"].Value);
+                                    ordencomprapendiente.orden_id = Convert.ToInt32(txtIdOrden.Text);
+                                    ordencomprapendiente.cantidad = Convert.ToInt32(fil.Cells["ocdcantidad"].Value);
+                                    ordencomprapendiente.producto_id = Convert.ToInt32(fil.Cells["prdid"].Value);
+                                    ordencomprapendiente.proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+                                    ordencomprapendiente.sucursal_id = Convert.ToInt32(fil.Cells["sucid"].Value);
 
                                     try
                                     {
@@ -1046,11 +1046,11 @@ namespace REAL
                         foreach (DataGridViewRow dr in dgvDetalle.Rows)
                         {
                             OrdenCompraDetalle detalle = new OrdenCompraDetalle();
-                            detalle.ecdid = 1;
-                            detalle.ocdcantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
-                            detalle.ocdimporteunit = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
-                            detalle.prdid = Convert.ToInt32(dr.Cells["prdid"].Value);
-                            detalle.sucid = Convert.ToInt32(dr.Cells["sucid"].Value);
+                            detalle.estado_id = 1;
+                            detalle.cantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
+                            detalle.importe_unitario = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
+                            detalle.producto_id = Convert.ToInt32(dr.Cells["prdid"].Value);
+                            detalle.sucursal_id = Convert.ToInt32(dr.Cells["sucid"].Value);
                             listado.Add(detalle);
                         }
 
@@ -1071,16 +1071,16 @@ namespace REAL
                         foreach (DataGridViewRow dr in dgvDetalle.Rows)
                         {
                             OrdenCompraDetalle detalle = new OrdenCompraDetalle();
-                            detalle.ecdid = 1;
-                            detalle.ocdcantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
-                            detalle.ocdimporteunit = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
+                            detalle.estado_id = 1;
+                            detalle.cantidad = Convert.ToInt32(dr.Cells["ocdcantidad"].Value);
+                            detalle.importe_unitario = Convert.ToDecimal(dr.Cells["odcimporteunit"].Value);
                             if (String.IsNullOrEmpty(dr.Cells["ocdid"].Value.ToString()))
                             {
                                 dr.Cells["ocdid"].Value = 0;
                             }
-                            detalle.ocdid = Convert.ToInt32(dr.Cells["ocdid"].Value);
-                            detalle.prdid = Convert.ToInt32(dr.Cells["prdid"].Value);
-                            detalle.sucid = Convert.ToInt32(dr.Cells["sucid"].Value);
+                            detalle.id = Convert.ToInt32(dr.Cells["ocdid"].Value);
+                            detalle.producto_id = Convert.ToInt32(dr.Cells["prdid"].Value);
+                            detalle.sucursal_id = Convert.ToInt32(dr.Cells["sucid"].Value);
                             listado.Add(detalle);
                         }
 
@@ -1100,41 +1100,41 @@ namespace REAL
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            OrdenCompra orden = new OrdenCompra();
-            orden = (OrdenCompra)e.Argument;
+            
+            int orden_id = (int)e.Argument;
 
             //GENERO EL PDF
-            string pathadjunto = GenerarPdf(orden);
+            string pathadjunto = GenerarPdf(orden_id);
 
             //ENVIO EL EMAIL
-            Utils.Email.EnviarOrdenEmail(orden, pathadjunto);
+            Utils.Email.EnviarOrdenEmail(orden_id, pathadjunto);
 
-            e.Result = orden;
+            e.Result = orden_id;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             OrdenCompra or =  e.Result as OrdenCompra;
             
-            MessageBox.Show("La orden de compra " + or.odcnumero + " fue enviada por email exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("La orden de compra " + or.numero + " fue enviada por email exitosamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ProgressBar1.MarqueeAnimationSpeed = 0;
             ProgressBar1.Visible = false;
            
             //abro el formulario de reporte
 
-            frmReporteOrdenCompra frm = new frmReporteOrdenCompra(or.odcid);
+            frmReporteOrdenCompra frm = new frmReporteOrdenCompra(or.id);
             frm.MdiParent = this.MdiParent;
-            frm.Text = "REPORTE DE ORDEN DE COMPRA N° " + or.odcnumero;
+            frm.Text = "REPORTE DE ORDEN DE COMPRA N° " + or.numero;
             frm.Show();
         }
 
 
-        private static String GenerarPdf(OrdenCompra orden)
+        private static String GenerarPdf(int orden_id)
         {
             DataTable dt = new DataTable();
             dt.Clear();
 
-            dt = OrdenesCompraDetalle.GetOrdencompraDetalleDatosPodId(orden.odcid);
+            dt = OrdenesCompraDetalle.GetOrdencompraDetalleDatosPodId(orden_id);
             //CREO EL REPORTE
             ReportViewer rpt = new ReportViewer();
             rpt.Clear();
@@ -1144,7 +1144,7 @@ namespace REAL
             rpt.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
 
             //GENERO EL PDF
-            string pathadjunto = Utils.GenerarPdf.ExportReportViewer2Pdf(rpt, orden);
+            string pathadjunto = Utils.GenerarPdf.ExportReportViewer2Pdf(rpt, orden_id);
 
             return pathadjunto;
         }

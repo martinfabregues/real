@@ -92,10 +92,10 @@ namespace REAL
             frm.Text = "Logística - Reporte de Entregas Diario";
             frm.Show();
 
-            frmRecepcionEntrega frmRecepcion = new frmRecepcionEntrega();
-            frmRecepcion.MdiParent = this;
-            frmRecepcion.Text = "Logística - Reporte de Recepción de Entregas";
-            frmRecepcion.Show();
+            //frmRecepcionEntrega frmRecepcion = new frmRecepcionEntrega();
+            //frmRecepcion.MdiParent = this;
+            //frmRecepcion.Text = "Logística - Reporte de Recepción de Entregas";
+            //frmRecepcion.Show();
         }
 
         private void btnMapa_Click(object sender, EventArgs e)
@@ -180,7 +180,7 @@ namespace REAL
 
             //btnCliente.Enabled = false;
             //btnModificarProveedor.Enabled = false;
-            btnRecepcionEntrega.Enabled = false;
+            //btnRecepcionEntrega.Enabled = false;
             //btnListadoProveedor.Enabled = false;
             //btnModificarOrdenCompra.Enabled = false;
             //btnAnularOrdenCompra.Enabled = false;
@@ -207,7 +207,7 @@ namespace REAL
 
         private void btnNuevaOrdenCompra_Click(object sender, EventArgs e)
         {
-            frmNuevaOrdenCompra frm = new frmNuevaOrdenCompra("NUEVO");
+            frmOrdenCompraTest frm = new frmOrdenCompraTest();
             frm.MdiParent = this;
             frm.Text = "Compras - Nueva Orden de Compra";
             frm.Show();
@@ -724,6 +724,43 @@ namespace REAL
             frm.Text = "Compras - Listado de Ingresos de Proveedor";
             frm.Show();
         }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void modificarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOrdenCompraTest frm = new frmOrdenCompraTest("Modificar", 20);
+            frm.Show();
+        }
+
+        private void nuevaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOrdenCompraTest frm = new frmOrdenCompraTest();
+            frm.Show();
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOrdenCompraTest frm = new frmOrdenCompraTest();
+            frm.Show();
+        }
+
+        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDashboard frm = new frmDashboard();
+            frm.Text = "Compras - Dashboard";
+            frm.Show();
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+       
 
      
 

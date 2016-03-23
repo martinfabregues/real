@@ -33,7 +33,7 @@ namespace REAL
 
         private void CargarDataGrid()
         {
-            var query = (from row in FacturasProveedor.FindAllComplete().OrderByDescending(x => x.fecha)
+            var query = (from row in FacturasProveedor.FindAllComplete().OrderByDescending(x => x.fecha).Take(60)
                          select new
                          {
                              row.id,
@@ -106,7 +106,7 @@ namespace REAL
             DateTime? hasta = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
 
 
-            var query = (from row in FacturasProveedor.FindAllCondicional(numero_factura, proveedor_id, desde, hasta).OrderByDescending(x => x.fecha)
+            var query = (from row in FacturasProveedor.FindAllCondicional(numero_factura, proveedor_id, desde, hasta).OrderByDescending(x => x.fecha).Take(100)
                          select new
                          {
                              row.id,

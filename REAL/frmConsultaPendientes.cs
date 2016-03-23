@@ -1,4 +1,6 @@
-﻿using Negocio;
+﻿using Entidad;
+using Microsoft.Reporting.WinForms;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,8 +74,9 @@ namespace REAL
             decimal total = 0;
             foreach (DataGridViewRow dr in dgvPendientes.Rows)
             {
-                total = total + Convert.ToDecimal(dr.Cells[7].Value);
+                total += Convert.ToDecimal(dr.Cells[6].Value) * Convert.ToDecimal(dr.Cells[5].Value);
             }
+
             lblTotal.Text = "$ " + total;
         }
 
@@ -97,14 +100,14 @@ namespace REAL
             var query = (from row in OrdenesCompra.FindPendientes()
                          select new
                          {
-                             row.ordencompra.odcnumero,                             
-                             row.ordencompra.odcfecha,
+                             odcnumero = row.ordencompra.numero,                             
+                             odcfecha = row.ordencompra.fecha,
                              row.proveedor.pronombre,
                              row.producto.prdcodigo,
                              row.producto.prddenominacion,
-                             row.ocdcantidad,
-                             row.ocdimporte,
-                             total = (row.ocdcantidad * row.ocdimporte),
+                             ocdcantidad = (row.cantidad - row.ingreso),
+                             ocdimporte = row.importe_unitario,
+                             total = (row.cantidad * row.importe_unitario),
                              row.sucursal.sucnombre
 
                          }).ToList();
@@ -130,14 +133,14 @@ namespace REAL
             var query = (from row in OrdenesCompra.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, producto)
                          select new
                          {
-                             row.ordencompra.odcnumero,
-                             row.ordencompra.odcfecha,
+                             odcnumero = row.ordencompra.numero,
+                             odcfecha = row.ordencompra.fecha,
                              row.proveedor.pronombre,
                              row.producto.prdcodigo,
                              row.producto.prddenominacion,
-                             row.ocdcantidad,
-                             row.ocdimporte,
-                             total = (row.ocdcantidad * row.ocdimporte),
+                             ocdcantidad = (row.cantidad - row.ingreso),
+                             ocdimporte = row.importe_unitario,
+                             total = (row.cantidad * row.importe_unitario),
                              row.sucursal.sucnombre
 
                          }).ToList();
@@ -171,10 +174,10 @@ namespace REAL
 
         private void frmConsultaPendientes_Resize(object sender, EventArgs e)
         {
-            this.dgvPendientes.Width = this.Width - 40;
-            this.dgvPendientes.Height = this.Height - 260;
-            this.btnAceptar.Location = new Point(this.Width - 100, this.Height - 80);
-            this.groupBox2.Location = new Point(20, this.Height - 120);
+            //this.dgvPendientes.Width = this.Width - 40;
+            //this.dgvPendientes.Height = this.Height - 260;
+            //this.btnAceptar.Location = new Point(this.Width - 100, this.Height - 80);
+            //this.groupBox2.Location = new Point(20, this.Height - 120);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -444,6 +447,40 @@ namespace REAL
             //    cmbSucursal.Enabled = false;
 
             //}
+
+        }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            int? proveedor_id = ckbProveedor.Checked ? (int?)Convert.ToInt32(cmbProveedor.SelectedValue) : null;
+            int? sucursal_id = ckbSucursal.Checked ? (int?)Convert.ToInt32(cmbSucursal.SelectedValue) : null;
+
+            string numero_orden = txtOrden.Text == string.Empty ? null : txtOrden.Text;
+            string producto = txtProducto.Text == string.Empty ? null : txtProducto.Text;
+
+            IList<OrdenCompraPendiente> pendientesL = OrdenesCompra.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, producto);
+
+            //var query = (from row in OrdenesCompra.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, producto)
+            //             select new
+            //             {
+            //                 odcnumero = row.ordencompra.numero,
+            //                 odcfecha = row.ordencompra.fecha,
+            //                 row.proveedor.pronombre,
+            //                 row.producto.prdcodigo,
+            //                 row.producto.prddenominacion,
+            //                 ocdcantidad = (row.cantidad - row.ingreso),
+            //                 ocdimporte = row.importe_unitario,
+            //                 total = (row.cantidad * row.importe_unitario),
+            //                 row.sucursal.sucnombre
+
+            //             }).ToList();
+
+            frmReportePendientesEntrega frm = new frmReportePendientesEntrega(pendientesL.ToList());
+            frm.MdiParent = this.MdiParent;
+            frm.Text = "Listados - Pendientes de Entrega de Proveedor";
+            frm.Show();
+
+           
 
         }
 

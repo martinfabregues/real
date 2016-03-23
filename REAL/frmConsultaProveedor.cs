@@ -67,9 +67,9 @@ namespace REAL
 
         private void frmConsultaProveedor_Resize(object sender, EventArgs e)
         {
-            dgvProveedores.Width = this.Width - 40;
-            dgvProveedores.Height = this.Height - 200;
-            btnCerrar.Location = new Point(this.Width - 110, this.Height - 80);
+            //dgvProveedores.Width = this.Width - 40;
+            //dgvProveedores.Height = this.Height - 200;
+            //btnCerrar.Location = new Point(this.Width - 110, this.Height - 80);
         }
 
         //LISTO

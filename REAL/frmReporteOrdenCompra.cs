@@ -37,7 +37,7 @@ namespace REAL
             reportViewer1.Clear();
             reportViewer1.LocalReport.DataSources.Clear();
             reportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            reportViewer1.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\_reporteOrdenCompra.rdl";
+            reportViewer1.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\ordencompra.rdl";
             reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
             reportViewer1.RefreshReport();
 

@@ -1,4 +1,5 @@
 ﻿using Entidad;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ namespace REAL.Utils
     public class Email
     {
 
-        public static Boolean EnviarOrdenEmail(OrdenCompra ordencompra, string adjunto)
+        public static Boolean EnviarOrdenEmail(int orden_id, string adjunto)
         {
             bool resultado = true;
 
             try
             {
+                OrdenCompra ordencompra = OrdenesCompra.FindById(orden_id);
+
                 MailMessage mail = new MailMessage();
                 SmtpClient smtpserver = new SmtpClient();
 
@@ -24,7 +27,7 @@ namespace REAL.Utils
                 mail.CC.Add("ezequielfabregues@colchoneriasreal.com");
                 mail.CC.Add("alvarobuteler@colchoneriasreal.com");
                 //mail.To.Add("martinfabregues@hotmail.com");
-                mail.Subject = "ORDEN DE COMPRA - " + ordencompra.odcnumero;
+                mail.Subject = "ORDEN DE COMPRA - " + ordencompra.numero;
                 mail.Body = "";
 
                 Attachment attachment = new Attachment(adjunto);

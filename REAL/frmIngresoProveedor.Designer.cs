@@ -58,15 +58,19 @@
             this.orden_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orden_numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orden_fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orden_detalle_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtIdIngreso = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.txtFactura = new System.Windows.Forms.MaskedTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtOrdenDetalle_Id = new System.Windows.Forms.TextBox();
             this.txtFecha = new System.Windows.Forms.TextBox();
             this.txtIdOrden = new System.Windows.Forms.TextBox();
             this.txtNroOrden = new System.Windows.Forms.TextBox();
+            this.btnBuscarOrden = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtObservacion = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -91,15 +95,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.btnBuscarRemito = new System.Windows.Forms.Button();
             this.dgvRemitos = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.btnBuscarOrden = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnBuscarRemito = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -262,6 +264,7 @@
             this.orden_id,
             this.orden_numero,
             this.orden_fecha,
+            this.orden_detalle_id,
             this.eliminar});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
@@ -273,17 +276,18 @@
             this.dgvDetalle.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDetalle.Location = new System.Drawing.Point(11, 209);
             this.dgvDetalle.Name = "dgvDetalle";
-            this.dgvDetalle.RowHeadersVisible = false;
             this.dgvDetalle.Size = new System.Drawing.Size(881, 215);
             this.dgvDetalle.TabIndex = 28;
             this.dgvDetalle.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellClick);
+            this.dgvDetalle.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellEndEdit);
+            this.dgvDetalle.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvDetalle_CellValidating);
             // 
             // prdid
             // 
             this.prdid.HeaderText = "ID";
             this.prdid.Name = "prdid";
             this.prdid.Visible = false;
-            this.prdid.Width = 24;
+            this.prdid.Width = 43;
             // 
             // Column1
             // 
@@ -299,7 +303,6 @@
             // 
             // Column3
             // 
-            dataGridViewCellStyle1.Format = "C2";
             dataGridViewCellStyle1.NullValue = null;
             this.Column3.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column3.HeaderText = "Costo Unit.";
@@ -314,7 +317,6 @@
             // 
             // total
             // 
-            dataGridViewCellStyle2.Format = "C2";
             dataGridViewCellStyle2.NullValue = null;
             this.total.DefaultCellStyle = dataGridViewCellStyle2;
             this.total.HeaderText = "Total";
@@ -346,6 +348,13 @@
             this.orden_fecha.HeaderText = "Fecha";
             this.orden_fecha.Name = "orden_fecha";
             this.orden_fecha.Width = 62;
+            // 
+            // orden_detalle_id
+            // 
+            this.orden_detalle_id.HeaderText = "orden_detalle_id";
+            this.orden_detalle_id.Name = "orden_detalle_id";
+            this.orden_detalle_id.Visible = false;
+            this.orden_detalle_id.Width = 110;
             // 
             // eliminar
             // 
@@ -385,6 +394,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtOrdenDetalle_Id);
             this.groupBox2.Controls.Add(this.txtFecha);
             this.groupBox2.Controls.Add(this.txtIdOrden);
             this.groupBox2.Controls.Add(this.txtNroOrden);
@@ -406,9 +416,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Items Factura";
             // 
+            // txtOrdenDetalle_Id
+            // 
+            this.txtOrdenDetalle_Id.Location = new System.Drawing.Point(415, 79);
+            this.txtOrdenDetalle_Id.Name = "txtOrdenDetalle_Id";
+            this.txtOrdenDetalle_Id.Size = new System.Drawing.Size(100, 20);
+            this.txtOrdenDetalle_Id.TabIndex = 22;
+            // 
             // txtFecha
             // 
-            this.txtFecha.Location = new System.Drawing.Point(392, 51);
+            this.txtFecha.Location = new System.Drawing.Point(392, 53);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.Size = new System.Drawing.Size(100, 20);
             this.txtFecha.TabIndex = 21;
@@ -426,6 +443,28 @@
             this.txtNroOrden.Name = "txtNroOrden";
             this.txtNroOrden.Size = new System.Drawing.Size(100, 20);
             this.txtNroOrden.TabIndex = 19;
+            // 
+            // btnBuscarOrden
+            // 
+            this.btnBuscarOrden.Image = global::REAL.Properties.Resources.search;
+            this.btnBuscarOrden.Location = new System.Drawing.Point(175, 28);
+            this.btnBuscarOrden.Name = "btnBuscarOrden";
+            this.btnBuscarOrden.Size = new System.Drawing.Size(38, 23);
+            this.btnBuscarOrden.TabIndex = 17;
+            this.btnBuscarOrden.UseVisualStyleBackColor = true;
+            this.btnBuscarOrden.Click += new System.EventHandler(this.btnBuscarOrden_Click);
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(246, 79);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(126, 36);
+            this.btnAgregar.TabIndex = 12;
+            this.btnAgregar.Text = "&Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // groupBox4
             // 
@@ -678,6 +717,18 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Remitos";
             // 
+            // btnBuscarRemito
+            // 
+            this.btnBuscarRemito.Image = global::REAL.Properties.Resources.document;
+            this.btnBuscarRemito.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscarRemito.Location = new System.Drawing.Point(27, 16);
+            this.btnBuscarRemito.Name = "btnBuscarRemito";
+            this.btnBuscarRemito.Size = new System.Drawing.Size(125, 23);
+            this.btnBuscarRemito.TabIndex = 0;
+            this.btnBuscarRemito.Text = "&Buscar Remitos";
+            this.btnBuscarRemito.UseVisualStyleBackColor = true;
+            this.btnBuscarRemito.Click += new System.EventHandler(this.btnBuscarRemito_Click);
+            // 
             // dgvRemitos
             // 
             this.dgvRemitos.AllowUserToAddRows = false;
@@ -692,7 +743,7 @@
             this.dgvRemitos.Location = new System.Drawing.Point(6, 54);
             this.dgvRemitos.Name = "dgvRemitos";
             this.dgvRemitos.ReadOnly = true;
-            this.dgvRemitos.Size = new System.Drawing.Size(345, 92);
+            this.dgvRemitos.Size = new System.Drawing.Size(274, 92);
             this.dgvRemitos.TabIndex = 0;
             // 
             // id
@@ -738,40 +789,6 @@
             this.btnCerrar.Text = "&Salir";
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
-            // 
-            // btnBuscarOrden
-            // 
-            this.btnBuscarOrden.Image = global::REAL.Properties.Resources.search;
-            this.btnBuscarOrden.Location = new System.Drawing.Point(175, 28);
-            this.btnBuscarOrden.Name = "btnBuscarOrden";
-            this.btnBuscarOrden.Size = new System.Drawing.Size(38, 23);
-            this.btnBuscarOrden.TabIndex = 17;
-            this.btnBuscarOrden.UseVisualStyleBackColor = true;
-            this.btnBuscarOrden.Click += new System.EventHandler(this.btnBuscarOrden_Click);
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::REAL.Properties.Resources.down_;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(246, 79);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(126, 36);
-            this.btnAgregar.TabIndex = 12;
-            this.btnAgregar.Text = "&Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnBuscarRemito
-            // 
-            this.btnBuscarRemito.Image = global::REAL.Properties.Resources.document;
-            this.btnBuscarRemito.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscarRemito.Location = new System.Drawing.Point(27, 16);
-            this.btnBuscarRemito.Name = "btnBuscarRemito";
-            this.btnBuscarRemito.Size = new System.Drawing.Size(125, 23);
-            this.btnBuscarRemito.TabIndex = 0;
-            this.btnBuscarRemito.Text = "&Buscar Remitos";
-            this.btnBuscarRemito.UseVisualStyleBackColor = true;
-            this.btnBuscarRemito.Click += new System.EventHandler(this.btnBuscarRemito_Click);
             // 
             // frmIngresoProveedor
             // 
@@ -873,6 +890,9 @@
         private System.Windows.Forms.TextBox txtNroOrden;
         private System.Windows.Forms.TextBox txtIdOrden;
         private System.Windows.Forms.TextBox txtFecha;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtRN;
+        private System.Windows.Forms.TextBox txtOrdenDetalle_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn prdid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -883,8 +903,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn orden_fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orden_detalle_id;
         private System.Windows.Forms.DataGridViewButtonColumn eliminar;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtRN;
     }
 }

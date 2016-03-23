@@ -21,6 +21,9 @@ namespace REAL
             {
                 config.AddMap(new RemitoProveedorMap());
                 config.AddMap(new FacturaProveedorMap());
+                config.AddMap(new OrdenCompraMap());
+                config.AddMap(new OrdenCompraDetalleMap());
+                config.AddMap(new OrdenCompraPendienteMap());
             });
 
             Application.EnableVisualStyles();

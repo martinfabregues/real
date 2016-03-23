@@ -21,31 +21,31 @@ namespace REAL
 
         private void CargarDataGrid()
         {
-            List<OrdenCompraPendiente> list = OrdenesCompraPendiente.GetTodos();
-            if (list.Count > 0)
-            {
-                var resultado = (from pendiente in list
-                                 orderby pendiente.ordencompra.odcfecha ascending
-                                 select new
-                                 {
-                                     pendiente.ocpid,
-                                     pendiente.sucursal.sucnombre,
-                                     pendiente.proveedor.pronombre,
-                                     pendiente.ordencompra.odcnumero,
-                                     pendiente.ordencompra.odcfecha,
-                                     pendiente.ocdcantidad,
-                                     pendiente.producto.prdcodigo,
-                                     pendiente.producto.prddenominacion,
-                                 }).ToList();
 
-                dgvDetalle.DataSource = resultado;
+            var query = (from row in OrdenesCompra.FindPendientes()
+                         select new
+                         {
+                             odcid = row.id,
+                             odcnumero = row.ordencompra.numero,
+                             odcfecha = row.ordencompra.fecha,
+                             row.proveedor.pronombre,
+                             row.producto.prdcodigo,
+                             row.producto.prddenominacion,
+                             ocdcantidad = (row.cantidad - row.ingreso),
+                             ocdimporte = row.importe_unitario,
+                             total = (row.cantidad * row.importe_unitario),
+                             row.sucursal.sucnombre
 
-            }
-            else
+                         }).ToList();
+
+            dgvDetalle.Rows.Clear();
+            foreach (var fila in query)
             {
-                dgvDetalle.DataSource = null;
-                dgvDetalle.Columns.Clear();
+                dgvDetalle.Rows.Add(fila.odcid, fila.odcnumero, fila.odcfecha.ToShortDateString(), fila.pronombre, 
+                    fila.prdcodigo, fila.prddenominacion, fila.ocdcantidad, fila.ocdimporte, fila.total, fila.sucnombre);
             }
+
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         private void CrearColumnaEliminar()
@@ -96,8 +96,8 @@ namespace REAL
         {
             //this.WindowState = FormWindowState.Maximized;
             CargarDataGrid();
-            PersonalizarDataGrid();
-            CrearColumnaEliminar();
+            //PersonalizarDataGrid();
+            //CrearColumnaEliminar();
 
             CargarComboProveedor();
             CargarComboSucursal();
@@ -118,8 +118,8 @@ namespace REAL
                  {
                      DataGridViewRow fil = dgvDetalle.CurrentRow;
                      int fila = dgvDetalle.CurrentRow.Index;
-                     bool resultado = OrdenesCompraPendiente.EliminarPendiente(Convert.ToInt32(fil.Cells["ocpid"].Value));
-                     if (resultado == true)
+                     int resultado = OrdenesCompraPendiente.EliminarPendiente(Convert.ToInt32(fil.Cells[0].Value));
+                     if (resultado > 0)
                      {
                          CargarDataGrid();
                      }
@@ -130,6 +130,42 @@ namespace REAL
                  }
 
             }
+        }
+
+
+        private void FiltrarForm()
+        {
+            int? proveedor_id = Convert.ToInt32(cmbProveedor.SelectedValue);
+            int? sucursal_id = Convert.ToInt32(cmbSucursal.SelectedValue);
+
+            string numero_orden = null;
+            string producto = txtProducto.Text == string.Empty ? null : txtProducto.Text;
+
+            var query = (from row in OrdenesCompra.FindPendientesCondicional(proveedor_id, sucursal_id, numero_orden, producto)
+                         select new
+                         {
+                             odcid = row.id,
+                             odcnumero = row.ordencompra.numero,
+                             odcfecha = row.ordencompra.fecha,
+                             row.proveedor.pronombre,
+                             row.producto.prdcodigo,
+                             row.producto.prddenominacion,
+                             ocdcantidad = (row.cantidad - row.ingreso),
+                             ocdimporte = row.importe_unitario,
+                             total = (row.cantidad * row.importe_unitario),
+                             row.sucursal.sucnombre
+
+                         }).ToList();
+
+            dgvDetalle.Rows.Clear();
+            foreach (var fila in query)
+            {
+                dgvDetalle.Rows.Add(fila.odcid, fila.odcnumero, fila.odcfecha.ToShortDateString(), fila.pronombre, 
+                    fila.prdcodigo, fila.prddenominacion, fila.ocdcantidad, fila.ocdimporte, fila.total, fila.sucnombre);
+            }
+
+
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
 
@@ -160,15 +196,15 @@ namespace REAL
                 if (list.Count > 0)
                 {
                     var resultado = (from pendiente in list
-                                     orderby pendiente.ordencompra.odcfecha ascending
+                                     orderby pendiente.ordencompra.fecha ascending
                                      select new
                                      {
-                                         pendiente.ocpid,
+                                         ocpid = pendiente.id,
                                          pendiente.sucursal.sucnombre,
                                          pendiente.proveedor.pronombre,
-                                         pendiente.ordencompra.odcnumero,
-                                         pendiente.ordencompra.odcfecha,
-                                         pendiente.ocdcantidad,
+                                         odcnumero = pendiente.ordencompra.numero,
+                                         odcfecha = pendiente.ordencompra.fecha,
+                                         ocdcantidad = pendiente.cantidad,
                                          pendiente.producto.prdcodigo,
                                          pendiente.producto.prddenominacion,
                                      }).ToList();
@@ -195,14 +231,14 @@ namespace REAL
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            BuscarPorCriterio();
+            FiltrarForm();
         }
 
         private void txtProducto_TextChanged(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(txtProducto.Text))
             {
-                BuscarPorCriterio();
+                FiltrarForm();
             }
         }
 

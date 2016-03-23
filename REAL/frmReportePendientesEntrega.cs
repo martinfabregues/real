@@ -1,4 +1,5 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using Entidad;
+using Microsoft.Reporting.WinForms;
 using Negocio;
 using System;
 using System.Collections.Generic;
@@ -15,40 +16,39 @@ namespace REAL
 {
     public partial class frmReportePendientesEntrega : Form
     {
-        public string tiporeporte { get; set; }
-        public int proid { get; set; }
-        public frmReportePendientesEntrega(string tR, int pId)
+        private List<OrdenCompraPendiente> pendientesL;
+        public frmReportePendientesEntrega(List<OrdenCompraPendiente> _pendientesL)
         {
-            proid = pId;
-            tiporeporte = tR;
+            pendientesL = _pendientesL;
             InitializeComponent();
         }
 
         private void frmReportePendientesEntrega_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
 
-            this.WindowState = FormWindowState.Maximized;
-            switch (tiporeporte)
-            {
-                case "PROVEEDOR":
-                    dt.Clear();
-                    dt = OrdenesCompraPendiente.GetOrdenCompraPendientePorIdProveedor(proid);
-                    break;
-                    
-                case "COMPLETO":
-                    
-                    dt.Clear();
-                    dt = OrdenesCompraPendiente.GetOrdenCompraPendienteTodo();
-                    break;
+            var query = (from row in pendientesL
+                        select new
+                        {
+                            odcnumero = row.ordencompra.numero,
+                            odcfecha = row.ordencompra.fecha,
+                            pronombre = row.proveedor.pronombre,
+                            proid = row.proveedor.proid,
+                            prdcodigo = row.producto.prdcodigo,
+                            prddenominacion = row.producto.prddenominacion,
+                            ocdcantidad = row.cantidad,
+                            ocdimporte = row.importe_unitario,
+                            total = (row.cantidad * row.importe_unitario),
+                            sucnombre = row.sucursal.sucnombre
+                        });
 
-            }     
-            reportViewer1.Clear();
-            reportViewer1.LocalReport.DataSources.Clear();
-            reportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            reportViewer1.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\_reportePendientes.rdl";
-            reportViewer1.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
-            reportViewer1.RefreshReport();
+
+            ReportDataSource rds = new ReportDataSource();
+            rds = new ReportDataSource("DataSet1", query);
+
+            reportViewer1.LocalReport.ReportPath = Directory.GetCurrentDirectory() + @"\Reports\Pendientes.rdl";
+            this.reportViewer1.LocalReport.DataSources.Add(rds);
+            //this.reportViewer1.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.PageWidth;
+            this.reportViewer1.RefreshReport();
 
         }
     }

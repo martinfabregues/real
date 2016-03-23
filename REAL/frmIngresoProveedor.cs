@@ -47,8 +47,6 @@ namespace REAL
             cmbProveedor.DataSource = Proveedores.FindAll();
         }
 
-      
-
         private void IniciarControles()
         {
             txtRemito.Enabled = false;         
@@ -67,12 +65,22 @@ namespace REAL
             txtNroOrden.Visible = false;
             txtFecha.Visible = false;
             txtRN.Text = "0.00";
-
-            dgvDetalle.Columns[8].Visible = false;
-            dgvDetalle.Columns[9].Visible = false;
+            txtOrdenDetalle_Id.Visible = false;
+            //dgvDetalle.Columns[8].Visible = false;
+            //dgvDetalle.Columns[9].Visible = false;
 
             dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvRemitos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            dgvDetalle.Columns[0].ReadOnly = true; 
+            dgvDetalle.Columns[1].ReadOnly = true;
+            dgvDetalle.Columns[2].ReadOnly = true;
+            dgvDetalle.Columns[4].ReadOnly = false;
+            dgvDetalle.Columns[6].ReadOnly = true;
+            dgvDetalle.Columns[7].ReadOnly = true;
+            dgvDetalle.Columns[8].ReadOnly = true;
+            dgvDetalle.Columns[9].ReadOnly = true;
+            dgvDetalle.Columns[10].ReadOnly = true;
         }
 
         private void ckbRemito_CheckedChanged(object sender, EventArgs e)
@@ -89,6 +97,7 @@ namespace REAL
                 txtCosto.Text = string.Empty;
                 txtProducto.Text = string.Empty;
                 txtCantidad.Text = string.Empty;
+                txtOrdenDetalle_Id.Text = string.Empty;
 
                 errorProvider1.Clear();
 
@@ -98,8 +107,7 @@ namespace REAL
                 if (result == System.Windows.Forms.DialogResult.OK && dlg.prdid != 0)
                 {
                     txtid.Text = dlg.prdid.ToString();
-                    txtCodigo.Text = dlg.prdcodigo.ToString();
-
+                    txtCodigo.Text = dlg.prdcodigo.ToString();                    
                 }
             }
             else
@@ -109,6 +117,7 @@ namespace REAL
                 txtNroOrden.Text = string.Empty;
                 txtIdOrden.Text = string.Empty;
                 txtProducto.Text = string.Empty;
+                txtOrdenDetalle_Id.Text = string.Empty;
                 errorProvider1.Clear();
 
                 dlgPendientesEntrega dlg = new dlgPendientesEntrega(Convert.ToInt32(cmbProveedor.SelectedValue), Convert.ToInt32(cmbSucursal.SelectedValue));
@@ -129,6 +138,7 @@ namespace REAL
                             txtNroOrden.Text = dlg.odcnumero.ToString();
                             txtFecha.Text = dlg.fecha.ToShortDateString();
                             txtCosto.Text = dlg.ocdimporte.ToString();
+                            txtOrdenDetalle_Id.Text = dlg.ordendetalle_id.ToString();
                         }
                         else
                         {
@@ -259,7 +269,7 @@ namespace REAL
                 }
                 else
                 {
-                    dgvDetalle.Rows.Add(txtid.Text, txtCodigo.Text, txtProducto.Text, Convert.ToDouble(txtCosto.Text), txtCantidad.Text, (Convert.ToDouble(txtCosto.Text) * Convert.ToInt32(txtCantidad.Text)), "", txtIdOrden.Text, txtNroOrden.Text, txtFecha.Text);
+                    dgvDetalle.Rows.Add(txtid.Text, txtCodigo.Text, txtProducto.Text, Convert.ToDouble(txtCosto.Text), txtCantidad.Text, (Convert.ToDouble(txtCosto.Text) * Convert.ToInt32(txtCantidad.Text)), "", txtIdOrden.Text, txtNroOrden.Text, txtFecha.Text, txtOrdenDetalle_Id.Text);
                     LimpiarControlesAgregar();
                     CalcularSubtotal();
                 }
@@ -355,12 +365,38 @@ namespace REAL
             {
                 remitos.Clear();
                 remitos = frm.remitos;
+                dgvDetalle.Rows.Clear();
                 foreach(RemitoProveedor row in remitos)
-                {
+                {                  
                     dgvRemitos.Rows.Add(row.id, row.numero, row.fechaemision.ToShortDateString());
+                    GetDetalleRemito(row);
                 }
+
+                CalcularSubtotal();
             }
            
+        }
+
+
+
+        private void GetDetalleRemito(RemitoProveedor remito)
+        {
+            remito = RemitosProveedor.FindById(remito.id);
+            
+            remito.detalle = RemitosProveedor.FindDetalleByIdRemito(remito.id);
+            foreach(var fila in remito.detalle)
+            {
+                double precio = GetPrecioProducto(fila.ordencompra.id, fila.producto.prdid, remito.sucursal_id);
+
+                dgvDetalle.Rows.Add(fila.producto.prdid, fila.producto.prdcodigo, fila.producto.prddenominacion,
+                     precio , fila.cantidad, (precio * fila.cantidad), "", fila.orden_id, fila.ordencompra.numero, fila.ordencompra.fecha.ToShortDateString(), fila.ordendetalle_id);
+            }
+        }
+
+        private double GetPrecioProducto(int ordencompra_id, int producto_id, int sucursal_id)
+        {
+            double precio = FacturasProveedor.FindPrecioProductoByOrdenProductoSucursal(ordencompra_id, producto_id, sucursal_id);
+            return precio;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -402,7 +438,7 @@ namespace REAL
             {
                 FacturaProveedorDetalle fila = new FacturaProveedorDetalle();
                 fila.fpdcantidad = Convert.ToInt32(row.Cells[4].Value);
-                fila.fpdimporteunit = Convert.ToInt32(row.Cells[3].Value);
+                fila.fpdimporteunit = Convert.ToDecimal(row.Cells[3].Value);
                 fila.prdid = Convert.ToInt32(row.Cells[0].Value);
                 fila.odcid = Convert.ToInt32(row.Cells[7].Value);
 
@@ -420,6 +456,7 @@ namespace REAL
                 fila.cantidad = Convert.ToInt32(row.Cells[4].Value);
                 fila.orden_id = Convert.ToInt32(row.Cells[7].Value); 
                 fila.producto_id = Convert.ToInt32(row.Cells[0].Value);
+                fila.ordendetalle_id = Convert.ToInt32(row.Cells[10].Value);
 
                 detalleremito.Add(fila);
             }
@@ -604,8 +641,8 @@ namespace REAL
             {
                 cmbSucursal.Enabled = false;
                 txtRemito.Enabled = false;
-                dgvDetalle.Columns[8].Visible = false;
-                dgvDetalle.Columns[9].Visible = false;
+                dgvDetalle.Columns[8].Visible = true;
+                dgvDetalle.Columns[9].Visible = true;
                 btnBuscarRemito.Enabled = true;
             }
         }
@@ -698,7 +735,6 @@ namespace REAL
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != '.')
             {
-
                 errorProvider1.SetError(txtIva, "Solo se permiten números en el campo I.V.A.");
                 e.Handled = true;
                 txtIva.Focus();
@@ -730,6 +766,75 @@ namespace REAL
             }
         }
 
+        private void dgvDetalle_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if(e.ColumnIndex.Equals(3))
+            {
+                if (EsDecimal(e.FormattedValue.ToString()) == true)
+                {
+                    dgvDetalle.Rows[e.RowIndex].ErrorText = string.Empty;
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                    dgvDetalle.Rows[e.RowIndex].ErrorText = "Debe ingresar un importe valido en la celda.";
+                }
+            }
+
+            if(e.ColumnIndex.Equals(4))
+            {
+                if(EsEntero(e.FormattedValue.ToString()) == true)
+                {
+                    dgvDetalle.Rows[e.RowIndex].ErrorText = string.Empty;
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                    dgvDetalle.Rows[e.RowIndex].ErrorText = "Debe ingresar una cantidad valida en la celda.";
+                }
+            }
+        }
+
+        private Boolean EsDecimal(string numero)
+        {
+            try
+            {
+                decimal resultado = decimal.Parse(numero);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private Boolean EsEntero(string numero)
+        {
+            try
+            {
+                int resultado = int.Parse(numero);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void dgvDetalle_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            Numeros n = new Numeros();
+
+            if(e.ColumnIndex.Equals(4))
+            {
+                decimal importe = Convert.ToDecimal(dgvDetalle.Rows[e.RowIndex].Cells[3].Value);
+                int cantidad = Convert.ToInt32(dgvDetalle.Rows[e.RowIndex].Cells[4].Value);
+
+                dgvDetalle.Rows[e.RowIndex].Cells[5].Value = n.AgregarDecimales((importe * cantidad).ToString());
+            }
+        }
 
 
     }

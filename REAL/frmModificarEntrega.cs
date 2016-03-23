@@ -40,6 +40,8 @@ namespace REAL
 
             cmbBarrio.DataSource = Barrios.BarrioObtenerTodo().DefaultView;
 
+            cmbBarrio.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbBarrio.AutoCompleteSource = AutoCompleteSource.ListItems;
 
         }
 
@@ -108,6 +110,19 @@ namespace REAL
             TipoEntrega tpe = new TipoEntrega();
             tpe = TiposEntrega.GetPorId(ent.tpeid);
             cmbTipoEntrega.Text = tpe.tpetipo;
+
+
+            //obtebgo el detalle
+            DataTable dt = EntregasDetalle.GetEntregaDetallePorId(entid);
+
+            dgvDetalle.Rows.Clear();
+            foreach(DataRow row in dt.Rows)
+            {
+                dgvDetalle.Rows.Add(row.ItemArray[0].ToString(), row.ItemArray[3].ToString(),
+                    row.ItemArray[2].ToString(), row.ItemArray[4].ToString());
+            }
+
+            dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
 
@@ -186,8 +201,25 @@ namespace REAL
                 ent.tpeid = Convert.ToInt32(cmbTipoEntrega.SelectedValue);
                 ent.tpsid = Convert.ToInt32(cmbTipoSalida.SelectedValue);
 
+                IList<EntregaDetalle> detalles = new List<EntregaDetalle>();
+
+                foreach(DataGridViewRow row in dgvDetalle.Rows)
+                {
+                    EntregaDetalle detalle = new EntregaDetalle();
+
+                    detalle.entid = entid;
+                    detalle.edeid = Convert.ToInt32(row.Cells[0].Value);
+                    detalle.edecantidad = Convert.ToInt32(row.Cells[1].Value);
+                    detalle.edeproducto = row.Cells[2].Value.ToString();
+                    detalle.edesalida = row.Cells[3].Value.ToString();
+
+                    detalles.Add(detalle);
+                }
+
+
+
                 int resultado = 0;
-                resultado = Entregas.EntregaModificar(ent);
+                resultado = Entregas.EntregaModificar(ent, detalles);
                 if (resultado > 0)
                 {
                     MessageBox.Show("LA ENTREGA SE ACTUALIZO CORRECTAMENTE.", "CONTROL ENTREGAS - INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -225,6 +257,16 @@ namespace REAL
                 cmbTipoEntrega.Enabled = true;
                 txtCosto.Enabled = true;
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            dgvDetalle.Rows.Add();
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            dgvDetalle.Rows.RemoveAt(dgvDetalle.CurrentRow.Index);
         }
 
     }

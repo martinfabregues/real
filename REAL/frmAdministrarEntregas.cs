@@ -23,8 +23,6 @@ namespace REAL
         private void IniciarControles()
         {
 
-            CargarGridEntregas();
-            //PersonalizarGrid();
             dtpDesde.Value = DateTime.Today.Date;
             dtpHasta.Value = DateTime.Today.Date;
 
@@ -34,10 +32,46 @@ namespace REAL
             txtNumero.Enabled = false;
         }
 
+
+        private void FiltrarForm()
+        {
+            DateTime? fec_desde = ckbFecha.Checked ? (DateTime?)dtpDesde.Value : null;
+            DateTime? fec_hasta = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
+            string nro_remito = txtNumero.Text == string.Empty ? null : txtNumero.Text;
+
+            var query = (from entrega in Entregas.FindAllFiltro(fec_desde, fec_hasta, nro_remito).OrderByDescending(x => x.entfecha).Take(50)
+                         select new
+                         {
+                             entrega.entid,
+                             entrega.remnumero,
+                             entfecha = entrega.entfecha.ToShortDateString(),
+                             entrega.barrio.barnombre,
+                             entrega.sucursal.sucnombre,
+                             entrega.tipo_entrega.tpetipo,
+                             entrega.entcosto,
+                             entrega.tipo_salida.tpstipo,
+                             entrega.estado_entrega.eseestado
+                         }).ToList();
+
+            dgvEntregas.Rows.Clear();
+            foreach(var row in query)
+            {
+                dgvEntregas.Rows.Add(row.entid, row.remnumero, row.entfecha, row.barnombre,
+                    row.sucnombre, row.tpetipo, row.entcosto, row.tpstipo, row.eseestado);
+            }
+
+            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            
+            dgvEntregas.Columns[0].Visible = false;
+        }
+
+
         private void CargarGridEntregas()
         {
+            IniciarControles();
+
             dgvEntregas.DataSource = Entregas.GetEntregasTodasConId();
-            //PersonalizarGrid();
+            
         }
 
         private void PersonalizarGrid()
@@ -94,54 +128,56 @@ namespace REAL
 
         private void frmAdministrarEntregas_Resize(object sender, EventArgs e)
         {
-            dgvEntregas.Width = this.Width - 20;
-            dgvEntregas.Height = this.Height - 180;
-            btnCerrar.Location = new Point(this.Width - 100, this.Height - 90);
+            //dgvEntregas.Width = this.Width - 20;
+            //dgvEntregas.Height = this.Height - 180;
+            //btnCerrar.Location = new Point(this.Width - 100, this.Height - 90);
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             //lblValidacion.Text = string.Empty;
-            dgvEntregas.Columns.Clear();
-            errorProvider1.Clear();
-            if (ckbFecha.Checked == true)
-            {
-                if (dtpDesde.Value <= dtpHasta.Value)
-                {
-                    dgvEntregas.DataSource = Entregas.GetEntregasFechas(dtpDesde.Value, dtpHasta.Value).DefaultView;
-                    PersonalizarGrid();
-                }
-                else
-                {
-                    errorProvider1.SetError(dtpHasta, "LA FECHA DE INICIO NO PUEDE SER MAYOR A LA FINAL");
-                    dtpDesde.Focus();
-                }
-            }
-            else
-            {
-                if (ckbNumero.Checked == true)
-                {
-                    DataTable dt = new DataTable();
-                    dt = Entregas.GetEntregasPorRemito(txtNumero.Text);
-                    if (dt.Rows.Count > 0)
-                    {
-                        dgvEntregas.DataSource = dt.DefaultView;
-                        PersonalizarGrid();
-                    }
-                    else
-                    {
-                        //lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
+            //dgvEntregas.Columns.Clear();
+            //errorProvider1.Clear();
+            //if (ckbFecha.Checked == true)
+            //{
+            //    if (dtpDesde.Value <= dtpHasta.Value)
+            //    {
+            //        dgvEntregas.DataSource = Entregas.GetEntregasFechas(dtpDesde.Value, dtpHasta.Value).DefaultView;
+            //        PersonalizarGrid();
+            //    }
+            //    else
+            //    {
+            //        errorProvider1.SetError(dtpHasta, "LA FECHA DE INICIO NO PUEDE SER MAYOR A LA FINAL");
+            //        dtpDesde.Focus();
+            //    }
+            //}
+            //else
+            //{
+            //    if (ckbNumero.Checked == true)
+            //    {
+            //        DataTable dt = new DataTable();
+            //        dt = Entregas.GetEntregasPorRemito(txtNumero.Text);
+            //        if (dt.Rows.Count > 0)
+            //        {
+            //            dgvEntregas.DataSource = dt.DefaultView;
+            //            PersonalizarGrid();
+            //        }
+            //        else
+            //        {
+            //            //lblValidacion.Text = "NO SE ENCONTRO NINGUNA ENTREGA CON ESE NÚMERO DE REMITO.";
                         
-                    }
+            //        }
 
                     
-                }
-                else
-                {
-                    CargarGridEntregas();
-                    PersonalizarGrid();
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        CargarGridEntregas();
+            //        PersonalizarGrid();
+            //    }
+            //}
+
+            FiltrarForm();
         }
 
         private void ActualizarGrid()
@@ -183,20 +219,17 @@ namespace REAL
 
         private void frmAdministrarEntregas_Load(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Maximized;
-
-            dgvEntregas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             IniciarControles();
-            PersonalizarGrid();
+            FiltrarForm();
         }
 
         private void dgvEntregas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvEntregas.Columns[e.ColumnIndex].Name == "btnModificar")
+            if (e.ColumnIndex.Equals(9))
             {
                 DataGridViewRow fila = dgvEntregas.CurrentRow;
 
-                int id = Convert.ToInt32(fila.Cells["entid"].Value);
+                int id = Convert.ToInt32(fila.Cells[0].Value);
 
                 frmModificarEntrega frm = new frmModificarEntrega(id);
                 if (frm.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
@@ -207,94 +240,81 @@ namespace REAL
                
             }
 
-            if (dgvEntregas.Columns[e.ColumnIndex].Name == "btnConfirmar")
+            if (e.ColumnIndex.Equals(10))
             {
                 DataGridViewRow fila = dgvEntregas.CurrentRow;
 
-                int id = Convert.ToInt32(fila.Cells["entid"].Value);
-                string rem = fila.Cells["remnumero"].Value.ToString();
+                int id = Convert.ToInt32(fila.Cells[0].Value);
+                string rem = fila.Cells[1].Value.ToString();
                 DialogResult dlg = new DialogResult();
-                dlg = MessageBox.Show("ESTA SEGURO DE CONFIRMAR LA RECEPCIÓN DE LA ENTREGA " + rem + " ?", "ATENCIÓN", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                dlg = MessageBox.Show("Esta seguro de confirmar la recepción de la entrega? " + rem + " ?", "Atención", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if(dlg == System.Windows.Forms.DialogResult.Yes)
                 {
                     int resultado = 0;
                     resultado = Entregas.EntregaActualizarRecibido(id);
                     if (resultado > 0)
                     {
-                        MessageBox.Show("REGISTRADO CORRECTAMENTE.", "CONTROL ENTREGAS - INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Los datos se registraron correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ActualizarGrid();
                     }
                     else
                     {
-                        MessageBox.Show("OCURRIO UN ERROR AL REGISTRAR LA RECEPCIÓN.", "CONTROL ENTREGAS - INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ocurrio un error al registrar los datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         ActualizarGrid();
                     }
                 }
             }
 
-            if (dgvEntregas.Columns[e.ColumnIndex].Name == "btnAnular")
+            if (e.ColumnIndex.Equals(11))
             {
                 DataGridViewRow fila = dgvEntregas.CurrentRow;
 
-                int id = Convert.ToInt32(fila.Cells["entid"].Value);
-                string rem = fila.Cells["remnumero"].Value.ToString();
+                int id = Convert.ToInt32(fila.Cells[0].Value);
+                string rem = fila.Cells[1].Value.ToString();
                 DialogResult dlg = new DialogResult();
-                dlg = MessageBox.Show("ESTA SEGURO DE ANULAR LA ENTREGA " + rem + " ?", "ATENCIÓN", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                dlg = MessageBox.Show("Esta seguro de anular la entrega? " + rem + " ?", "Información", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dlg == System.Windows.Forms.DialogResult.Yes)
                 {
                     int resultado = 0;
                     resultado = Entregas.EntregaAnular(id);
                     if (resultado > 0)
                     {
-                        MessageBox.Show("ANULADA CORRECTAMENTE.", "CONTROL ENTREGAS - INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("La entrega se anulo correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ActualizarGrid();
                     }
                     else
                     {
-                        MessageBox.Show("OCURRIO UN ERROR AL ANULAR LA ENTREGA.", "CONTROL ENTREGAS - INFORMACIÓN", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ocurrio un error al anular la entrega.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         ActualizarGrid();
                     }
                 }
-
             }
-
-
-
         }
 
         private void ckbFecha_CheckedChanged(object sender, EventArgs e)
         {
-            txtNumero.Text = string.Empty;
-            if (ckbFecha.Checked == true)
-            {
-                dtpHasta.Enabled = true;
-                dtpDesde.Enabled = true;
-                txtNumero.Enabled = false;
-                ckbNumero.CheckState = CheckState.Unchecked;
-            }
-            else
-            {
-                dtpDesde.Enabled = false;
-                dtpHasta.Enabled = false;
-            }
+           if(ckbFecha.CheckState == CheckState.Checked)
+           {
+               dtpDesde.Enabled = true;
+               dtpHasta.Enabled = true;
+           }
+           else
+           {
+               dtpDesde.Enabled = false;
+               dtpHasta.Enabled = false;
+           }
         }
 
         private void ckbNumero_CheckedChanged(object sender, EventArgs e)
         {
             txtNumero.Text = string.Empty;
-            if (ckbNumero.Checked == true)
-            {
-                txtNumero.Enabled = true;
-                dtpHasta.Enabled = false;
-                dtpDesde.Enabled = false;
-                ckbFecha.CheckState = CheckState.Unchecked;
-            }
-            else
-            {
-                txtNumero.Enabled = false;
-            }
 
+            if (ckbNumero.CheckState == CheckState.Checked)
+                txtNumero.Enabled = true;
+            else
+                txtNumero.Enabled = false;
         }
+
 
         private void txtNumero_KeyPress(object sender, KeyPressEventArgs e)
         {

@@ -37,14 +37,14 @@
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.ReportServerUrl = new System.Uri("", System.UriKind.Relative);
-            this.reportViewer1.Size = new System.Drawing.Size(829, 562);
+            this.reportViewer1.Size = new System.Drawing.Size(1186, 562);
             this.reportViewer1.TabIndex = 0;
             // 
             // frmReportePendientesEntrega
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(829, 562);
+            this.ClientSize = new System.Drawing.Size(1186, 562);
             this.Controls.Add(this.reportViewer1);
             this.Name = "frmReportePendientesEntrega";
             this.Text = "frmReportePendientesEntrega";

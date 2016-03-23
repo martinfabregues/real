@@ -81,7 +81,7 @@ namespace REAL
 
         private void CargarDataGrid()
         {
-            var query = (from row in RemitosProveedor.FindIngresos()
+            var query = (from row in RemitosProveedor.FindIngresos().Take(60)
                          select new
                          {
                              row.remitoproveedor.id,  
@@ -92,8 +92,8 @@ namespace REAL
                              row.remitoproveedor.sucursal.sucnombre,
                              row.producto.prddenominacion,
                              row.cantidad,
-                             row.ordencompra.odcnumero,
-                             row.ordencompra.odcfecha
+                             odcnumero = row.ordencompra.numero,
+                             odcfecha = row.ordencompra.fecha
 
                          }).ToList();
 
@@ -117,7 +117,7 @@ namespace REAL
             DateTime? desde = ckbFecha.Checked ? (DateTime?)dtpDesde.Value : null;
             DateTime? hasta = ckbFecha.Checked ? (DateTime?)dtpHasta.Value : null;
 
-            var query = (from row in RemitosProveedor.FindIngresosCondicional(nroremito, producto, proveedor_id, sucursal_id, desde, hasta)
+            var query = (from row in RemitosProveedor.FindIngresosCondicional(nroremito, producto, proveedor_id, sucursal_id, desde, hasta).Take(20)
                          select new
                          {
                              row.remitoproveedor.id,   
@@ -128,8 +128,8 @@ namespace REAL
                              row.remitoproveedor.sucursal.sucnombre,
                              row.producto.prddenominacion,
                              row.cantidad,
-                             row.ordencompra.odcnumero,
-                             row.ordencompra.odcfecha
+                             odcnumero = row.ordencompra.numero,
+                             odcfecha = row.ordencompra.fecha
 
                          }).ToList();
 

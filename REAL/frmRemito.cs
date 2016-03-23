@@ -62,7 +62,7 @@ namespace REAL
             txtCoeficiente.Visible = false;
             txtMetros.Visible = false;
             txtFecha.Visible = false;
-
+            txtIdDetalle.Visible = false;
             dgvDetalle.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
@@ -106,6 +106,7 @@ namespace REAL
                         txtIdOrden.Text = dlg.odcid.ToString();
                         txtNroOrden.Text = dlg.odcnumero.ToString();
                         txtFecha.Text = dlg.fecha.ToShortDateString();
+                        txtIdDetalle.Text = dlg.ordendetalle_id.ToString();
                     }
                     else
                     {
@@ -167,12 +168,13 @@ namespace REAL
                             if (txtNroOrden.Text != string.Empty)
                             {
 
-                                dgvDetalle.Rows.Add(txtid.Text, "", txtCodigo.Text, txtProducto.Text, txtCantidad.Text, txtNroOrden.Text, txtIdOrden.Text, txtFecha.Text, txtMetros.Text);
+                                dgvDetalle.Rows.Add(txtid.Text, "", txtCodigo.Text, txtProducto.Text, txtCantidad.Text, txtNroOrden.Text, txtIdOrden.Text, txtFecha.Text, txtMetros.Text, txtIdDetalle.Text);
                                 txtCodigo.Text = string.Empty;
                                 txtCantidad.Text = string.Empty;
                                 txtOrden.Text = string.Empty;
                                 txtIdOrden.Text = string.Empty;
                                 txtProducto.Text = string.Empty;
+                                txtIdDetalle.Text = string.Empty;
                             }
                             else
                             {
@@ -219,6 +221,7 @@ namespace REAL
                 fila.producto_id = Convert.ToInt32(row.Cells[0].Value);
                 fila.orden_id = Convert.ToInt32(row.Cells[6].Value);
                 fila.cantidad = Convert.ToInt32(row.Cells[4].Value);
+                fila.ordendetalle_id = Convert.ToInt32(row.Cells[9].Value);
                 detalle.Add(fila);
             }
         }
@@ -284,6 +287,24 @@ namespace REAL
         {
             this.Close();
         }
+
+        private void dgvDetalle_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex.Equals(10))
+            {
+                DialogResult result = MessageBox.Show("Desea quitar del detalle el producto: " + dgvDetalle.CurrentRow.Cells[2].Value.ToString() + " - " + dgvDetalle.CurrentRow.Cells[3].Value.ToString() + " ?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    int fila = dgvDetalle.CurrentRow.Index;
+                    if(dgvDetalle.Rows[e.RowIndex].Cells[1].Value.ToString() == string.Empty)
+                    {
+                        dgvDetalle.Rows.RemoveAt(fila);
+                    }
+                }
+            }
+        }
+
+
 
     }
 }
