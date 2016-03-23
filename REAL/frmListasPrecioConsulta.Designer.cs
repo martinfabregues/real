@@ -36,7 +36,6 @@
             this.cmbProveedor = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblTitulo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListasPrecio)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +45,7 @@
             this.dgvListasPrecio.BackgroundColor = System.Drawing.Color.Lavender;
             this.dgvListasPrecio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvListasPrecio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListasPrecio.Location = new System.Drawing.Point(12, 121);
+            this.dgvListasPrecio.Location = new System.Drawing.Point(12, 98);
             this.dgvListasPrecio.Name = "dgvListasPrecio";
             this.dgvListasPrecio.RowHeadersVisible = false;
             this.dgvListasPrecio.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -56,7 +55,7 @@
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCerrar.Location = new System.Drawing.Point(784, 507);
+            this.btnCerrar.Location = new System.Drawing.Point(792, 480);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
             this.btnCerrar.TabIndex = 1;
@@ -71,7 +70,7 @@
             this.groupBox1.Controls.Add(this.cmbProveedor);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 26);
+            this.groupBox1.Location = new System.Drawing.Point(12, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(866, 89);
             this.groupBox1.TabIndex = 2;
@@ -121,26 +120,12 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Proveedor:";
             // 
-            // lblTitulo
-            // 
-            this.lblTitulo.BackColor = System.Drawing.Color.IndianRed;
-            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.ForeColor = System.Drawing.Color.White;
-            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(890, 20);
-            this.lblTitulo.TabIndex = 117;
-            this.lblTitulo.Text = "LISTAS DE PRECIO REGISTRADAS ";
-            this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // frmListasPrecioConsulta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCerrar;
-            this.ClientSize = new System.Drawing.Size(890, 542);
-            this.Controls.Add(this.lblTitulo);
+            this.ClientSize = new System.Drawing.Size(890, 515);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.dgvListasPrecio);
@@ -164,6 +149,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Label lblTitulo;
     }
 }

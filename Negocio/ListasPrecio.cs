@@ -1,4 +1,6 @@
 ﻿using DAL;
+using DAL.Interfases;
+using DAL.Repositories;
 using Entidad;
 using System;
 using System.Collections.Generic;
@@ -49,6 +51,13 @@ namespace Negocio
             listaprecio = ListaPrecioDAL.GetPorId(listaprecio_id);
             return listaprecio;
         }
+
+        public static ListaPrecio FindUltimaActivaByProveedor(int proveedor_id)
+        {
+            IListaPrecioRepository _repository = new ListaPrecioRepository();
+            return _repository.FindUltimaActivaByProveedor(proveedor_id);
+        }
+
 
     }
 }

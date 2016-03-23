@@ -578,6 +578,9 @@ namespace REAL
                 txtCostoNeto.Text = producto.prdcosto.ToString();
                 txtMetros.Text = producto.prdmetros.ToString();
                 txtCosto.Text = producto.prdcosto.ToString();
+
+                txtCostoNeto.Text = FindPrecioUltimaLista().ToString();
+                txtCosto.Text = txtCostoNeto.Text;
             }
         }
 
@@ -585,6 +588,28 @@ namespace REAL
         {
             Producto producto = Productos.FindById(producto_id);
             return producto;
+        }
+
+
+        private double FindPrecioUltimaLista()
+        {
+            double importe = 0;
+
+            try
+            {
+                var listaprecio_activa = ListasPrecio.FindUltimaActivaByProveedor(Convert.ToInt32(cmbProveedor.SelectedValue));
+
+                importe = ListasPrecioProducto.FindImporteProducto(listaprecio_activa.listaprecio_id, Convert.ToInt32(txtid.Text));
+
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return importe;
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)

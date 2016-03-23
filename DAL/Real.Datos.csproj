@@ -96,6 +96,7 @@
     <Compile Include="FacturaProveedorDetalleDAL.cs" />
     <Compile Include="FormaPagoDAL.cs" />
     <Compile Include="Interfases\IArticuloRepository.cs" />
+    <Compile Include="Interfases\IListaPrecioRepository.cs" />
     <Compile Include="Interfases\IOrdenCompraRepository.cs" />
     <Compile Include="Interfases\IProveedorRepository.cs" />
     <Compile Include="Interfases\IRepository.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Repositories\ArticuloRepository.cs" />
     <Compile Include="Repositories\EntregaRepository.cs" />
     <Compile Include="Repositories\FacturaProveedorRepository.cs" />
+    <Compile Include="Repositories\ListaPrecioRepository.cs" />
     <Compile Include="Repositories\OrdenCompraRepository.cs" />
     <Compile Include="Repositories\ProveedorRepository.cs" />
     <Compile Include="Repositories\RemitoProveedorRepository.cs" />

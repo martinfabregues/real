@@ -48,7 +48,7 @@ namespace REAL
 
         private void frmPreciosActualizacion_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
 
             CargarComboProveedor();
             PersonalizarGrid();
@@ -100,9 +100,9 @@ namespace REAL
             dgvDetalle.AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite;
             dgvDetalle.EditMode = DataGridViewEditMode.EditOnF2;
 
-            dgvDetalle.Columns[3].DefaultCellStyle.Format = "c"; 
-            dgvDetalle.Columns[4].DefaultCellStyle.Format = "c";
-            dgvDetalle.Columns[5].DefaultCellStyle.Format = "c";
+            //dgvDetalle.Columns[3].DefaultCellStyle.Format = "c"; 
+            //dgvDetalle.Columns[4].DefaultCellStyle.Format = "c";
+            //dgvDetalle.Columns[5].DefaultCellStyle.Format = "c";
         }
 
         private void frmPreciosActualizacion_Resize(object sender, EventArgs e)

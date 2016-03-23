@@ -1,4 +1,6 @@
 ﻿using DAL;
+using DAL.Interfases;
+using DAL.Repositories;
 using Entidad;
 using System;
 using System.Collections.Generic;
@@ -35,5 +37,12 @@ namespace Negocio
             bool resultado = ListaPrecioProductoDAL.ActualizarCostos(datos);
             return resultado;
         }
+
+        public static double FindImporteProducto(int lista_id, int producto_id)
+        {
+            IListaPrecioRepository _repository = new ListaPrecioRepository();
+            return _repository.FindImporteProducto(lista_id, producto_id);
+        }
+
     }
 }
